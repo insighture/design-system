@@ -1,0 +1,159 @@
+/* Shared styling for Checkbox and Radio — same box metrics, different shape. */
+.ins-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ins-space-xs);
+  font-family: var(--ins-font-sans);
+}
+
+.ins-choice__input {
+  appearance: none;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  border: var(--ins-border-width-thick) solid var(--ins-border-strong);
+  background-color: var(--ins-bg-surface);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition:
+    background-color var(--ins-duration-fast) var(--ins-easing-standard),
+    border-color var(--ins-duration-fast) var(--ins-easing-standard);
+}
+
+.ins-choice__input--checkbox {
+  border-radius: var(--ins-radius-sm);
+}
+
+.ins-choice__input--radio {
+  border-radius: 50%;
+}
+
+.ins-choice__input::before {
+  content: '';
+  opacity: 0;
+  transition: opacity var(--ins-duration-fast) var(--ins-easing-standard);
+}
+
+.ins-choice__input--checkbox::before {
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid var(--ins-accent-on-accent);
+  border-bottom: 2px solid var(--ins-accent-on-accent);
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+.ins-choice__input--radio::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--ins-accent-on-accent);
+}
+
+.ins-choice__input:checked {
+  background-color: var(--ins-accent-bg);
+  border-color: var(--ins-accent-bg);
+}
+
+.ins-choice__input:checked::before {
+  opacity: 1;
+}
+
+/* Scoped to checkboxes on purpose: per spec, a radio matches :indeterminate
+   whenever NOTHING in its group is checked, so an unscoped rule paints every
+   empty radio group as if every option were half-selected. */
+.ins-choice__input--checkbox:indeterminate {
+  background-color: var(--ins-accent-bg);
+  border-color: var(--ins-accent-bg);
+}
+
+.ins-choice__input--checkbox:indeterminate::before {
+  opacity: 1;
+  width: 10px;
+  height: 0;
+  border-left: 0;
+  border-bottom: 2px solid var(--ins-accent-on-accent);
+  transform: none;
+}
+
+.ins-choice__input:hover:not(:disabled) {
+  border-color: var(--ins-accent-bg);
+}
+
+.ins-choice__input:focus-visible {
+  outline: none;
+  box-shadow: var(--ins-focus-ring);
+}
+
+.ins-choice__input:disabled {
+  cursor: not-allowed;
+  background-color: var(--ins-bg-subtle);
+  border-color: var(--ins-border-subtle);
+}
+
+.ins-choice--disabled .ins-choice__label,
+.ins-choice--disabled .ins-choice__hint {
+  color: var(--ins-text-disabled);
+}
+
+.ins-choice--invalid .ins-choice__input {
+  border-color: var(--ins-danger-solid);
+}
+
+.ins-choice__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ins-choice__label {
+  font-size: var(--ins-font-size-sm);
+  color: var(--ins-text-primary);
+  cursor: pointer;
+}
+
+.ins-choice__hint {
+  margin: 0;
+  font-size: var(--ins-font-size-xs);
+  color: var(--ins-text-tertiary);
+}
+
+.ins-choice__error {
+  margin: 0;
+  font-size: var(--ins-font-size-xs);
+  color: var(--ins-danger-text);
+}
+
+/* ---- RadioGroup ---------------------------------------------------------- */
+.ins-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ins-space-xs);
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.ins-radio-group__legend {
+  padding: 0;
+  margin-bottom: var(--ins-space-2xs);
+  font-family: var(--ins-font-sans);
+  font-size: var(--ins-font-size-sm);
+  font-weight: var(--ins-font-weight-medium);
+  color: var(--ins-text-primary);
+}
+
+.ins-radio-group__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ins-space-xs);
+}
+
+.ins-radio-group__options--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--ins-space-lg);
+}

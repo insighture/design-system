@@ -1,0 +1,52 @@
+.ins-input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border: var(--ins-border-width-thin) solid var(--ins-border-default);
+  border-radius: var(--ins-radius-md);
+  background-color: var(--ins-bg-surface);
+  overflow: hidden;
+  transition:
+    border-color var(--ins-duration-fast) var(--ins-easing-standard),
+    box-shadow var(--ins-duration-fast) var(--ins-easing-standard);
+}
+
+.ins-input-group:focus-within {
+  border-color: var(--ins-focus-ring-color);
+  box-shadow: var(--ins-focus-ring);
+}
+
+.ins-field--invalid .ins-input-group {
+  border-color: var(--ins-danger-solid);
+}
+
+/* The inner control drops its own chrome — the group owns the border now. */
+.ins-input-group .ins-control {
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.ins-input-group .ins-control:focus {
+  box-shadow: none;
+}
+
+.ins-input-group__affix {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--ins-space-sm);
+  background-color: var(--ins-bg-subtle);
+  color: var(--ins-text-tertiary);
+  font-size: var(--ins-font-size-sm);
+  white-space: nowrap;
+}
+
+.ins-input-group--sm .ins-input-group__affix {
+  font-size: var(--ins-font-size-xs);
+  padding-inline: var(--ins-space-xs);
+}
+
+.ins-input-group--lg .ins-input-group__affix {
+  font-size: var(--ins-font-size-md);
+  padding-inline: var(--ins-space-md);
+}

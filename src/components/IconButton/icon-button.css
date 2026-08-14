@@ -1,0 +1,26 @@
+.ins-icon-button {
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+.ins-icon-button--sm {
+  width: 32px;
+  min-height: 32px;
+  font-size: var(--ins-font-size-sm);
+}
+
+.ins-icon-button--md {
+  width: 40px;
+  min-height: 40px;
+  font-size: var(--ins-font-size-md);
+}
+
+.ins-icon-button--lg {
+  width: 48px;
+  min-height: 48px;
+  font-size: var(--ins-font-size-lg);
+}
+
+.ins-icon-button--round {
+  border-radius: var(--ins-radius-pill);
+}

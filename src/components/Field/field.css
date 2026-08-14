@@ -1,0 +1,88 @@
+.ins-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ins-space-2xs);
+  font-family: var(--ins-font-sans);
+  min-width: 0;
+}
+
+.ins-field__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--ins-font-size-sm);
+  font-weight: var(--ins-font-weight-medium);
+  color: var(--ins-text-primary);
+}
+
+.ins-field__required {
+  color: var(--ins-accent-bg);
+}
+
+.ins-field__hint {
+  margin: 0;
+  font-size: var(--ins-font-size-xs);
+  color: var(--ins-text-tertiary);
+}
+
+.ins-field__error {
+  margin: 0;
+  font-size: var(--ins-font-size-xs);
+  color: var(--ins-danger-text);
+}
+
+/* ---- Shared control surface (input, textarea, select) -------------------- */
+.ins-control {
+  width: 100%;
+  min-width: 0;
+  border: var(--ins-border-width-thin) solid var(--ins-border-default);
+  border-radius: var(--ins-radius-md);
+  background-color: var(--ins-bg-surface);
+  color: var(--ins-text-primary);
+  font-family: var(--ins-font-sans);
+  font-size: var(--ins-font-size-sm);
+  line-height: var(--ins-line-height-normal);
+  transition:
+    border-color var(--ins-duration-fast) var(--ins-easing-standard),
+    box-shadow var(--ins-duration-fast) var(--ins-easing-standard);
+}
+
+.ins-control::placeholder {
+  color: var(--ins-text-tertiary);
+}
+
+.ins-control:hover:not(:disabled):not(:focus) {
+  border-color: var(--ins-border-strong);
+}
+
+.ins-control:focus {
+  outline: none;
+  border-color: var(--ins-focus-ring-color);
+  box-shadow: var(--ins-focus-ring);
+}
+
+.ins-control:disabled {
+  background-color: var(--ins-bg-subtle);
+  color: var(--ins-text-disabled);
+  cursor: not-allowed;
+}
+
+.ins-field--invalid .ins-control {
+  border-color: var(--ins-danger-solid);
+}
+
+.ins-control--sm {
+  min-height: 32px;
+  padding: var(--ins-space-2xs) var(--ins-space-xs);
+}
+
+.ins-control--md {
+  min-height: 40px;
+  padding: var(--ins-space-xs) var(--ins-space-sm);
+}
+
+.ins-control--lg {
+  min-height: 48px;
+  padding: var(--ins-space-sm) var(--ins-space-md);
+  font-size: var(--ins-font-size-md);
+}

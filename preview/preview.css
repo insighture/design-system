@@ -1,0 +1,61 @@
+/* Showcase-only layout. Nothing here ships in the package. */
+
+.pv-page {
+  max-width: var(--ins-container-lg);
+  margin: 0 auto;
+  padding: var(--ins-space-2xl) var(--ins-space-lg) var(--ins-space-3xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ins-space-2xl);
+}
+
+.pv-header {
+  padding-bottom: var(--ins-space-lg);
+  border-bottom: 1px solid var(--ins-border-subtle);
+}
+
+.pv-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ins-space-md);
+}
+
+.pv-section__body {
+  padding: var(--ins-space-lg);
+  border: 1px solid var(--ins-border-subtle);
+  border-radius: var(--ins-radius-lg);
+  background-color: var(--ins-bg-surface);
+}
+
+.pv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--ins-space-lg);
+  align-items: start;
+}
+
+.pv-ramp {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(52px, 1fr));
+  gap: var(--ins-space-2xs);
+}
+
+.pv-ramp__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.pv-ramp__chip {
+  display: block;
+  width: 100%;
+  height: 44px;
+  border-radius: var(--ins-radius-sm);
+  border: 1px solid var(--ins-border-subtle);
+}
+
+.pv-footer {
+  padding-top: var(--ins-space-lg);
+  border-top: 1px solid var(--ins-border-subtle);
+}

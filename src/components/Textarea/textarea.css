@@ -1,0 +1,9 @@
+.ins-textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.ins-textarea--auto {
+  field-sizing: content;
+  resize: none;
+}

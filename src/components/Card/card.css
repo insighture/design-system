@@ -1,0 +1,89 @@
+.ins-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: var(--ins-border-width-thin) solid transparent;
+  border-radius: var(--ins-radius-lg);
+  background-color: var(--ins-bg-surface);
+  color: var(--ins-text-primary);
+  transition:
+    box-shadow var(--ins-duration-base) var(--ins-easing-standard),
+    transform var(--ins-duration-base) var(--ins-easing-standard),
+    border-color var(--ins-duration-base) var(--ins-easing-standard);
+}
+
+.ins-card--elevated {
+  box-shadow: var(--ins-shadow-card);
+  border-color: var(--ins-border-subtle);
+}
+
+.ins-card--outlined {
+  border-color: var(--ins-border-default);
+  background-color: transparent;
+}
+
+.ins-card--filled {
+  background-color: var(--ins-bg-surface-sunken);
+  border-color: var(--ins-border-subtle);
+}
+
+/* Crimson-rose keyline card — for the one card that should pull focus. */
+.ins-card--accent {
+  background-color: var(--ins-accent-bg-subtle);
+  border-color: var(--ins-accent-border);
+}
+
+.ins-card--pad-none {
+  padding: 0;
+}
+.ins-card--pad-sm {
+  padding: var(--ins-space-sm);
+}
+.ins-card--pad-md {
+  padding: var(--ins-space-lg);
+}
+.ins-card--pad-lg {
+  padding: var(--ins-space-xl);
+}
+
+.ins-card--interactive {
+  cursor: pointer;
+}
+
+.ins-card--interactive:hover {
+  box-shadow: var(--ins-shadow-card-hover);
+  transform: translateY(-2px);
+  border-color: var(--ins-accent-border);
+}
+
+.ins-card--interactive:focus-visible {
+  outline: none;
+  box-shadow: var(--ins-focus-ring);
+}
+
+.ins-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ins-space-md);
+  padding-bottom: var(--ins-space-md);
+  border-bottom: var(--ins-border-width-thin) solid var(--ins-border-subtle);
+  margin-bottom: var(--ins-space-md);
+}
+
+.ins-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ins-space-sm);
+  flex: 1;
+}
+
+.ins-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ins-space-xs);
+  padding-top: var(--ins-space-md);
+  border-top: var(--ins-border-width-thin) solid var(--ins-border-subtle);
+  margin-top: var(--ins-space-md);
+}

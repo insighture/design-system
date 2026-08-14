@@ -1,0 +1,59 @@
+.ins-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.ins-tooltip__trigger {
+  display: inline-flex;
+}
+
+.ins-tooltip__bubble {
+  position: absolute;
+  z-index: var(--ins-z-overlay);
+  max-width: 260px;
+  padding: var(--ins-space-2xs) var(--ins-space-xs);
+  border-radius: var(--ins-radius-sm);
+  background-color: var(--ins-inverse-surface);
+  color: var(--ins-inverse-text);
+  font-family: var(--ins-font-sans);
+  font-size: var(--ins-font-size-xs);
+  line-height: var(--ins-line-height-snug);
+  text-align: center;
+  white-space: normal;
+  box-shadow: var(--ins-shadow-popover);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--ins-duration-fast) var(--ins-easing-standard),
+    visibility var(--ins-duration-fast) var(--ins-easing-standard);
+}
+
+.ins-tooltip__bubble--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ins-tooltip__bubble--top {
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ins-tooltip__bubble--bottom {
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ins-tooltip__bubble--left {
+  right: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ins-tooltip__bubble--right {
+  left: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+}

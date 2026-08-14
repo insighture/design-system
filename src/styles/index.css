@@ -1,0 +1,31 @@
+/* Insighture design system — single stylesheet entry.
+   Order matters: fonts and primitives first, then the semantic aliases, then
+   the base layer, then components (which consume only semantic tokens). */
+
+@import './fonts.css';
+@import './tokens.css';
+@import './semantic.css';
+@import './base.css';
+
+@import '../components/InsightureProvider/provider.css';
+@import '../components/Stack/stack.css';
+@import '../components/Typography/typography.css';
+@import '../components/Button/button.css';
+@import '../components/IconButton/icon-button.css';
+@import '../components/Spinner/spinner.css';
+@import '../components/Badge/badge.css';
+@import '../components/Tag/tag.css';
+@import '../components/Card/card.css';
+@import '../components/Alert/alert.css';
+@import '../components/Avatar/avatar.css';
+@import '../components/Divider/divider.css';
+@import '../components/Progress/progress.css';
+@import '../components/Field/field.css';
+@import '../components/Input/input.css';
+@import '../components/Textarea/textarea.css';
+@import '../components/Select/select.css';
+@import '../components/Checkbox/choice.css';
+@import '../components/Switch/switch.css';
+@import '../components/Tabs/tabs.css';
+@import '../components/Tooltip/tooltip.css';
+@import '../components/Modal/modal.css';

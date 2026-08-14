@@ -1,0 +1,107 @@
+.ins-switch {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ins-space-sm);
+  font-family: var(--ins-font-sans);
+}
+
+.ins-switch--label-start {
+  justify-content: space-between;
+}
+
+.ins-switch__control {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+
+.ins-switch__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ins-switch__track {
+  display: block;
+  border-radius: var(--ins-radius-pill);
+  background-color: var(--ins-neutral-bg-active);
+  transition: background-color var(--ins-duration-base) var(--ins-easing-standard);
+}
+
+.ins-switch__thumb {
+  display: block;
+  border-radius: 50%;
+  background-color: var(--ins-brand-white);
+  box-shadow: var(--ins-shadow-xs);
+  transition: transform var(--ins-duration-base) var(--ins-easing-standard);
+}
+
+.ins-switch--md .ins-switch__track {
+  width: 40px;
+  height: 22px;
+  padding: 3px;
+}
+
+.ins-switch--md .ins-switch__thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.ins-switch--md .ins-switch__input:checked ~ .ins-switch__track .ins-switch__thumb {
+  transform: translateX(18px);
+}
+
+.ins-switch--sm .ins-switch__track {
+  width: 32px;
+  height: 18px;
+  padding: 2px;
+}
+
+.ins-switch--sm .ins-switch__thumb {
+  width: 14px;
+  height: 14px;
+}
+
+.ins-switch--sm .ins-switch__input:checked ~ .ins-switch__track .ins-switch__thumb {
+  transform: translateX(14px);
+}
+
+.ins-switch__input:checked ~ .ins-switch__track {
+  background-color: var(--ins-accent-bg);
+}
+
+.ins-switch__input:focus-visible ~ .ins-switch__track {
+  box-shadow: var(--ins-focus-ring);
+}
+
+.ins-switch__input:disabled {
+  cursor: not-allowed;
+}
+
+.ins-switch--disabled {
+  opacity: 0.55;
+}
+
+.ins-switch__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ins-switch__label {
+  font-size: var(--ins-font-size-sm);
+  font-weight: var(--ins-font-weight-medium);
+  color: var(--ins-text-primary);
+  cursor: pointer;
+}
+
+.ins-switch__hint {
+  margin: 0;
+  font-size: var(--ins-font-size-xs);
+  color: var(--ins-text-tertiary);
+}

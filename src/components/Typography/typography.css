@@ -1,0 +1,218 @@
+/* ---- Heading -------------------------------------------------------------
+   One family, bold, with tracking that tightens as the type grows. That
+   size-dependent tracking is what separates a modern screen face from a
+   default-spaced one — do not flatten it to a single value. */
+.ins-heading {
+  margin: 0;
+  font-family: var(--ins-font-sans);
+  font-weight: var(--ins-font-weight-bold);
+  line-height: var(--ins-line-height-tight);
+  text-wrap: pretty;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+.ins-heading--balance {
+  text-wrap: balance;
+}
+
+.ins-heading--display {
+  font-size: var(--ins-font-size-5xl);
+  letter-spacing: var(--ins-letter-spacing-display);
+  line-height: 1.02;
+}
+
+.ins-heading--xl {
+  font-size: var(--ins-font-size-4xl);
+  letter-spacing: var(--ins-letter-spacing-display);
+  line-height: 1.06;
+}
+
+.ins-heading--lg {
+  font-size: var(--ins-font-size-3xl);
+  letter-spacing: var(--ins-letter-spacing-tight);
+}
+
+.ins-heading--md {
+  font-size: var(--ins-font-size-2xl);
+  letter-spacing: var(--ins-letter-spacing-tight);
+  line-height: var(--ins-line-height-snug);
+}
+
+.ins-heading--sm {
+  font-size: var(--ins-font-size-xl);
+  letter-spacing: var(--ins-letter-spacing-snug);
+  line-height: var(--ins-line-height-snug);
+}
+
+.ins-heading--xs {
+  font-size: var(--ins-font-size-lg);
+  letter-spacing: var(--ins-letter-spacing-snug);
+  line-height: var(--ins-line-height-snug);
+}
+
+.ins-heading--tone-primary {
+  color: var(--ins-text-primary);
+}
+
+.ins-heading--tone-secondary {
+  color: var(--ins-text-secondary);
+}
+
+.ins-heading--tone-accent {
+  color: var(--ins-text-accent);
+}
+
+.ins-heading--tone-inverse {
+  color: var(--ins-text-inverse);
+}
+
+@media (max-width: 640px) {
+  .ins-heading--display {
+    font-size: var(--ins-font-size-4xl);
+  }
+
+  .ins-heading--xl {
+    font-size: var(--ins-font-size-3xl);
+  }
+}
+
+/* ---- Text ---------------------------------------------------------------- */
+.ins-text {
+  margin: 0;
+  font-family: var(--ins-font-sans);
+  line-height: var(--ins-line-height-normal);
+  /* Tabular-ish defaults and Inter's straight-sided glyph alternates. */
+  font-feature-settings: 'cv11';
+}
+
+.ins-text--2xs {
+  font-size: var(--ins-font-size-2xs);
+}
+.ins-text--xs {
+  font-size: var(--ins-font-size-xs);
+}
+.ins-text--sm {
+  font-size: var(--ins-font-size-sm);
+}
+.ins-text--md {
+  font-size: var(--ins-font-size-md);
+}
+.ins-text--lg {
+  font-size: var(--ins-font-size-lg);
+}
+.ins-text--xl {
+  font-size: var(--ins-font-size-xl);
+}
+
+.ins-text--weight-regular {
+  font-weight: var(--ins-font-weight-regular);
+}
+.ins-text--weight-medium {
+  font-weight: var(--ins-font-weight-medium);
+}
+.ins-text--weight-semibold {
+  font-weight: var(--ins-font-weight-semibold);
+}
+.ins-text--weight-bold {
+  font-weight: var(--ins-font-weight-bold);
+}
+
+/* Larger text needs the tracking pulled in; small text needs it left alone. */
+.ins-text--xl {
+  letter-spacing: var(--ins-letter-spacing-snug);
+}
+.ins-text--2xs,
+.ins-text--xs {
+  letter-spacing: var(--ins-letter-spacing-wide);
+}
+
+.ins-text--tone-primary {
+  color: var(--ins-text-primary);
+}
+.ins-text--tone-secondary {
+  color: var(--ins-text-secondary);
+}
+.ins-text--tone-tertiary {
+  color: var(--ins-text-tertiary);
+}
+.ins-text--tone-accent {
+  color: var(--ins-text-accent);
+}
+.ins-text--tone-inverse {
+  color: var(--ins-text-inverse);
+}
+.ins-text--tone-success {
+  color: var(--ins-success-text);
+}
+.ins-text--tone-warning {
+  color: var(--ins-warning-text);
+}
+.ins-text--tone-danger {
+  color: var(--ins-danger-text);
+}
+
+.ins-text--caps {
+  text-transform: uppercase;
+  letter-spacing: var(--ins-letter-spacing-caps);
+  font-weight: var(--ins-font-weight-semibold);
+}
+
+.ins-text--relaxed {
+  line-height: var(--ins-line-height-relaxed);
+}
+
+.ins-text--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Link ---------------------------------------------------------------- */
+.ins-link {
+  display: inline;
+  font-family: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  border-radius: var(--ins-radius-sm);
+  cursor: pointer;
+  transition: color var(--ins-duration-fast) var(--ins-easing-standard);
+}
+
+.ins-link--default {
+  color: var(--ins-text-link);
+}
+
+.ins-link--default:hover {
+  color: var(--ins-text-link-hover);
+}
+
+.ins-link--accent {
+  color: var(--ins-text-accent);
+}
+
+.ins-link--accent:hover {
+  color: var(--ins-accent-bg-active);
+}
+
+.ins-link--inherit {
+  color: inherit;
+}
+
+.ins-link--subtle {
+  text-decoration: none;
+}
+
+.ins-link--subtle:hover {
+  text-decoration: underline;
+}
+
+.ins-link__external {
+  margin-inline-start: 0.15em;
+  font-size: 0.85em;
+}
+
+.ins-link:focus-visible {
+  outline: 2px solid var(--ins-focus-ring-color);
+  outline-offset: 2px;
+}

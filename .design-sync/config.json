@@ -1,0 +1,74 @@
+{
+  "projectId": "9029f2a5-5abb-4282-b662-c7223875782e",
+  "shape": "package",
+  "pkg": "@insighture/design-system",
+  "globalName": "Insighture",
+  "buildCmd": "npm run build",
+  "srcDir": "src",
+  "tsconfig": "tsconfig.json",
+  "cssEntry": "dist/index.css",
+  "tokensGlob": [
+    "src/styles/tokens.css",
+    "src/styles/semantic.css"
+  ],
+  "provider": {
+    "component": "InsightureProvider",
+    "props": {
+      "defaultTheme": "light"
+    }
+  },
+  "componentSrcMap": {
+    "FieldShell": null
+  },
+  "overrides": {
+    "Modal": {
+      "cardMode": "single",
+      "primaryStory": "Confirmation",
+      "viewport": "900x620"
+    },
+    "Tooltip": {
+      "cardMode": "column"
+    },
+    "InsightureProvider": {
+      "cardMode": "column"
+    },
+    "Card": {
+      "cardMode": "column"
+    },
+    "CardBody": {
+      "cardMode": "column"
+    },
+    "CardFooter": {
+      "cardMode": "column"
+    },
+    "CardHeader": {
+      "cardMode": "column"
+    },
+    "Alert": {
+      "cardMode": "column"
+    },
+    "Switch": {
+      "cardMode": "column"
+    },
+    "Textarea": {
+      "cardMode": "column"
+    },
+    "Divider": {
+      "cardMode": "column"
+    },
+    "Stack": {
+      "cardMode": "column"
+    },
+    "Tabs": {
+      "cardMode": "column"
+    },
+    "Heading": {
+      "cardMode": "column"
+    },
+    "Text": {
+      "cardMode": "column"
+    }
+  },
+  "docsDir": "docs",
+  "readmeHeader": ".design-sync/conventions.md"
+}

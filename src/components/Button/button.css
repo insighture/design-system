@@ -1,0 +1,141 @@
+.ins-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ins-space-xs);
+  border: var(--ins-border-width-thin) solid transparent;
+  border-radius: var(--ins-radius-md);
+  font-family: var(--ins-font-sans);
+  font-weight: var(--ins-font-weight-medium);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ins-duration-fast) var(--ins-easing-standard),
+    border-color var(--ins-duration-fast) var(--ins-easing-standard),
+    color var(--ins-duration-fast) var(--ins-easing-standard),
+    box-shadow var(--ins-duration-fast) var(--ins-easing-standard);
+}
+
+.ins-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.ins-button__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ins-space-xs);
+}
+
+.ins-button__icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+.ins-button__spinner {
+  position: absolute;
+  display: inline-flex;
+}
+
+.ins-button--loading .ins-button__content {
+  visibility: hidden;
+}
+
+/* ---- Sizes --------------------------------------------------------------- */
+.ins-button--sm {
+  min-height: 32px;
+  padding: 0 var(--ins-space-sm);
+  font-size: var(--ins-font-size-sm);
+}
+
+.ins-button--md {
+  min-height: 40px;
+  padding: 0 var(--ins-space-md);
+  font-size: var(--ins-font-size-sm);
+}
+
+.ins-button--lg {
+  min-height: 48px;
+  padding: 0 var(--ins-space-lg);
+  font-size: var(--ins-font-size-md);
+}
+
+.ins-button--full {
+  width: 100%;
+}
+
+/* ---- Variants ------------------------------------------------------------ */
+/* The strongest action. Ink on the light ground, coral on the dark one — the
+   tokens flip per theme so the button always reads as the heaviest thing. */
+.ins-button--primary {
+  background-color: var(--ins-button-primary-bg);
+  color: var(--ins-button-primary-fg);
+}
+
+.ins-button--primary:hover:not(:disabled) {
+  background-color: var(--ins-button-primary-bg-hover);
+}
+
+/* The second step: coral on light, azure on dark. Reserve it for the single
+   most important action on a marketing or onboarding surface. */
+.ins-button--emphasis {
+  background-color: var(--ins-button-emphasis-bg);
+  color: var(--ins-button-emphasis-fg);
+}
+
+.ins-button--emphasis:hover:not(:disabled) {
+  background-color: var(--ins-button-emphasis-bg-hover);
+}
+
+.ins-button--secondary {
+  background-color: var(--ins-neutral-bg);
+  color: var(--ins-text-primary);
+}
+
+.ins-button--secondary:hover:not(:disabled) {
+  background-color: var(--ins-neutral-bg-hover);
+}
+
+.ins-button--secondary:active:not(:disabled) {
+  background-color: var(--ins-neutral-bg-active);
+}
+
+.ins-button--outline {
+  background-color: transparent;
+  border-color: var(--ins-border-default);
+  color: var(--ins-text-primary);
+}
+
+.ins-button--outline:hover:not(:disabled) {
+  border-color: var(--ins-accent-bg);
+  color: var(--ins-accent-text);
+  background-color: var(--ins-accent-bg-subtle);
+}
+
+.ins-button--ghost {
+  background-color: transparent;
+  color: var(--ins-text-secondary);
+}
+
+.ins-button--ghost:hover:not(:disabled) {
+  background-color: var(--ins-neutral-bg);
+  color: var(--ins-text-primary);
+}
+
+.ins-button--danger {
+  background-color: var(--ins-danger-solid);
+  color: var(--ins-brand-white);
+}
+
+.ins-button--danger:hover:not(:disabled) {
+  background-color: var(--ins-red-600);
+}
+
+.ins-button:focus-visible {
+  outline: none;
+  box-shadow: var(--ins-focus-ring);
+}

@@ -1,0 +1,45 @@
+.ins-divider--horizontal {
+  width: 100%;
+  height: var(--ins-border-width-thin);
+  background-color: var(--ins-border-default);
+  border: 0;
+}
+
+.ins-divider--vertical {
+  width: var(--ins-border-width-thin);
+  align-self: stretch;
+  min-height: 1em;
+  background-color: var(--ins-border-default);
+}
+
+.ins-divider--subtle {
+  background-color: var(--ins-border-subtle);
+}
+
+.ins-divider--labelled {
+  display: flex;
+  align-items: center;
+  gap: var(--ins-space-sm);
+  height: auto;
+  background-color: transparent;
+}
+
+.ins-divider__line {
+  flex: 1;
+  height: var(--ins-border-width-thin);
+  background-color: var(--ins-border-default);
+}
+
+.ins-divider--subtle .ins-divider__line {
+  background-color: var(--ins-border-subtle);
+}
+
+.ins-divider__label {
+  font-family: var(--ins-font-sans);
+  font-size: var(--ins-font-size-xs);
+  font-weight: var(--ins-font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ins-letter-spacing-caps);
+  color: var(--ins-text-tertiary);
+  white-space: nowrap;
+}

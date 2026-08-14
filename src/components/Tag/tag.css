@@ -1,0 +1,80 @@
+/* Tags are neutral chips. The category colour lives in the swatch only —
+   a wall of tinted tags turns a list into a colour chart. */
+.ins-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ins-space-2xs);
+  padding: 4px var(--ins-space-xs);
+  border: var(--ins-border-width-thin) solid var(--ins-border-subtle);
+  border-radius: var(--ins-radius-sm);
+  background-color: var(--ins-bg-subtle);
+  color: var(--ins-text-secondary);
+  font-family: var(--ins-font-sans);
+  font-size: var(--ins-font-size-xs);
+  font-weight: var(--ins-font-weight-medium);
+  line-height: 1.2;
+  max-width: 100%;
+}
+
+.ins-tag__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ins-tag__swatch {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 2px;
+  background-color: var(--ins-tag-solid);
+}
+
+.ins-tag__remove {
+  flex: none;
+  border: 0;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--ins-radius-sm);
+  background: transparent;
+  color: inherit;
+  font-size: var(--ins-font-size-sm);
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.65;
+}
+
+.ins-tag__remove:hover {
+  opacity: 1;
+  background-color: var(--ins-bg-muted);
+}
+
+.ins-tag__remove:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}
+
+.ins-tag--neutral {
+  --ins-tag-solid: var(--ins-neutral-500);
+}
+
+.ins-tag--coral {
+  --ins-tag-solid: var(--ins-orange-500);
+}
+
+.ins-tag--amber {
+  --ins-tag-solid: var(--ins-orange-amber);
+}
+
+.ins-tag--yellow {
+  --ins-tag-solid: var(--ins-yellow-500);
+}
+
+.ins-tag--azure {
+  --ins-tag-solid: var(--ins-azure-500);
+}
+
+.ins-tag--green {
+  --ins-tag-solid: var(--ins-green-500);
+}

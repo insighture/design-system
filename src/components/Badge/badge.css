@@ -1,0 +1,103 @@
+/* Three deliberate tiers of loudness:
+   - `soft` (default): fully neutral chip. Tone shows only in the dot. This is
+     what most badges should be — a wall of coloured pills reads as decoration.
+   - `outline`: tone-coloured border and label on a transparent chip.
+   - `solid`: filled with the tone. The loudest, for a status that must be seen
+     immediately (a failure, a live state).
+   Every colour below is a semantic token, so all three follow the theme. */
+.ins-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ins-space-2xs);
+  border: var(--ins-border-width-thin) solid transparent;
+  border-radius: var(--ins-radius-pill);
+  font-family: var(--ins-font-sans);
+  font-weight: var(--ins-font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ins-badge--sm {
+  padding: 3px var(--ins-space-xs);
+  font-size: var(--ins-font-size-2xs);
+}
+
+.ins-badge--md {
+  padding: 5px var(--ins-space-sm);
+  font-size: var(--ins-font-size-xs);
+}
+
+.ins-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--ins-badge-tone);
+}
+
+/* On a filled chip the dot has to read against the fill, not repeat it. */
+.ins-badge--solid .ins-badge__dot {
+  background-color: currentColor;
+  opacity: 0.7;
+}
+
+/* ---- Tone -----------------------------------------------------------------
+   `--ins-badge-tone` is the dot and the solid fill; `--ins-badge-text` is the
+   outline label; `--ins-badge-on-solid` is the label on a filled chip. */
+.ins-badge--tone-neutral {
+  --ins-badge-tone: var(--ins-neutral-500);
+  --ins-badge-text: var(--ins-text-secondary);
+  --ins-badge-on-solid: var(--ins-brand-white);
+}
+.ins-badge--tone-accent {
+  --ins-badge-tone: var(--ins-accent-bg);
+  --ins-badge-text: var(--ins-accent-text);
+  --ins-badge-on-solid: var(--ins-accent-on-accent);
+}
+.ins-badge--tone-info {
+  --ins-badge-tone: var(--ins-info-solid);
+  --ins-badge-text: var(--ins-info-text);
+  --ins-badge-on-solid: var(--ins-brand-white);
+}
+.ins-badge--tone-success {
+  --ins-badge-tone: var(--ins-success-solid);
+  --ins-badge-text: var(--ins-success-text);
+  --ins-badge-on-solid: var(--ins-brand-white);
+}
+.ins-badge--tone-warning {
+  --ins-badge-tone: var(--ins-warning-solid);
+  --ins-badge-text: var(--ins-warning-text);
+  --ins-badge-on-solid: var(--ins-neutral-950);
+}
+.ins-badge--tone-danger {
+  --ins-badge-tone: var(--ins-danger-solid);
+  --ins-badge-text: var(--ins-danger-text);
+  --ins-badge-on-solid: var(--ins-brand-white);
+}
+.ins-badge--tone-highlight {
+  --ins-badge-tone: var(--ins-highlight-solid);
+  --ins-badge-text: var(--ins-highlight-text);
+  --ins-badge-on-solid: var(--ins-neutral-950);
+}
+.ins-badge--tone-emphasis {
+  --ins-badge-tone: var(--ins-emphasis-solid);
+  --ins-badge-text: var(--ins-emphasis-text);
+  --ins-badge-on-solid: var(--ins-emphasis-on-solid);
+}
+
+/* ---- Variants ------------------------------------------------------------ */
+/* Neutral by design: surface AND label. The dot is the only colour. */
+.ins-badge--soft {
+  background-color: var(--ins-bg-subtle);
+  color: var(--ins-text-secondary);
+}
+
+.ins-badge--outline {
+  background-color: transparent;
+  border-color: var(--ins-badge-tone);
+  color: var(--ins-badge-text);
+}
+
+.ins-badge--solid {
+  background-color: var(--ins-badge-tone);
+  color: var(--ins-badge-on-solid);
+}

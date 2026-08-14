@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Insighture base layer
+   Scoped to the provider root (.ins-root) so dropping the design system into an
+   existing app never resets styles outside of it.
+   ========================================================================== */
+
+.ins-root {
+  background-color: var(--ins-bg-canvas);
+  color: var(--ins-text-primary);
+  font-family: var(--ins-font-sans);
+  font-size: var(--ins-font-size-md);
+  font-weight: var(--ins-font-weight-regular);
+  line-height: var(--ins-line-height-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+}
+
+.ins-root *,
+.ins-root *::before,
+.ins-root *::after {
+  box-sizing: border-box;
+}
+
+.ins-root :where(h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd) {
+  margin: 0;
+}
+
+.ins-root :where(ul, ol) {
+  margin: 0;
+  padding: 0;
+}
+
+.ins-root :where(img, svg, video, canvas) {
+  display: block;
+  max-width: 100%;
+}
+
+.ins-root :where(button, input, select, textarea) {
+  font: inherit;
+  color: inherit;
+}
+
+.ins-root :where(:focus-visible) {
+  outline: 2px solid var(--ins-focus-ring-color);
+  outline-offset: 2px;
+}
+
+.ins-root :where(::selection) {
+  background-color: var(--ins-accent-bg);
+  color: var(--ins-accent-on-accent);
+}
+
+/* Screen-reader-only content, used by inputs, switches and icon buttons. */
+.ins-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ins-root *,
+  .ins-root *::before,
+  .ins-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

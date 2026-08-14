@@ -1,0 +1,24 @@
+.ins-select {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.ins-select__control {
+  appearance: none;
+  padding-inline-end: var(--ins-space-xl);
+  cursor: pointer;
+}
+
+.ins-select__chevron {
+  position: absolute;
+  right: var(--ins-space-sm);
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-top: -6px;
+  border-right: 1.5px solid var(--ins-text-tertiary);
+  border-bottom: 1.5px solid var(--ins-text-tertiary);
+  transform: rotate(45deg);
+  pointer-events: none;
+}

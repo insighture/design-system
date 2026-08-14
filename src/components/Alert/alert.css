@@ -1,0 +1,130 @@
+/* Alerts are deliberately quiet: a neutral card whose only colour is the icon
+   and whatever action you pass. No tinted surface, no coloured edge — a page
+   full of highlighted blocks reads as noise and dilutes the real signal. */
+.ins-alert {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ins-space-sm);
+  padding: var(--ins-space-md);
+  border: var(--ins-border-width-thin) solid var(--ins-border-subtle);
+  border-radius: var(--ins-radius-md);
+  background-color: var(--ins-bg-surface);
+  color: var(--ins-text-primary);
+  font-family: var(--ins-font-sans);
+  font-size: var(--ins-font-size-sm);
+  line-height: var(--ins-line-height-normal);
+  overflow: hidden;
+}
+
+/* Opt-in: the whole border takes the tone. Still no fill, still no edge bar. */
+.ins-alert--outline {
+  border-color: var(--ins-alert-tone);
+}
+
+/* The loud one. Reach for it when a single alert must dominate the view. */
+.ins-alert--tinted {
+  background-color: var(--ins-alert-tint-bg);
+  border-color: var(--ins-alert-tint-border);
+}
+
+.ins-alert__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background-color: var(--ins-alert-tone);
+  color: var(--ins-alert-icon-fg);
+  font-size: var(--ins-font-size-xs);
+  font-weight: var(--ins-font-weight-bold);
+  line-height: 1;
+}
+
+.ins-alert--info {
+  --ins-alert-tone: var(--ins-info-solid);
+  --ins-alert-icon-fg: var(--ins-brand-white);
+  --ins-alert-tint-bg: var(--ins-info-bg);
+  --ins-alert-tint-border: var(--ins-info-border);
+}
+.ins-alert--success {
+  --ins-alert-tone: var(--ins-success-solid);
+  --ins-alert-icon-fg: var(--ins-brand-white);
+  --ins-alert-tint-bg: var(--ins-success-bg);
+  --ins-alert-tint-border: var(--ins-success-border);
+}
+.ins-alert--warning {
+  --ins-alert-tone: var(--ins-warning-solid);
+  --ins-alert-icon-fg: var(--ins-neutral-950);
+  --ins-alert-tint-bg: var(--ins-warning-bg);
+  --ins-alert-tint-border: var(--ins-warning-border);
+}
+.ins-alert--danger {
+  --ins-alert-tone: var(--ins-danger-solid);
+  --ins-alert-icon-fg: var(--ins-brand-white);
+  --ins-alert-tint-bg: var(--ins-danger-bg);
+  --ins-alert-tint-border: var(--ins-danger-border);
+}
+.ins-alert--accent {
+  --ins-alert-tone: var(--ins-accent-bg);
+  --ins-alert-icon-fg: var(--ins-accent-on-accent);
+  --ins-alert-tint-bg: var(--ins-accent-bg-subtle);
+  --ins-alert-tint-border: var(--ins-accent-border);
+}
+
+.ins-alert__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ins-space-2xs);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Neutral text: the icon and the rule already say which state this is. */
+.ins-alert__title {
+  margin: 0;
+  font-weight: var(--ins-font-weight-bold);
+  font-size: var(--ins-font-size-sm);
+  color: var(--ins-text-primary);
+}
+
+.ins-alert__message {
+  margin: 0;
+  color: var(--ins-text-secondary);
+}
+
+.ins-alert__actions {
+  display: flex;
+  gap: var(--ins-space-xs);
+  margin-top: var(--ins-space-2xs);
+}
+
+.ins-alert__dismiss {
+  flex: none;
+  border: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ins-radius-sm);
+  background: transparent;
+  color: var(--ins-text-tertiary);
+  font-size: var(--ins-font-size-lg);
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color var(--ins-duration-fast) var(--ins-easing-standard),
+    color var(--ins-duration-fast) var(--ins-easing-standard);
+}
+
+.ins-alert__dismiss:hover {
+  background-color: var(--ins-neutral-bg);
+  color: var(--ins-text-primary);
+}
+
+.ins-alert__dismiss:focus-visible {
+  outline: none;
+  box-shadow: var(--ins-focus-ring);
+}
