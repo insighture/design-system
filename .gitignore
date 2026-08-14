@@ -14,3 +14,4 @@ ds-bundle/
 .design-sync/node_modules
 .design-sync/upload-list.txt
 .design-sync/chunks.json
+docs/assets/*.tmp.png

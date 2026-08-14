@@ -1,18 +1,49 @@
-# Insighture Design System
+<div align="center">
 
-Tokens, primitives and React components for Insighture product surfaces.
+<img src="docs/assets/hero.png" alt="Insighture Design System" width="880">
 
-Inter throughout — one variable family for headings, UI and body. Self-hosted
-(latin subset), so nothing hits Google Fonts at runtime.
+<p>
+  <img alt="components" src="https://img.shields.io/badge/components-28-FC773B?style=flat-square&labelColor=101315">
+  <img alt="themes" src="https://img.shields.io/badge/themes-light%20%2B%20dark-0182CB?style=flat-square&labelColor=101315">
+  <img alt="typeface" src="https://img.shields.io/badge/typeface-Inter-101315?style=flat-square&labelColor=101315">
+  <img alt="react" src="https://img.shields.io/badge/React-18%2B-101315?style=flat-square&labelColor=101315">
+  <img alt="typescript" src="https://img.shields.io/badge/TypeScript-strict-101315?style=flat-square&labelColor=101315">
+</p>
+
+**Tokens, primitives and 28 React components for Insighture product surfaces.**
+
+</div>
+
+---
+
+## The system at a glance
+
+Every image below is rendered from the **real compiled components** — not
+mockups — so they cannot drift from what the library actually ships.
+
+<img src="docs/assets/components-light.png" alt="Insighture components in the light theme" width="100%">
+
+<img src="docs/assets/components-dark.png" alt="Insighture components in the dark theme" width="100%">
+
+Light and dark are both first-class. Note the button hierarchy inverting between
+them: on white the strongest action is ink, on near-black it is coral — because
+ink disappears against a dark ground. That runs through dedicated
+`--ins-button-*` tokens, so the swap never drags the rest of the accent system
+with it.
 
 ## Install and use
 
 ```bash
 npm install
-npm run build      # builds dist/ (ESM + CJS + .d.ts + index.css)
-npm run preview    # showcase app on http://127.0.0.1:5273
+npm run build          # dist/ (ESM + CJS + .d.ts + index.css)
+npm run preview        # local showcase on http://127.0.0.1:5273
 npm run typecheck
+npm run readme:assets  # re-render the images in this README
 ```
+
+`readme:assets` bundles `src/` and screenshots the scenes in
+`scripts/readme-scenes/`, so the images above are always generated from the
+current components rather than maintained by hand.
 
 ```tsx
 import { InsightureProvider, Button, Card, Heading } from '@insighture/design-system';
@@ -34,6 +65,8 @@ export function App() {
 token layer keys off — components rendered outside a provider are unstyled.
 
 ## The palette
+
+<img src="docs/assets/palette.png" alt="Insighture colour ramps" width="100%">
 
 Drawn from the Insighture mark, but deliberately **weighted**: the system is
 carried by white and near-black, accented with the mark's coral orange, and
@@ -149,9 +182,13 @@ Do not hardcode hex values in product code — every colour you need has a token
 src/
   index.ts                 package entry (also imports the stylesheet)
   tokens.ts                TS mirror of the token values
-  styles/                  fonts, primitives, semantic, base, stylesheet barrel
+  styles/                  font, primitives, semantic, base, stylesheet barrel
   components/<Name>/       one .tsx + one .css per component
-preview/                   showcase app, not published
+docs/                      per-component docs (also drive the design-system sync)
+docs/assets/               the README images, rendered from the real bundle
+preview/                   local showcase app, not published
+scripts/fetch-fonts.mjs    refreshes the self-hosted Inter subset
+.design-sync/              inputs for the claude.ai/design sync
 ```
 
 Adding a component: create `src/components/<Name>/`, add its stylesheet to
