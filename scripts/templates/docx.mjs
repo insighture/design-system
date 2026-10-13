@@ -38,6 +38,11 @@ export async function buildDocx(tokens, assets) {
       heading1: { run: { font: SANS, size: pt(t.h1), bold: true, color: ink }, paragraph: { spacing: { before: 360, after: 140, line: 276 }, keepNext: true } },
       heading2: { run: { font: SANS, size: pt(t.h2), bold: true, color: ink }, paragraph: { spacing: { before: 280, after: 100, line: 288 }, keepNext: true } },
       heading3: { run: { font: SANS, size: pt(t.h3), bold: true, color: ink }, paragraph: { spacing: { before: 200, after: 80 }, keepNext: true } },
+      // Word's built-in Heading 4–6 and Hyperlink styles default to Office blue; pin them to the brand.
+      heading4: { run: { font: SANS, size: pt(t.body), bold: true, color: ink }, paragraph: { spacing: { before: 160, after: 60 }, keepNext: true } },
+      heading5: { run: { font: SANS, size: pt(t.body), bold: true, color: body }, paragraph: { spacing: { before: 160, after: 60 }, keepNext: true } },
+      heading6: { run: { font: SANS, size: pt(t.small), bold: true, allCaps: true, color: muted }, paragraph: { spacing: { before: 160, after: 60 }, keepNext: true } },
+      hyperlink: { run: { color: ink, underline: { type: 'single', color: ink } } },
     },
     paragraphStyles: [
       { id: 'Eyebrow', name: 'Eyebrow', basedOn: 'Normal', next: 'Heading1', quickFormat: true,

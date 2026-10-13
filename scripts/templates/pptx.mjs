@@ -187,7 +187,8 @@ export async function buildPptx(tokens, assets) {
   s.addText('WHAT WE DO', { placeholder: 'eyebrow' });
   s.addText([{ text: 'Great outcomes start with the ' }, em('right thinking')], { placeholder: 'title' });
   const services = [
-    ['AI', 'Artificial intelligence', 'Practical AI that delivers measurable business value.', C.accent1, palette.rose[700]],
+    // Rose is spent on the title's serif words, so the cards use the alt colours only.
+    ['AI', 'Artificial intelligence', 'Practical AI that delivers measurable business value.', C.accent5, palette.indigo[700]],
     ['DA', 'Data & analytics', 'Turn fragmented data into insights that drive better decisions.', C.accent3, palette.orange[700]],
     ['CL', 'Cloud & platforms', 'Secure, scalable foundations built for growth.', C.accent4, palette.yellow[700]],
     ['IN', 'Integration', 'Connect systems and processes to simplify operations.', C.accent2, palette.teal[700]],
@@ -228,7 +229,8 @@ export async function buildPptx(tokens, assets) {
     chartColors: [grey, grey, grey, grey, grey, hex(brand.rose)],
     showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', dataLabelColor: hex(palette.neutral[700]), dataLabelFontSize: 12, dataLabelFontFace: '+mn-lt',
     catAxisLabelColor: muted, catAxisLabelFontSize: 12, catAxisLabelFontFace: '+mn-lt', catAxisLineShow: false,
-    valAxisHidden: true, valGridLine: { color: hex(palette.neutral[200]), size: 0.75 }, catGridLine: { style: 'none' },
+    // The value axis is hidden, but pptxgenjs still writes its line and labels in its own grey/black/Arial defaults.
+    valAxisHidden: true, valAxisLineShow: false, valAxisLabelColor: muted, valAxisLabelFontSize: 12, valAxisLabelFontFace: '+mn-lt', valGridLine: { color: hex(palette.neutral[200]), size: 0.75 }, catGridLine: { style: 'none' },
     showLegend: false, showTitle: true, title: 'Median lead time for changes (days)', titleFontSize: 14, titleColor: hex(brand.black), titleFontFace: '+mn-lt',
     objectName: 'lead-time-chart',
   });

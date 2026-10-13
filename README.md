@@ -31,7 +31,25 @@ websites, charts, email and social**.
 | Use the logo | [`brand/logo/`](brand/logo) · [rules](GUIDELINES.md#6-logo) |
 | Build a web page or app | [Install and use](#install-and-use) |
 | Check a colour, size or rule | [GUIDELINES.md](GUIDELINES.md) |
+| Make an AI assistant follow the brand, or check a file | [`skills/insighture-design-system/`](skills/insighture-design-system) · [details](#ai-assistants) |
 | See everything locally | `npm run preview` → http://localhost:5273 |
+
+## AI assistants
+
+`skills/insighture-design-system/` is the brand packaged for AI tools. Rebuild
+it with `npm run skill` after changing the guidelines, logo, templates or
+tokens. It also writes `dist/insighture-design-system.zip` for uploading.
+
+| File | For |
+| --- | --- |
+| `SKILL.md` | Claude (Claude Code, claude.ai) and other agents that read Agent Skills. Hand-written. |
+| `AGENTS.md` | Codex, Cursor, Copilot, Gemini CLI and other tools that read `AGENTS.md`; also the instructions or knowledge file for a Custom GPT or Gem. Generated from `SKILL.md`. |
+| `scripts/check_brand.py` | Brand checker for .pptx, .docx, .xlsx, .html, .css, .svg and .pdf: off-palette colours, non-brand fonts, missing logo, too much rose. Python 3, no dependencies. |
+| `assets/`, `references/` | Logo, Office and email templates, tokens, palette. Copied from this repo. |
+
+```bash
+python3 skills/insighture-design-system/scripts/check_brand.py deck.pptx page.html   # --json for machines
+```
 
 ## The system at a glance
 
