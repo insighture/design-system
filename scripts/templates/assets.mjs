@@ -4,7 +4,7 @@
  * can't draw CSS gradients, so these are baked to PNG.
  */
 import path from 'node:path';
-import { assetDir, page, png } from './lib.mjs';
+import { assetDir, loadLogos, page, png, root } from './lib.mjs';
 
 const circles = (stroke, glow) => `
   <div class="glow" style="background:radial-gradient(circle, ${glow} 0%, transparent 62%)"></div>
@@ -30,7 +30,26 @@ export const ASSETS = {
   deepSlide: path.join(assetDir, 'deep-teal-16x9.png'),
   roseA4: path.join(assetDir, 'rose-a4.png'),
   deepA4: path.join(assetDir, 'deep-teal-a4.png'),
+  logoBlack: path.join(assetDir, 'logo-black.png'),
+  logoWhite: path.join(assetDir, 'logo-white.png'),
+  logoWhiteMono: path.join(assetDir, 'logo-white-mono.png'),
 };
+
+/** Logo aspect ratio (width / height), from the SVG viewBox 355 × 84. */
+export const LOGO_RATIO = 355 / 84;
+
+const fit = (svg) => svg.replace(/width="\d+" height="\d+"/, 'width="100%" height="100%"');
+
+/** The usage sheet shown in GUIDELINES.md: each version on its ground. */
+const usage = (L) => page(`<div class="sheet">
+  <div class="tile" style="background:var(--ins-brand-white)"><div class="mark">${fit(L.black)}</div><p>Primary · on white</p></div>
+  <div class="tile" style="background:var(--ins-brand-deep-teal);color:#fff"><div class="mark">${fit(L.white)}</div><p>Reversed · on dark teal</p></div>
+  <div class="tile" style="background:var(--ins-gradient-rose);color:#fff"><div class="mark">${fit(L.whiteMono)}</div><p>White mono · on rose and photos</p></div>
+  <div class="tile" style="background:var(--ins-neutral-100)"><div class="mark">${fit(L.blackMono)}</div><p>Black mono · single-colour print</p></div>
+</div>`, `.sheet{display:grid;grid-template-columns:1fr 1fr;width:100vw;height:100vh}
+  .tile{position:relative;display:grid;place-items:center}
+  .mark{width:300px;height:71px}
+  .tile p{position:absolute;left:24px;bottom:16px;margin:0;font-size:13px;opacity:.75}`);
 
 export async function buildAssets(tokens) {
   await png(rose(tokens), 1600, 900, ASSETS.roseSlide, 1.2);
@@ -38,5 +57,12 @@ export async function buildAssets(tokens) {
   // A4 at 96 css-dpi = 794 × 1123; ×2 gives ~190 dpi print quality.
   await png(rose(tokens), 794, 1123, ASSETS.roseA4, 2);
   await png(deep(tokens), 794, 1123, ASSETS.deepA4, 2);
+  // Logos as transparent PNG for Office (4× the 355 × 84 artboard).
+  const L = await loadLogos();
+  const logo = (svg) => page(`<div style="width:100vw;height:100vh">${fit(svg)}</div>`);
+  await png(logo(L.black), 355, 84, ASSETS.logoBlack, 4, { transparent: true });
+  await png(logo(L.white), 355, 84, ASSETS.logoWhite, 4, { transparent: true });
+  await png(logo(L.whiteMono), 355, 84, ASSETS.logoWhiteMono, 4, { transparent: true });
+  await png(usage(L), 1000, 420, path.join(root, 'docs', 'assets', 'logo.png'), 2);
   return ASSETS;
 }

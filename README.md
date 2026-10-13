@@ -77,6 +77,21 @@ export function App() {
 token layer keys off — components rendered outside a provider are unstyled.
 The `<em>` inside `Heading` renders in DM Serif Display italic, in rose.
 
+## Logo
+
+<img src="docs/assets/logo.png" alt="The Insighture logo in its four versions" width="100%">
+
+Four versions in [`brand/logo/`](brand/logo): primary (black), reversed
+(white) for dark teal, white mono for rose grounds and photos, and black mono
+for single-colour print. The package ships them too:
+
+```tsx
+import logoUrl from '@insighture/design-system/logo/insighture-logo-black.svg';
+```
+
+Usage rules (clear space, minimum size, what not to do) are in
+[GUIDELINES.md](GUIDELINES.md#6-logo).
+
 ## Templates
 
 Ready-made, on-brand files live in [`templates/`](templates/README.md), all
@@ -292,6 +307,7 @@ GUIDELINES.md              brand guidelines for every medium: start here
 docs/                      per-component docs (also drive the design-system sync)
 docs/assets/               the README images, rendered from the real bundle
 preview/                   local showcase app, not published
+brand/logo/                the logo, as SVG, in four versions
 templates/                 generated PowerPoint, Word, PDF, email and social templates
 scripts/templates/         the generators behind `npm run templates`
 scripts/fetch-fonts.mjs    refreshes the self-hosted DM Sans + DM Serif Display subsets

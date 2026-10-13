@@ -17,7 +17,7 @@ npm run templates -- pptx docx    # or just some: pptx docx pdf email social
 | `powerpoint/Insighture-sample.pptx` | The same deck as a normal presentation, to copy slides from. |
 | `word/Insighture-report.dotx` | **Word report template**: rose cover page, running header and footer, and every brand style (Title, Heading 1–3, Lead, Eyebrow, Quote, Caption, Table Header/Text, and the **Serif Emphasis** character style). |
 | `word/Insighture-report-sample.docx` | A filled-in report showing the styles, stat row, data table and key-takeaway box in use. |
-| `word/Insighture-letterhead.dotx` | **Letterhead** with the wordmark header and company-details footer. |
+| `word/Insighture-letterhead.dotx` | **Letterhead** with the logo header and company-details footer. |
 | `pdf/Insighture-report.pdf` | A4 report PDF: cover, summary, chart, table, takeaway and back cover. |
 | `pdf/Insighture-one-pager.pdf` | A4 one-pager: rose hero, service cards, stats and CTA band. |
 | `pdf/src/*.html` | The editable sources for the PDFs. They use the real token CSS. Edit the copy, then run `npm run templates -- pdf`. |
@@ -25,7 +25,7 @@ npm run templates -- pptx docx    # or just some: pptx docx pdf email social
 | `social/linkedin-1200x627.png` | LinkedIn post / link-preview card. |
 | `social/quote-1080x1080.png` | Square testimonial card. |
 | `social/stat-1080x1350.png` | Portrait stat card. |
-| `assets/*.png` | The rose and dark-teal backgrounds the Office templates use, at 16:9 and A4. |
+| `assets/*.png` | The rose and dark-teal backgrounds the Office templates use (16:9 and A4), and transparent PNGs of the logo (`logo-black`, `logo-white`, `logo-white-mono`). |
 
 The PDFs embed their fonts. The email loads them from Google Fonts where the
 mail client allows it.
@@ -65,5 +65,10 @@ Use it once per title, in headings only, never in body text.
 - The Office theme (Design › Colours / Fonts) is set to the brand palette:
   Accent 1 rose, Accent 2 teal, Accent 3 orange, Accent 4 yellow, Accent 5
   indigo, Dark 2 dark teal. Charts and SmartArt pick it up automatically.
+- Every template uses the real logo from `brand/logo/`: black on white,
+  white (rose dot) on dark teal, and all-white on rose.
+- The email references `logo-white-mono.png` by a relative path. Upload it to
+  your site or email platform and change the `src` to that URL before
+  sending.
 - Contact details, addresses and the ABN in the letterhead and email are
   placeholders. Fill them in once in the generator, then rebuild.

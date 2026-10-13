@@ -18,6 +18,13 @@ export const outDir = path.join(root, 'templates');
 export const assetDir = path.join(outDir, 'assets');
 export const fontsCss = pathToFileURL(path.join(root, 'src/styles/fonts.css')).href;
 export const tokensCss = pathToFileURL(path.join(root, 'src/styles/tokens.css')).href;
+export const logoDir = path.join(root, 'brand', 'logo');
+
+/** The logo SVGs, as markup, keyed by variant. */
+export async function loadLogos() {
+  const read = (v) => fs.readFile(path.join(logoDir, `insighture-logo-${v}.svg`), 'utf8');
+  return { black: await read('black'), white: await read('white'), whiteMono: await read('white-mono'), blackMono: await read('black-mono') };
+}
 
 /** src/tokens.ts, bundled on the fly — no `npm run build` needed first. */
 export async function loadTokens() {
@@ -57,10 +64,10 @@ async function open(html, width, height, scale = 1) {
 }
 
 /** Render HTML to a PNG of exactly width × height CSS px. */
-export async function png(html, width, height, file, scale = 2) {
+export async function png(html, width, height, file, scale = 2, { transparent = false } = {}) {
   const { p, done } = await open(html, width, height, scale);
   await fs.mkdir(path.dirname(file), { recursive: true });
-  await p.screenshot({ path: file, clip: { x: 0, y: 0, width, height } });
+  await p.screenshot({ path: file, clip: { x: 0, y: 0, width, height }, omitBackground: transparent });
   await done();
 }
 

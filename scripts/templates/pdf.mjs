@@ -31,7 +31,8 @@ p { margin: 0 0 3mm }
 .eyebrow { font-size: 8.5pt; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ins-indigo-500); margin-bottom: 2.5mm }
 .lead { font-size: 12.5pt; color: var(--ins-neutral-700); line-height: 1.5 }
 .muted { color: var(--ins-neutral-500) }
-.wordmark { font-size: 15pt; font-weight: 300; letter-spacing: -0.01em }
+.logo { display: block; height: 9mm; width: auto }
+.running .logo { display: inline; height: 3.4mm; vertical-align: middle }
 /* Brand grounds, with the soft circle motif from insighture.com */
 .rose { background: var(--ins-gradient-rose); color: var(--ins-brand-white) }
 .deep { background: var(--ins-brand-deep-teal); color: var(--ins-brand-white) }
@@ -84,7 +85,7 @@ blockquote cite { display: block; margin-top: 2mm; font-size: 9pt; font-style: n
 <section class="page cover rose pad">
   <div class="motif glow"></div><div class="motif ring" style="width:95mm;height:95mm;right:-30mm;bottom:-45mm"></div>
   <div class="motif ring" style="width:24mm;height:24mm;right:70mm;bottom:28mm"></div>
-  <div class="wordmark">Insighture</div>
+  <img class="logo" src="../../../brand/logo/insighture-logo-white-mono.svg" alt="Insighture">
   <div style="margin-top:88mm">
     <div class="eyebrow">Platform review</div>
     <h1>Modernising for <em>speed</em> and control</h1>
@@ -94,7 +95,7 @@ blockquote cite { display: block; margin-top: 2mm; font-size: 9pt; font-style: n
 </section>
 
 <section class="page pad">
-  <div class="running top"><b>Insighture</b><span>Platform review · October 2026</span></div>
+  <div class="running top"><img class="logo" src="../../../brand/logo/insighture-logo-black.svg" alt="Insighture"><span>Platform review · October 2026</span></div>
   <div class="eyebrow">Executive summary</div>
   <h1 class="section">Faster releases, <em>fewer</em> failures</h1>
   <p class="lead">In the twelve months since the move to the new platform, the team ships nearly twice as often and fixes problems faster. The gains are real but uneven, and two areas need attention before the next phase.</p>
@@ -115,7 +116,7 @@ blockquote cite { display: block; margin-top: 2mm; font-size: 9pt; font-style: n
 </section>
 
 <section class="page pad">
-  <div class="running top"><b>Insighture</b><span>Platform review · October 2026</span></div>
+  <div class="running top"><img class="logo" src="../../../brand/logo/insighture-logo-black.svg" alt="Insighture"><span>Platform review · October 2026</span></div>
   <h2 style="margin-top:4mm">Results by quarter</h2>
   <table>
     <thead><tr><th>Quarter</th><th>Lead time (days)</th><th>Deploys / month</th><th>Failure rate</th></tr></thead>
@@ -140,7 +141,7 @@ blockquote cite { display: block; margin-top: 2mm; font-size: 9pt; font-style: n
 
 <section class="page deep back pad">
   <div class="motif glow"></div><div class="motif ring" style="width:95mm;height:95mm;right:-30mm;bottom:-45mm"></div>
-  <div class="wordmark">Insighture</div>
+  <img class="logo" src="../../../brand/logo/insighture-logo-white.svg" alt="Insighture">
   <div style="margin-top:150mm">
     <h2>Let's <em>talk</em></h2>
     <p>Your name · name@insighture.com</p>
@@ -189,7 +190,7 @@ const onePager = () => head('Insighture one-pager', `
   <div class="hero rose">
     <div class="motif glow"></div><div class="motif ring" style="width:80mm;height:80mm;right:-25mm;bottom:-40mm"></div>
     <div class="motif ring" style="width:16mm;height:16mm;right:62mm;bottom:20mm"></div>
-    <div class="wordmark">Insighture</div>
+    <img class="logo" src="../../../brand/logo/insighture-logo-white-mono.svg" alt="Insighture">
     <div class="display">We own the problem, not just <em>the solution</em></div>
     <p>Technology consulting and AI partner. Because the best outcomes begin long before implementation.</p>
   </div>

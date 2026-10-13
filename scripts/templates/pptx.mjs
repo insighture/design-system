@@ -8,6 +8,7 @@
 import pptxgen from 'pptxgenjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { LOGO_RATIO } from './assets.mjs';
 import { applyTheme, fixPptxRuns, hex, outDir, toTemplate } from './lib.mjs';
 
 const W = 13.333;
@@ -31,9 +32,9 @@ export async function buildPptx(tokens, assets) {
   const SERIF = officeTheme.emphasisFont;
 
   // ---- Shared layout pieces --------------------------------------------------
-  const footer = (dark) => [
-    { text: { text: 'Insighture', options: { x: M, y: H - 0.55, w: 3, h: 0.3, fontSize: 10, color: dark ? onDark2 : muted, margin: 0 } } },
-  ];
+  // The real logo: black on white, white (rose dot) on dark teal, all-white on rose.
+  const logo = (path, x, y, h) => ({ image: { x, y, h, w: h * LOGO_RATIO, path, altText: 'Insighture' } });
+  const footer = (dark) => [logo(dark ? assets.logoWhite : assets.logoBlack, M, H - 0.58, 0.24)];
   const slideNumber = (dark) => ({ x: W - M - 0.6, y: H - 0.55, w: 0.6, h: 0.3, fontSize: 10, color: dark ? onDark2 : muted, align: 'right', margin: 0 });
   const eyebrow = (color) => ({
     placeholder: {
@@ -53,7 +54,7 @@ export async function buildPptx(tokens, assets) {
     title: 'Title',
     background: { path: assets.roseSlide },
     objects: [
-      { text: { text: 'Insighture', options: { x: M, y: 0.55, w: 4, h: 0.5, fontSize: 22, color: C.background1, margin: 0 } } },
+      logo(assets.logoWhiteMono, M, 0.55, 0.42),
       { placeholder: { options: { name: 'title', type: 'title', align: 'left', x: M, y: 1.7, w: 9.2, h: 2.9, fontSize: 54, bold: true, color: C.background1, valign: 'bottom', margin: 0, lineSpacingMultiple: 0.95 }, text: 'Presentation title' } },
       { placeholder: { options: { name: 'subtitle', type: 'body', align: 'left', x: M, y: 4.85, w: 8, h: 1.0, fontSize: 20, color: C.background1, valign: 'top', margin: 0 }, text: 'Subtitle' } },
       { placeholder: { options: { name: 'meta', type: 'body', align: 'left', x: M, y: H - 1.0, w: 7, h: 0.4, fontSize: 12, bold: true, color: C.background1, charSpacing: 2, margin: 0 }, text: 'DATE · PRESENTER' } },
@@ -129,7 +130,7 @@ export async function buildPptx(tokens, assets) {
     title: 'Closing',
     background: { path: assets.roseSlide },
     objects: [
-      { text: { text: 'Insighture', options: { x: M, y: 0.55, w: 4, h: 0.5, fontSize: 22, color: C.background1, margin: 0 } } },
+      logo(assets.logoWhiteMono, M, 0.55, 0.42),
       { placeholder: { options: { name: 'title', type: 'title', align: 'left', x: M, y: 2.2, w: 9, h: 1.8, fontSize: 60, bold: true, color: C.background1, valign: 'bottom', margin: 0 }, text: 'Closing line' } },
       { placeholder: { options: { name: 'body', type: 'body', align: 'left', x: M, y: 4.25, w: 8, h: 1.4, fontSize: 18, color: C.background1, valign: 'top', margin: 0, paraSpaceAfter: 6 }, text: 'Contact details' } },
     ],

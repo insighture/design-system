@@ -1,7 +1,7 @@
 {
   "name": "@insighture/design-system",
   "version": "0.1.0",
-  "description": "Insighture design system — tokens, primitives and React components.",
+  "description": "Insighture design system \u2014 tokens, primitives and React components.",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
@@ -18,10 +18,12 @@
       "require": "./dist/index.cjs"
     },
     "./styles.css": "./dist/index.css",
-    "./dist/index.css": "./dist/index.css"
+    "./dist/index.css": "./dist/index.css",
+    "./logo/*": "./brand/logo/*"
   },
   "files": [
-    "dist"
+    "dist",
+    "brand/logo"
   ],
   "scripts": {
     "build": "tsup",

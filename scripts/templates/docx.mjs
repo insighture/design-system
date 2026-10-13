@@ -10,6 +10,7 @@ import {
 } from 'docx';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { LOGO_RATIO } from './assets.mjs';
 import { hex, outDir, toTemplate } from './lib.mjs';
 
 // A4 in DXA (1/20 pt). Margins 22 mm.
@@ -87,7 +88,7 @@ export async function buildDocx(tokens, assets) {
         verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: 0 }, behindDocument: true, allowOverlap: true },
       altText: { name: 'Cover background', title: 'Cover background', description: 'Insighture rose gradient' },
     })] }),
-    P([new TextRun({ text: 'Insighture', size: pt(20), color: 'FFFFFF' })], { spacing: { after: 4800 } }),
+    P([logo(logos.whiteMono, 150)], { spacing: { after: 4800 } }),
     P([new TextRun({ text: kicker, color: 'FFFFFF' })], { style: 'Eyebrow' }),
     P(titleRuns.map((r) => (r instanceof TextRun ? r : new TextRun(r))), { style: 'Title' }),
     P([new TextRun({ text: subtitle, color: 'FFFFFF', size: pt(14) })], { spacing: { after: 2400 } }),
@@ -101,7 +102,7 @@ export async function buildDocx(tokens, assets) {
   const header = (rightText) => new Header({ children: [new Paragraph({
     tabStops: [{ type: TabStopType.RIGHT, position: CONTENT }],
     border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: rule, space: 6 } },
-    children: [new TextRun({ text: 'Insighture', bold: true, size: pt(t.caption + 1), color: ink }),
+    children: [logo(logos.black, 70),
       new TextRun({ text: `\t${rightText}`, size: pt(t.caption), color: muted })],
   })] });
   const footer = (leftText) => new Footer({ children: [new Paragraph({
@@ -157,6 +158,10 @@ export async function buildDocx(tokens, assets) {
 
   const spacer = (after = 240) => P('', { spacing: { after } });
   const roseBg = await fs.readFile(assets.roseA4);
+  const logos = { black: await fs.readFile(assets.logoBlack), whiteMono: await fs.readFile(assets.logoWhiteMono) };
+  // Inline logo, sized by width in px (96 dpi).
+  const logo = (data, width) => new ImageRun({ type: 'png', data, transformation: { width, height: Math.round(width / LOGO_RATIO) },
+    altText: { name: 'Insighture', title: 'Insighture', description: 'Insighture logo' } });
   const make = (sections) => new Document({
     creator: 'Insighture', title: 'Insighture report', styles, numbering,
     features: { updateFields: false }, sections,
@@ -224,7 +229,7 @@ export async function buildDocx(tokens, assets) {
   // ---- Letterhead (.dotx) ------------------------------------------------------
   const letterHeader = new Header({ children: [
     new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CONTENT }], children: [
-      new TextRun({ text: 'Insighture', size: pt(20), color: ink }),
+      logo(logos.black, 140),
       new TextRun({ text: '\tinsighture.com', size: pt(t.caption), color: muted }),
     ] }),
   ] });
@@ -244,7 +249,7 @@ export async function buildDocx(tokens, assets) {
     P([new TextRun({ text: 'Subject line of the letter', bold: true, size: pt(t.h3) })]),
     P('Dear Recipient,'),
     P('Body text is DM Sans 10.5 pt. Keep letters to one page where you can: one paragraph for context, one for the substance, and one for the next step.'),
-    P('Replace this text with your letter. The header and footer carry the wordmark and company details on every page, so the body needs nothing else.'),
+    P('Replace this text with your letter. The header and footer carry the logo and company details on every page, so the body needs nothing else.'),
     P('Kind regards,', { spacing: { before: 240, after: 720 } }),
     P([new TextRun({ text: 'Your name', bold: true })], { spacing: { after: 0 } }),
     P([new TextRun({ text: 'Role · name@insighture.com', color: muted })]),

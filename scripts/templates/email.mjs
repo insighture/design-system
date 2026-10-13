@@ -8,7 +8,7 @@
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { outDir } from './lib.mjs';
+import { assetDir, outDir } from './lib.mjs';
 
 export async function buildEmail(tokens) {
   const { brand, palette } = tokens;
@@ -41,7 +41,8 @@ export async function buildEmail(tokens) {
 
   <!-- Hero: rose gradient, solid fallback for clients without gradients -->
   <tr><td class="px" bgcolor="#E63A5F" style="background:#E63A5F;background-image:${tokens.roseGradient};padding:40px 48px 44px;font-family:${sans};color:#ffffff">
-    <p style="margin:0 0 36px;font-size:20px;font-weight:300;color:#ffffff">Insighture</p>
+    <!-- Host logo-white-mono.png on your site or email platform and point src at that URL. -->
+    <img src="logo-white-mono.png" width="150" height="36" alt="Insighture" style="display:block;margin:0 0 36px;border:0;width:150px;height:36px">
     <h1 style="margin:0 0 14px;font-size:36px;line-height:40px;font-weight:600;letter-spacing:-0.5px;color:#ffffff">We own the problem, not just ${em('the solution', '#ffffff')}</h1>
     <p style="margin:0 0 26px;font-size:16px;line-height:24px;color:#ffffff">A short intro line: what this email is about and why it matters to the reader.</p>
     ${button("Let's talk", '#ffffff', palette.rose[600])}
@@ -85,5 +86,6 @@ export async function buildEmail(tokens) {
   const file = path.join(outDir, 'email', 'newsletter.html');
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, html);
+  await fs.copyFile(path.join(assetDir, 'logo-white-mono.png'), path.join(outDir, 'email', 'logo-white-mono.png'));
   return { newsletter: file };
 }
