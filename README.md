@@ -5,7 +5,7 @@
 <p>
   <img alt="components" src="https://img.shields.io/badge/components-28-EE4065?style=flat-square&labelColor=15181A">
   <img alt="themes" src="https://img.shields.io/badge/themes-light%20%2B%20dark%20teal-08242B?style=flat-square&labelColor=15181A">
-  <img alt="typeface" src="https://img.shields.io/badge/typeface-DM%20Sans-15181A?style=flat-square&labelColor=15181A">
+  <img alt="typeface" src="https://img.shields.io/badge/type-DM%20Sans%20%2B%20DM%20Serif-15181A?style=flat-square&labelColor=15181A">
   <img alt="react" src="https://img.shields.io/badge/React-18%2B-15181A?style=flat-square&labelColor=15181A">
   <img alt="typescript" src="https://img.shields.io/badge/TypeScript-strict-15181A?style=flat-square&labelColor=15181A">
 </p>
@@ -62,8 +62,10 @@ export function App() {
   return (
     <InsightureProvider defaultTheme="light">
       <Card>
-        <Heading level={2}>Insight, engineered.</Heading>
-        <Button>Get started</Button>
+        <Heading level={2}>
+          We own the problem, not just <em>the solution.</em>
+        </Heading>
+        <Button variant="emphasis">Let's talk</Button>
       </Card>
     </InsightureProvider>
   );
@@ -72,6 +74,34 @@ export function App() {
 
 `InsightureProvider` is required. It sets `data-ins-theme`, which is what the
 token layer keys off — components rendered outside a provider are unstyled.
+The `<em>` inside `Heading` renders in DM Serif Display italic, in rose.
+
+## Beyond the web
+
+The same system drives everything else. [GUIDELINES.md](GUIDELINES.md) has
+the full rules; the essentials:
+
+| Medium | Ground | Type | Signature move |
+| --- | --- | --- | --- |
+| Word / PDF | White pages; dark teal or rose-gradient cover | DM Sans 10.5pt body, H1 20pt semibold | One or two title words in rose DM Serif Display italic |
+| Slides (16:9) | Rose-gradient title slide, dark teal section slides, white content slides | Title 36pt semibold, body 18pt | White serif-italic words on rose; one rose moment per slide |
+| Excel | White, `#EEF0F1` header row | DM Sans 10pt | Key cell in rose on `#FCF0F3` |
+| Charts | White or dark teal | DM Sans 10–11pt labels | Series: rose → dark teal → teal → yellow → indigo → orange |
+| Email / social | Rose-gradient or dark teal band | DM Sans, Arial fallback | Rose pill button; one serif italic word |
+
+For generated Office files, `tokens.ts` exports `officeTheme` (dk1/lt1/
+accent1–6, fonts) and `mediaType` (pt scales) so code can apply the theme
+directly. Where the fonts can't be embedded, fall back to **Arial** for DM Sans
+and **Georgia Italic** for DM Serif Display.
+
+### Fonts
+
+Both families are free on Google Fonts under the SIL Open Font License:
+[DM Sans](https://fonts.google.com/specimen/DM+Sans) and
+[DM Serif Display](https://fonts.google.com/specimen/DM+Serif+Display). Install
+them locally for Word, PowerPoint and Keynote work. The package self-hosts
+latin subsets in `src/styles/fonts/`, so web pages need no network font
+request.
 
 ## The palette
 
@@ -83,8 +113,8 @@ Four main colours and four alts. Rose, teal and the alts sit at step 500 of thei
 | --- | ------ | --- | ---- |
 | Main | White | `#FCFCFD` | Pages, slides, surfaces. Most of everything. |
 | Main | Black | `#15181A` | Text, headings, the strongest action on light. |
-| Main | Dark teal | `#08242B` | The brand ground: dark theme, covers, title slides, hero bands. |
-| Main | Crimson rose | `#EE4065` | **The** accent: one key element per view, plus focus and selection. |
+| Main | Dark teal | `#08242B` | The brand ground: dark theme, covers, section slides, testimonial bands. |
+| Main | Crimson rose | `#EE4065` | **The** accent: one rose moment per view (a gradient hero/CTA band, the key action, or the serif-italic headline words), plus focus and selection. |
 | Alt | Teal | `#0FA2BF` | Support / info, second data series. |
 | Alt | Orange | `#FF8102` | Categorical, illustration. |
 | Alt | Yellow | `#FAB400` | Warning, highlight, categorical. |
@@ -105,9 +135,10 @@ else.
   rather than generic charcoal.
 - **Neutrals are slightly cool** and run from brand white to brand black, so
   greys sit beside dark teal without looking warm.
-- **Contrast:** white on rose is 3.8:1, which is fine for buttons and bold
-  large text. Small accent text uses `--ins-text-accent` (`#B11032` on light,
-  `#F58AA1` on dark).
+- **Contrast:** white on rose is 3.8:1, which is fine for buttons and large
+  text. Small accent text uses `--ins-text-accent` (`#B11032` on light,
+  `#F58AA1` on dark). The serif emphasis uses full rose, so keep it to
+  headings at `size="md"` (28px) and up.
 
 ## Type and shape
 
@@ -141,7 +172,11 @@ properties can't reach: charts, canvas, email, and generated Word, PowerPoint
 and PDF files.
 
 - `brand`: the eight colours.
+- `palette`: every ramp, including `deep` (dark teal) and `neutral`.
 - `chartSeries`: a ready-ordered categorical sequence.
+- `roseGradient` / `brandGradient`: the hero-band surface and the decorative
+  strip.
+- `typography`, `space`, `radius`: the web scales.
 - `mediaType`: pt type scales for documents and 16:9 slides.
 - `officeTheme`: the dk1/lt1/accent1–6 + fonts mapping to apply as a Word,
   PowerPoint or Excel theme.
@@ -181,9 +216,11 @@ Conventions across the set:
   Setting `error` also flips the field into the invalid state.
 - **Controlled and uncontrolled.** `Tabs`, `RadioGroup` and `InsightureProvider`
   accept `value`/`defaultValue` with an `on*Change` callback.
-- **Accent restraint.** Rose is the accent. Use one `Button variant="primary"`
-  per view, and save `variant="emphasis"` (rose on light, white on dark teal)
-  for the single strongest action on a page. Reach for neutrals first; colour is the exception, not the default.
+- **Buttons are pills.** Use one `Button variant="primary"` per view (black
+  on light, rose on dark teal), and save `variant="emphasis"` (rose on light,
+  white on dark teal) for the single strongest action on a page.
+- **Accent restraint.** One rose moment per view. Reach for neutrals first;
+  colour is the exception, not the default.
 
 ## Styling your own layout
 
@@ -191,16 +228,42 @@ Compose with `Stack` (flex wrapper over the space scale) and reach for the
 custom properties directly in your own CSS:
 
 ```css
-.dashboard {
-  display: grid;
+/* A rose call-to-action band, as on insighture.com */
+.cta-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--ins-space-lg);
+  padding: var(--ins-space-2xl) var(--ins-space-xl);
+  background: var(--ins-gradient-rose);
+  color: var(--ins-brand-white);
+  border-radius: var(--ins-radius-2xl);
+}
+
+/* A feature card */
+.feature-card {
   padding: var(--ins-space-xl);
-  background: var(--ins-bg-surface-sunken);
+  background: var(--ins-bg-surface);
   border-radius: var(--ins-radius-lg);
+  box-shadow: var(--ins-shadow-card);
 }
 ```
 
-Do not hardcode hex values in product code — every colour you need has a token.
+Don't hardcode hex values in web code; every colour you need has a token.
+
+## Migrating from the previous palette
+
+The coral / azure / Inter system was replaced in `0aedaf4`:
+
+- `Tag` colours `coral`, `azure`, `amber` and `green` are now `rose`, `teal`,
+  `orange`, `yellow` and `indigo`.
+- `--ins-azure-*`, `--ins-ink-*`, `--ins-orange-amber`, `--ins-brand-coral`,
+  `--ins-brand-azure`, `--ins-brand-navy` and `--ins-brand-amber` are gone.
+  Use `--ins-teal-*`, `--ins-deep-*` and the new `--ins-brand-*` names.
+- `tokens.ts` `brand` keys are now `white`, `black`, `deepTeal`, `rose`,
+  `teal`, `orange`, `yellow` and `indigo`.
+- Headings are semibold, buttons are pills, and the font is DM Sans. Nothing
+  to change in code, but screenshots and visual tests will differ.
 
 ## Layout of the repo
 
