@@ -59,3 +59,72 @@
   padding-top: var(--ins-space-lg);
   border-top: 1px solid var(--ins-border-subtle);
 }
+
+/* ---- Logo tiles and template gallery ------------------------------------ */
+.pv-logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--ins-space-sm);
+}
+
+.pv-logo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 150px;
+  border-radius: var(--ins-radius-md);
+  border: 1px solid var(--ins-border-subtle);
+  text-decoration: none;
+}
+
+.pv-logo img {
+  width: 58%;
+  height: auto;
+}
+
+.pv-logo span {
+  position: absolute;
+  left: var(--ins-space-sm);
+  bottom: var(--ins-space-xs);
+  font-size: var(--ins-font-size-xs);
+}
+
+.pv-gallery {
+  margin: 0;
+}
+
+.pv-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--ins-radius-md);
+}
+
+.pv-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ins-space-xs);
+  min-height: 32px;
+  padding: 0 var(--ins-space-sm);
+  border: 1px solid var(--ins-border-default);
+  border-radius: var(--ins-radius-pill);
+  color: var(--ins-text-primary);
+  font-size: var(--ins-font-size-sm);
+  font-weight: var(--ins-font-weight-medium);
+  text-decoration: none;
+  transition: border-color var(--ins-duration-fast), color var(--ins-duration-fast);
+}
+
+.pv-download:hover {
+  border-color: var(--ins-accent-bg);
+  color: var(--ins-accent-text);
+}
+
+.pv-download:focus-visible {
+  outline: none;
+  box-shadow: var(--ins-focus-ring);
+}
+
+.pv-download__kind {
+  font-size: var(--ins-font-size-2xs);
+  color: var(--ins-text-tertiary);
+}

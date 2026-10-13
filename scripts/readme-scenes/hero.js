@@ -7,11 +7,12 @@ mount(
       background: 'var(--ins-gradient-brand)',
     } }),
     h(Stack, { gap: 'lg' },
-      h(Text, { size: 'sm', caps: true, tone: 'accent' }, 'Insighture'),
+      h('img', { src: '/insighture-logo-black.svg', alt: 'Insighture', style: { height: 34, width: 'auto', display: 'block', alignSelf: 'flex-start' } }),
       h(Heading, { level: 1, size: 'display', style: { maxWidth: 900 } },
         'One system, ', h('em', null, 'everywhere.')),
       h(Text, { size: 'lg', tone: 'secondary', relaxed: true, style: { maxWidth: 620 } },
-        'One brand system for documents, slides, websites and everything else. ' +
+        'One brand system for documents, slides, websites and everything else: ' +
+        'guidelines, tokens, components and ready-made templates. ' +
         'White and black carry the content, dark teal is the ground, and ' +
         'crimson rose marks the one thing that matters.'),
       h(Stack, { direction: 'row', gap: 'sm', align: 'center', style: { marginTop: 8 } },
@@ -21,7 +22,7 @@ mount(
       h(Stack, { direction: 'row', gap: 'xs', align: 'center', style: { marginTop: 16 } },
         h(Badge, { tone: 'accent', dot: true }, 'Docs · Slides · Web'),
         h(Badge, { tone: 'info', dot: true }, 'Light + dark'),
-        h(Badge, { tone: 'neutral', dot: true }, 'DM Sans'),
+        h(Badge, { tone: 'neutral', dot: true }, 'PowerPoint · Word · PDF'),
         h(Badge, { tone: 'success', dot: true }, '28 components'))),
   ),
   'light',

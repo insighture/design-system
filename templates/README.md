@@ -7,7 +7,13 @@ tokens) and rebuild, so every template stays in step with the system.
 ```bash
 npm run templates                 # rebuild everything
 npm run templates -- pptx docx    # or just some: pptx docx pdf email social
+npm run templates:preview         # re-render the README gallery images
+npm run preview                   # browse and download them at http://localhost:5273
 ```
+
+`templates:preview` renders the real files through LibreOffice and Poppler, so
+both must be installed, along with the brand fonts. If LibreOffice can't see
+your installed fonts, set `INS_FONT_DIR` to a folder of the `.ttf` files.
 
 ## What's here
 

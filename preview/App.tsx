@@ -32,6 +32,7 @@ import {
   useInsightureTheme,
   type InsightureTheme,
 } from '../src';
+import { LogoSection, TemplatesSection, ThemeLogo } from './BrandSections';
 import './preview.css';
 
 function Section({
@@ -118,9 +119,7 @@ function Showcase() {
       <header className="pv-header">
         <Stack direction="row" justify="between" align="center" gap="md" wrap>
           <Stack gap="3xs">
-            <Text size="xs" caps tone="accent">
-              Insighture
-            </Text>
+            <ThemeLogo height={26} />
             <Heading level={1} size="lg">
               Design System
             </Heading>
@@ -172,6 +171,14 @@ function Showcase() {
             </Link>
           </Stack>
         </Stack>
+      </Section>
+
+      <Section title="Logo" description="Four versions in brand/logo/. Pick the one for the ground it sits on; click to download.">
+        <LogoSection />
+      </Section>
+
+      <Section title="Templates" description="Ready-made files generated from the tokens: PowerPoint, Word, PDF, email and social.">
+        <TemplatesSection />
       </Section>
 
       <Section title="Colour" description="Four main colours, four alts. Rose, teal and the alts sit at step 500; dark teal is deep-900; white and black are neutral 0 and 950.">
