@@ -1,0 +1,487 @@
+/* ==========================================================================
+   Insighture design tokens
+   Primitive values. Nothing here references a component — these are the raw
+   palette, type, space, radius and elevation scales the semantic layer maps on
+   top of. Consume the semantic tokens (semantic.css) in components, not these.
+
+   The palette is medium-agnostic: the same values drive web pages, documents,
+   slides, charts and email. It is built from four main colours and four alt
+   colours:
+
+     Main  — White #FCFCFD · Black #15181A · Dark teal #08242B · Crimson rose #EE4065
+     Alt   — Teal #0FA2BF · Orange #FF8102 · Yellow #FAB400 · Indigo #4F46E5
+
+   White and black carry the content, dark teal is the brand ground (dark
+   theme, covers, hero bands), crimson rose is the single accent, and the alt
+   colours are supporting/categorical — never competing with rose. Brand
+   hexes are kept exact: rose, teal and the alts at step 500, dark teal at
+   deep-900, white and black at neutral-0 and neutral-950.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand: the eight colours, exactly -------------------------------- */
+  --ins-brand-white: #fcfcfd;
+  --ins-brand-black: #15181a;
+  --ins-brand-deep-teal: #08242b;
+  --ins-brand-rose: #ee4065;
+  --ins-brand-teal: #0fa2bf;
+  --ins-brand-orange: #ff8102;
+  --ins-brand-yellow: #fab400;
+  --ins-brand-indigo: #4f46e5;
+
+  /* ---- Rose (THE accent: key action, focus, selection, highlight) ------- */
+  --ins-rose-50: #fcf0f3;
+  --ins-rose-100: #f8e0e5;
+  --ins-rose-200: #f9b9c6;
+  --ins-rose-300: #f58aa1;
+  --ins-rose-400: #f05677;
+  --ins-rose-500: #ee4065;
+  --ins-rose-600: #de143f;
+  --ins-rose-700: #b11032;
+  --ins-rose-800: #8b0c27;
+  --ins-rose-900: #69091e;
+
+  /* ---- Teal (support, info, second chart series) ----------------------- */
+  --ins-teal-50: #f0fafc;
+  --ins-teal-100: #e0f4f8;
+  --ins-teal-200: #b8eff9;
+  --ins-teal-300: #89e4f6;
+  --ins-teal-400: #55d8f2;
+  --ins-teal-500: #0fa2bf;
+  --ins-teal-600: #0c7b99;
+  --ins-teal-700: #0a5d7a;
+  --ins-teal-800: #084460;
+  --ins-teal-900: #063149;
+
+  /* ---- Orange (alt: categorical, illustration) ------------------------- */
+  --ins-orange-50: #fdf6ef;
+  --ins-orange-100: #faecde;
+  --ins-orange-200: #ffd9b2;
+  --ins-orange-300: #ffc080;
+  --ins-orange-400: #ffa447;
+  --ins-orange-500: #ff8102;
+  --ins-orange-600: #ce5800;
+  --ins-orange-700: #a43b00;
+  --ins-orange-800: #802500;
+  --ins-orange-900: #621500;
+
+  /* ---- Yellow (alt: warning, highlight) -------------------------------- */
+  --ins-yellow-50: #fdf9ef;
+  --ins-yellow-100: #faf2de;
+  --ins-yellow-200: #ffeab2;
+  --ins-yellow-300: #ffdb80;
+  --ins-yellow-400: #ffcc47;
+  --ins-yellow-500: #fab400;
+  --ins-yellow-600: #c87800;
+  --ins-yellow-700: #a04d00;
+  --ins-yellow-800: #7d2d00;
+  --ins-yellow-900: #5f1700;
+
+  /* ---- Indigo (alt: categorical, data) --------------------------------- */
+  --ins-indigo-50: #f2f1fb;
+  --ins-indigo-100: #e2e1f7;
+  --ins-indigo-200: #bfbcf6;
+  --ins-indigo-300: #958fef;
+  --ins-indigo-400: #665ee8;
+  --ins-indigo-500: #4f46e5;
+  --ins-indigo-600: #281dd2;
+  --ins-indigo-700: #2018a8;
+  --ins-indigo-800: #191283;
+  --ins-indigo-900: #130e64;
+
+  /* ---- Green (success) — functional only, not a brand colour ----------- */
+  --ins-green-50: #f1fbf7;
+  --ins-green-100: #e1f7ee;
+  --ins-green-200: #bcf5df;
+  --ins-green-300: #90efc9;
+  --ins-green-400: #5ee8b2;
+  --ins-green-500: #17a06a;
+  --ins-green-600: #128059;
+  --ins-green-700: #0f664a;
+  --ins-green-800: #0c503c;
+  --ins-green-900: #093d30;
+
+  /* ---- Red (danger) — functional only. Rotated toward orange so it never
+         reads as the rose accent. ---------------------------------------- */
+  --ins-red-50: #fbf2f1;
+  --ins-red-100: #f6e4e2;
+  --ins-red-200: #f3c3be;
+  --ins-red-300: #ec9b93;
+  --ins-red-400: #e36e63;
+  --ins-red-500: #d93a2b;
+  --ins-red-600: #b02c20;
+  --ins-red-700: #8d2319;
+  --ins-red-800: #6e1c14;
+  --ins-red-900: #54150f;
+
+  /* ---- Neutral (the backbone: brand white → brand black) ---------------
+         Slightly cool, so greys sit beside dark teal without looking warm.
+         Almost every surface, rule and label comes from this ramp. */
+  --ins-neutral-0: #fcfcfd;
+  --ins-neutral-50: #f6f7f8;
+  --ins-neutral-100: #eef0f1;
+  --ins-neutral-200: #e1e4e6;
+  --ins-neutral-300: #cbd0d3;
+  --ins-neutral-400: #9ea5aa;
+  --ins-neutral-500: #6b7278;
+  --ins-neutral-600: #555c62;
+  --ins-neutral-700: #3e4449;
+  --ins-neutral-800: #2a2e32;
+  --ins-neutral-900: #1d2023;
+  --ins-neutral-950: #15181a;
+
+  /* ---- Deep teal (the dark ground: dark theme, covers, hero bands) ----- */
+  --ins-deep-50: #e6eef0;
+  --ins-deep-100: #c3d4d8;
+  --ins-deep-200: #a9c0c5;
+  --ins-deep-300: #7e9aa1;
+  --ins-deep-400: #4e6b72;
+  --ins-deep-500: #346672;
+  --ins-deep-600: #23525e;
+  --ins-deep-700: #1a4450;
+  --ins-deep-750: #12383f;
+  --ins-deep-800: #0c2e36;
+  --ins-deep-900: #08242b;
+  --ins-deep-950: #051a1f;
+
+  /* ---- Typography ------------------------------------------------------- */
+  /* DM Sans for everything — screen, print and slides. DM Serif Display
+     italic is the emphasis face for one or two accent words in a headline.
+     In Office files where they may be missing, fall back to Arial / Georgia. */
+  --ins-font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --ins-font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --ins-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  --ins-font-size-2xs: 0.6875rem; /* 11px */
+  --ins-font-size-xs: 0.75rem; /* 12px */
+  --ins-font-size-sm: 0.875rem; /* 14px */
+  --ins-font-size-md: 1rem; /* 16px */
+  --ins-font-size-lg: 1.125rem; /* 18px */
+  --ins-font-size-xl: 1.375rem; /* 22px */
+  --ins-font-size-2xl: 1.75rem; /* 28px */
+  --ins-font-size-3xl: 2.25rem; /* 36px */
+  --ins-font-size-4xl: 3rem; /* 48px */
+  --ins-font-size-5xl: 3.75rem; /* 60px */
+
+  --ins-line-height-tight: 1.1;
+  --ins-line-height-snug: 1.25;
+  --ins-line-height-normal: 1.5;
+  --ins-line-height-relaxed: 1.7;
+
+  --ins-font-weight-regular: 400;
+  --ins-font-weight-medium: 500;
+  --ins-font-weight-semibold: 600;
+  --ins-font-weight-bold: 700;
+
+  /* DM Sans tightens as it scales up: about -0.025em at display sizes, as on
+     insighture.com. */
+  --ins-letter-spacing-display: -0.025em;
+  --ins-letter-spacing-tight: -0.02em;
+  --ins-letter-spacing-snug: -0.012em;
+  --ins-letter-spacing-normal: 0;
+  --ins-letter-spacing-wide: 0.02em;
+  --ins-letter-spacing-caps: 0.06em;
+
+  /* ---- Space (4px base) -------------------------------------------------- */
+  --ins-space-0: 0;
+  --ins-space-3xs: 0.125rem; /* 2px */
+  --ins-space-2xs: 0.25rem; /* 4px */
+  --ins-space-xs: 0.5rem; /* 8px */
+  --ins-space-sm: 0.75rem; /* 12px */
+  --ins-space-md: 1rem; /* 16px */
+  --ins-space-lg: 1.5rem; /* 24px */
+  --ins-space-xl: 2rem; /* 32px */
+  --ins-space-2xl: 3rem; /* 48px */
+  --ins-space-3xl: 4rem; /* 64px */
+  --ins-space-4xl: 6rem; /* 96px */
+
+  /* ---- Radius ------------------------------------------------------------ */
+  --ins-radius-none: 0;
+  --ins-radius-sm: 6px;
+  --ins-radius-md: 10px;
+  --ins-radius-lg: 18px;
+  --ins-radius-xl: 24px;
+  --ins-radius-2xl: 48px;
+  --ins-radius-pill: 999px;
+
+  /* ---- Borders ----------------------------------------------------------- */
+  --ins-border-width-thin: 1px;
+  --ins-border-width-thick: 2px;
+
+  /* ---- Elevation — neutral, tinted by the brand black -------------------- */
+  --ins-shadow-xs: 0 1px 2px rgba(21, 24, 26, 0.06);
+  --ins-shadow-sm: 0 1px 3px rgba(21, 24, 26, 0.09),
+    0 1px 2px rgba(21, 24, 26, 0.04);
+  --ins-shadow-md: 0 4px 14px rgba(21, 24, 26, 0.1),
+    0 2px 4px rgba(21, 24, 26, 0.05);
+  --ins-shadow-lg: 0 14px 36px rgba(21, 24, 26, 0.15),
+    0 4px 8px rgba(21, 24, 26, 0.06);
+  /* Focus is rose — the accent, so focus reads as brand, not as system UI. */
+  --ins-shadow-focus: 0 0 0 3px rgba(238, 64, 101, 0.34);
+
+  /* ---- Motion ------------------------------------------------------------ */
+  --ins-duration-fast: 120ms;
+  --ins-duration-base: 180ms;
+  --ins-duration-slow: 280ms;
+  --ins-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ins-easing-entrance: cubic-bezier(0, 0, 0.2, 1);
+
+  /* ---- Layout ------------------------------------------------------------ */
+  --ins-container-sm: 40rem;
+  --ins-container-md: 56rem;
+  --ins-container-lg: 72rem;
+  --ins-container-xl: 84rem;
+
+  --ins-z-base: 0;
+  --ins-z-sticky: 100;
+  --ins-z-overlay: 500;
+  --ins-z-modal: 600;
+  --ins-z-toast: 700;
+
+  /* ---- Rose gradient — the brand's signature surface. Hero bands and
+         call-to-action strips; white text sits on it. ----------------- */
+  --ins-gradient-rose: linear-gradient(90deg, #e63a5f 0%, #b61639 100%);
+
+  /* ---- Brand gradient — rose through the warm alts. Covers, divider strips
+         and hero accents only; never behind text. ----------------------- */
+  --ins-gradient-brand: linear-gradient(
+    120deg,
+    var(--ins-brand-rose) 0%,
+    var(--ins-brand-orange) 55%,
+    var(--ins-brand-yellow) 100%
+  );
+}
+
+/* ==========================================================================
+   Insighture semantic tokens
+   Role-named aliases over the primitives. Components MUST consume these, never
+   the raw palette — that is what lets a theme swap change the whole system.
+
+   The weighting is deliberate:
+   - Neutrals (white → black) carry the content. Surfaces, rules, text and
+     most of any page, slide or screen come from the neutral ramp.
+   - Crimson rose is THE accent: the key action, focus, selection, the one
+     number or word that matters.
+   - Dark teal is the brand ground — the dark theme, and in light contexts the
+     inverse surface (tooltips, cover bands).
+   - Teal is support/info. Orange, yellow and indigo are categorical alts.
+
+   Themes are selected by `data-ins-theme` on <InsightureProvider> (or any
+   ancestor element): "light" on white, "dark" on dark teal.
+   ========================================================================== */
+
+[data-ins-theme='light'] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --ins-bg-canvas: var(--ins-neutral-50);
+  --ins-bg-surface: var(--ins-neutral-0);
+  --ins-bg-surface-raised: var(--ins-neutral-0);
+  --ins-bg-surface-sunken: var(--ins-neutral-100);
+  --ins-bg-inverse: var(--ins-deep-900);
+  --ins-bg-subtle: var(--ins-neutral-100);
+  --ins-bg-muted: var(--ins-neutral-200);
+  --ins-bg-overlay: rgba(8, 36, 43, 0.6);
+
+  /* Text */
+  --ins-text-primary: var(--ins-neutral-950);
+  --ins-text-secondary: var(--ins-neutral-600);
+  --ins-text-tertiary: var(--ins-neutral-500);
+  --ins-text-disabled: var(--ins-neutral-400);
+  --ins-text-inverse: var(--ins-neutral-0);
+  --ins-text-accent: var(--ins-rose-700);
+  /* Prose links are ink + underline, and warm to the accent on hover. Rose
+     links everywhere would put the accent colour in every paragraph. */
+  --ins-text-link: var(--ins-neutral-900);
+  --ins-text-link-hover: var(--ins-rose-700);
+
+  /* Borders */
+  --ins-border-subtle: var(--ins-neutral-200);
+  --ins-border-default: var(--ins-neutral-300);
+  --ins-border-strong: var(--ins-neutral-400);
+  --ins-border-inverse: var(--ins-deep-600);
+
+  /* Accent — crimson rose. Key action, focus, selection. */
+  --ins-accent-bg: var(--ins-rose-500);
+  --ins-accent-bg-hover: var(--ins-rose-600);
+  --ins-accent-bg-active: var(--ins-rose-700);
+  --ins-accent-bg-subtle: var(--ins-rose-50);
+  --ins-accent-bg-subtle-hover: var(--ins-rose-100);
+  --ins-accent-border: var(--ins-rose-200);
+  --ins-accent-text: var(--ins-rose-700);
+  --ins-accent-on-accent: var(--ins-neutral-0);
+
+  /* Emphasis — black. The strongest possible action on a white ground;
+     louder than the rose accent precisely because it is not a colour. */
+  --ins-emphasis-bg: var(--ins-neutral-100);
+  --ins-emphasis-border: var(--ins-neutral-300);
+  --ins-emphasis-text: var(--ins-neutral-900);
+  --ins-emphasis-solid: var(--ins-neutral-950);
+  --ins-emphasis-solid-hover: var(--ins-neutral-800);
+  --ins-emphasis-on-solid: var(--ins-neutral-0);
+
+  /* Support — teal. */
+  --ins-support-bg: var(--ins-teal-50);
+  --ins-support-border: var(--ins-teal-200);
+  --ins-support-text: var(--ins-teal-700);
+  --ins-support-solid: var(--ins-teal-500);
+
+  /* Neutral action (secondary buttons, chips) */
+  --ins-neutral-bg: var(--ins-neutral-100);
+  --ins-neutral-bg-hover: var(--ins-neutral-200);
+  --ins-neutral-bg-active: var(--ins-neutral-300);
+
+  /* Status */
+  --ins-info-bg: var(--ins-teal-50);
+  --ins-info-border: var(--ins-teal-200);
+  --ins-info-text: var(--ins-teal-700);
+  --ins-info-solid: var(--ins-teal-500);
+
+  --ins-success-bg: var(--ins-green-50);
+  --ins-success-border: var(--ins-green-200);
+  --ins-success-text: var(--ins-green-700);
+  --ins-success-solid: var(--ins-green-500);
+
+  --ins-warning-bg: var(--ins-yellow-50);
+  --ins-warning-border: var(--ins-yellow-200);
+  --ins-warning-text: var(--ins-yellow-700);
+  --ins-warning-solid: var(--ins-yellow-500);
+
+  --ins-danger-bg: var(--ins-red-50);
+  --ins-danger-border: var(--ins-red-200);
+  --ins-danger-text: var(--ins-red-700);
+  --ins-danger-solid: var(--ins-red-500);
+
+  --ins-highlight-bg: var(--ins-yellow-100);
+  --ins-highlight-border: var(--ins-yellow-300);
+  --ins-highlight-text: var(--ins-yellow-700);
+  --ins-highlight-solid: var(--ins-yellow-500);
+
+  /* Button hierarchy — deliberately theme-dependent. On the white ground the
+     strongest action is black; on the dark-teal ground black disappears, so
+     rose takes the lead and white becomes the second step. These are their
+     own tokens so the swap does NOT drag the rest of the accent system. */
+  --ins-button-primary-bg: var(--ins-neutral-950);
+  --ins-button-primary-bg-hover: var(--ins-neutral-800);
+  --ins-button-primary-fg: var(--ins-neutral-0);
+  --ins-button-emphasis-bg: var(--ins-rose-500);
+  --ins-button-emphasis-bg-hover: var(--ins-rose-600);
+  --ins-button-emphasis-fg: var(--ins-neutral-0);
+
+  /* Interaction */
+  --ins-focus-ring: var(--ins-shadow-focus);
+  --ins-focus-ring-color: var(--ins-rose-500);
+  --ins-shadow-card: var(--ins-shadow-sm);
+  --ins-shadow-card-hover: var(--ins-shadow-md);
+  --ins-shadow-popover: var(--ins-shadow-lg);
+
+  /* Tooltip / inverse chips — the brand dark teal */
+  --ins-inverse-surface: var(--ins-deep-900);
+  --ins-inverse-text: var(--ins-neutral-0);
+}
+
+[data-ins-theme='dark'] {
+  color-scheme: dark;
+
+  /* Surfaces — the brand dark teal, stepping lighter as they rise */
+  --ins-bg-canvas: var(--ins-deep-900);
+  --ins-bg-surface: var(--ins-deep-800);
+  --ins-bg-surface-raised: var(--ins-deep-750);
+  --ins-bg-surface-sunken: var(--ins-deep-950);
+  --ins-bg-inverse: var(--ins-neutral-0);
+  --ins-bg-subtle: var(--ins-deep-750);
+  --ins-bg-muted: var(--ins-deep-700);
+  --ins-bg-overlay: rgba(3, 14, 17, 0.72);
+
+  /* Text */
+  --ins-text-primary: var(--ins-neutral-0);
+  --ins-text-secondary: var(--ins-deep-200);
+  --ins-text-tertiary: var(--ins-deep-300);
+  --ins-text-disabled: var(--ins-deep-400);
+  --ins-text-inverse: var(--ins-neutral-950);
+  --ins-text-accent: var(--ins-rose-300);
+  --ins-text-link: var(--ins-neutral-0);
+  --ins-text-link-hover: var(--ins-rose-300);
+
+  /* Borders */
+  --ins-border-subtle: var(--ins-deep-700);
+  --ins-border-default: var(--ins-deep-600);
+  --ins-border-strong: var(--ins-deep-500);
+  --ins-border-inverse: var(--ins-neutral-300);
+
+  /* Accent — rose holds up on dark teal */
+  --ins-accent-bg: var(--ins-rose-500);
+  --ins-accent-bg-hover: var(--ins-rose-400);
+  --ins-accent-bg-active: var(--ins-rose-300);
+  --ins-accent-bg-subtle: rgba(238, 64, 101, 0.18);
+  --ins-accent-bg-subtle-hover: rgba(238, 64, 101, 0.26);
+  --ins-accent-border: rgba(238, 64, 101, 0.48);
+  --ins-accent-text: var(--ins-rose-300);
+  --ins-accent-on-accent: var(--ins-neutral-0);
+
+  /* Emphasis — inverts to white on the dark ground */
+  --ins-emphasis-bg: var(--ins-deep-750);
+  --ins-emphasis-border: var(--ins-deep-600);
+  --ins-emphasis-text: var(--ins-neutral-100);
+  --ins-emphasis-solid: var(--ins-neutral-0);
+  --ins-emphasis-solid-hover: var(--ins-neutral-200);
+  --ins-emphasis-on-solid: var(--ins-neutral-950);
+
+  /* Support */
+  --ins-support-bg: rgba(15, 162, 191, 0.2);
+  --ins-support-border: rgba(85, 216, 242, 0.42);
+  --ins-support-text: var(--ins-teal-300);
+  --ins-support-solid: var(--ins-teal-400);
+
+  /* Neutral action */
+  --ins-neutral-bg: var(--ins-deep-750);
+  --ins-neutral-bg-hover: var(--ins-deep-700);
+  --ins-neutral-bg-active: var(--ins-deep-600);
+
+  /* Status */
+  --ins-info-bg: rgba(15, 162, 191, 0.2);
+  --ins-info-border: rgba(85, 216, 242, 0.42);
+  --ins-info-text: var(--ins-teal-300);
+  --ins-info-solid: var(--ins-teal-400);
+
+  --ins-success-bg: rgba(23, 160, 106, 0.2);
+  --ins-success-border: rgba(23, 160, 106, 0.46);
+  --ins-success-text: var(--ins-green-300);
+  --ins-success-solid: var(--ins-green-500);
+
+  --ins-warning-bg: rgba(250, 180, 0, 0.16);
+  --ins-warning-border: rgba(250, 180, 0, 0.4);
+  --ins-warning-text: var(--ins-yellow-300);
+  --ins-warning-solid: var(--ins-yellow-500);
+
+  --ins-danger-bg: rgba(217, 58, 43, 0.22);
+  --ins-danger-border: rgba(217, 58, 43, 0.5);
+  --ins-danger-text: var(--ins-red-300);
+  --ins-danger-solid: var(--ins-red-500);
+
+  --ins-highlight-bg: rgba(250, 180, 0, 0.18);
+  --ins-highlight-border: rgba(250, 180, 0, 0.42);
+  --ins-highlight-text: var(--ins-yellow-300);
+  --ins-highlight-solid: var(--ins-yellow-500);
+
+  /* Button hierarchy — inverted for the dark ground (see the light block). */
+  --ins-button-primary-bg: var(--ins-rose-500);
+  --ins-button-primary-bg-hover: var(--ins-rose-400);
+  --ins-button-primary-fg: var(--ins-neutral-0);
+  --ins-button-emphasis-bg: var(--ins-neutral-0);
+  --ins-button-emphasis-bg-hover: var(--ins-neutral-200);
+  --ins-button-emphasis-fg: var(--ins-neutral-950);
+
+  /* Interaction */
+  --ins-focus-ring: 0 0 0 3px rgba(238, 64, 101, 0.5);
+  --ins-focus-ring-color: var(--ins-rose-400);
+  --ins-shadow-card: 0 1px 3px rgba(2, 10, 12, 0.5);
+  --ins-shadow-card-hover: 0 6px 20px rgba(2, 10, 12, 0.55);
+  --ins-shadow-popover: 0 16px 44px rgba(2, 10, 12, 0.62);
+
+  /* Tooltip / inverse chips */
+  --ins-inverse-surface: var(--ins-neutral-0);
+  --ins-inverse-text: var(--ins-neutral-950);
+}
