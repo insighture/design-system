@@ -56,7 +56,8 @@
 .ins-badge--tone-info {
   --ins-badge-tone: var(--ins-info-solid);
   --ins-badge-text: var(--ins-info-text);
-  --ins-badge-on-solid: var(--ins-brand-white);
+  /* Teal is too light to carry white text (2.9:1); black reads at ~6:1. */
+  --ins-badge-on-solid: var(--ins-neutral-950);
 }
 .ins-badge--tone-success {
   --ins-badge-tone: var(--ins-success-solid);

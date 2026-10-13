@@ -4,14 +4,16 @@
    the raw palette — that is what lets a theme swap change the whole system.
 
    The weighting is deliberate:
-   - Neutrals (white → near-black) carry the system. Surfaces, rules, text and
-     the great majority of any screen come from the neutral ramp.
-   - Coral orange is THE accent: primary actions, focus, selection, links.
-   - Azure appears in small doses only — info status, the `support` role, a
-     second chart series. It is never a surface and never the default accent.
+   - Neutrals (white → black) carry the content. Surfaces, rules, text and
+     most of any page, slide or screen come from the neutral ramp.
+   - Crimson rose is THE accent: the key action, focus, selection, the one
+     number or word that matters.
+   - Dark teal is the brand ground — the dark theme, and in light contexts the
+     inverse surface (tooltips, cover bands).
+   - Teal is support/info. Orange, yellow and indigo are categorical alts.
 
    Themes are selected by `data-ins-theme` on <InsightureProvider> (or any
-   ancestor element): "light" on white, "dark" on near-black ink.
+   ancestor element): "light" on white, "dark" on dark teal.
    ========================================================================== */
 
 [data-ins-theme='light'] {
@@ -22,10 +24,10 @@
   --ins-bg-surface: var(--ins-neutral-0);
   --ins-bg-surface-raised: var(--ins-neutral-0);
   --ins-bg-surface-sunken: var(--ins-neutral-100);
-  --ins-bg-inverse: var(--ins-neutral-950);
+  --ins-bg-inverse: var(--ins-deep-900);
   --ins-bg-subtle: var(--ins-neutral-100);
   --ins-bg-muted: var(--ins-neutral-200);
-  --ins-bg-overlay: rgba(16, 19, 21, 0.55);
+  --ins-bg-overlay: rgba(8, 36, 43, 0.6);
 
   /* Text */
   --ins-text-primary: var(--ins-neutral-950);
@@ -33,30 +35,30 @@
   --ins-text-tertiary: var(--ins-neutral-500);
   --ins-text-disabled: var(--ins-neutral-400);
   --ins-text-inverse: var(--ins-neutral-0);
-  --ins-text-accent: var(--ins-orange-700);
-  /* Prose links are ink + underline, and warm to the accent on hover. Orange
+  --ins-text-accent: var(--ins-rose-700);
+  /* Prose links are ink + underline, and warm to the accent on hover. Rose
      links everywhere would put the accent colour in every paragraph. */
   --ins-text-link: var(--ins-neutral-900);
-  --ins-text-link-hover: var(--ins-orange-700);
+  --ins-text-link-hover: var(--ins-rose-700);
 
   /* Borders */
   --ins-border-subtle: var(--ins-neutral-200);
   --ins-border-default: var(--ins-neutral-300);
   --ins-border-strong: var(--ins-neutral-400);
-  --ins-border-inverse: var(--ins-neutral-700);
+  --ins-border-inverse: var(--ins-deep-600);
 
-  /* Accent — coral orange. Primary actions, focus, selection. */
-  --ins-accent-bg: var(--ins-orange-500);
-  --ins-accent-bg-hover: var(--ins-orange-600);
-  --ins-accent-bg-active: var(--ins-orange-700);
-  --ins-accent-bg-subtle: var(--ins-orange-50);
-  --ins-accent-bg-subtle-hover: var(--ins-orange-100);
-  --ins-accent-border: var(--ins-orange-200);
-  --ins-accent-text: var(--ins-orange-700);
+  /* Accent — crimson rose. Key action, focus, selection. */
+  --ins-accent-bg: var(--ins-rose-500);
+  --ins-accent-bg-hover: var(--ins-rose-600);
+  --ins-accent-bg-active: var(--ins-rose-700);
+  --ins-accent-bg-subtle: var(--ins-rose-50);
+  --ins-accent-bg-subtle-hover: var(--ins-rose-100);
+  --ins-accent-border: var(--ins-rose-200);
+  --ins-accent-text: var(--ins-rose-700);
   --ins-accent-on-accent: var(--ins-neutral-0);
 
-  /* Emphasis — near-black. The strongest possible action on a white ground;
-     louder than the orange accent precisely because it is not a colour. */
+  /* Emphasis — black. The strongest possible action on a white ground;
+     louder than the rose accent precisely because it is not a colour. */
   --ins-emphasis-bg: var(--ins-neutral-100);
   --ins-emphasis-border: var(--ins-neutral-300);
   --ins-emphasis-text: var(--ins-neutral-900);
@@ -64,11 +66,11 @@
   --ins-emphasis-solid-hover: var(--ins-neutral-800);
   --ins-emphasis-on-solid: var(--ins-neutral-0);
 
-  /* Support — the mark's azure, in the small dose the brand calls for. */
-  --ins-support-bg: var(--ins-azure-50);
-  --ins-support-border: var(--ins-azure-200);
-  --ins-support-text: var(--ins-azure-700);
-  --ins-support-solid: var(--ins-azure-500);
+  /* Support — teal. */
+  --ins-support-bg: var(--ins-teal-50);
+  --ins-support-border: var(--ins-teal-200);
+  --ins-support-text: var(--ins-teal-700);
+  --ins-support-solid: var(--ins-teal-500);
 
   /* Neutral action (secondary buttons, chips) */
   --ins-neutral-bg: var(--ins-neutral-100);
@@ -76,10 +78,10 @@
   --ins-neutral-bg-active: var(--ins-neutral-300);
 
   /* Status */
-  --ins-info-bg: var(--ins-azure-50);
-  --ins-info-border: var(--ins-azure-200);
-  --ins-info-text: var(--ins-azure-700);
-  --ins-info-solid: var(--ins-azure-500);
+  --ins-info-bg: var(--ins-teal-50);
+  --ins-info-border: var(--ins-teal-200);
+  --ins-info-text: var(--ins-teal-700);
+  --ins-info-solid: var(--ins-teal-500);
 
   --ins-success-bg: var(--ins-green-50);
   --ins-success-border: var(--ins-green-200);
@@ -88,7 +90,7 @@
 
   --ins-warning-bg: var(--ins-yellow-50);
   --ins-warning-border: var(--ins-yellow-200);
-  --ins-warning-text: var(--ins-yellow-800);
+  --ins-warning-text: var(--ins-yellow-700);
   --ins-warning-solid: var(--ins-yellow-500);
 
   --ins-danger-bg: var(--ins-red-50);
@@ -98,130 +100,130 @@
 
   --ins-highlight-bg: var(--ins-yellow-100);
   --ins-highlight-border: var(--ins-yellow-300);
-  --ins-highlight-text: var(--ins-yellow-800);
+  --ins-highlight-text: var(--ins-yellow-700);
   --ins-highlight-solid: var(--ins-yellow-500);
 
   /* Button hierarchy — deliberately theme-dependent. On the white ground the
-     strongest action is ink; on the dark ground ink disappears, so the accent
-     takes the lead and azure becomes the second step. These are their own
-     tokens so the swap does NOT drag the rest of the accent system with it. */
+     strongest action is black; on the dark-teal ground black disappears, so
+     rose takes the lead and white becomes the second step. These are their
+     own tokens so the swap does NOT drag the rest of the accent system. */
   --ins-button-primary-bg: var(--ins-neutral-950);
   --ins-button-primary-bg-hover: var(--ins-neutral-800);
   --ins-button-primary-fg: var(--ins-neutral-0);
-  --ins-button-emphasis-bg: var(--ins-orange-500);
-  --ins-button-emphasis-bg-hover: var(--ins-orange-600);
+  --ins-button-emphasis-bg: var(--ins-rose-500);
+  --ins-button-emphasis-bg-hover: var(--ins-rose-600);
   --ins-button-emphasis-fg: var(--ins-neutral-0);
 
   /* Interaction */
   --ins-focus-ring: var(--ins-shadow-focus);
-  --ins-focus-ring-color: var(--ins-orange-500);
+  --ins-focus-ring-color: var(--ins-rose-500);
   --ins-shadow-card: var(--ins-shadow-sm);
   --ins-shadow-card-hover: var(--ins-shadow-md);
   --ins-shadow-popover: var(--ins-shadow-lg);
 
-  /* Tooltip / inverse chips */
-  --ins-inverse-surface: var(--ins-neutral-950);
+  /* Tooltip / inverse chips — the brand dark teal */
+  --ins-inverse-surface: var(--ins-deep-900);
   --ins-inverse-text: var(--ins-neutral-0);
 }
 
 [data-ins-theme='dark'] {
   color-scheme: dark;
 
-  /* Surfaces — near-black ink, not a tinted navy */
-  --ins-bg-canvas: var(--ins-ink-canvas);
-  --ins-bg-surface: var(--ins-ink-surface);
-  --ins-bg-surface-raised: var(--ins-ink-raised);
-  --ins-bg-surface-sunken: var(--ins-ink-sunken);
+  /* Surfaces — the brand dark teal, stepping lighter as they rise */
+  --ins-bg-canvas: var(--ins-deep-900);
+  --ins-bg-surface: var(--ins-deep-800);
+  --ins-bg-surface-raised: var(--ins-deep-750);
+  --ins-bg-surface-sunken: var(--ins-deep-950);
   --ins-bg-inverse: var(--ins-neutral-0);
-  --ins-bg-subtle: #1c2024;
-  --ins-bg-muted: #262b30;
-  --ins-bg-overlay: rgba(4, 5, 6, 0.72);
+  --ins-bg-subtle: var(--ins-deep-750);
+  --ins-bg-muted: var(--ins-deep-700);
+  --ins-bg-overlay: rgba(3, 14, 17, 0.72);
 
   /* Text */
-  --ins-text-primary: #f4f5f6;
-  --ins-text-secondary: #a8aeb4;
-  --ins-text-tertiary: #848b92;
-  --ins-text-disabled: #5b6268;
+  --ins-text-primary: var(--ins-neutral-0);
+  --ins-text-secondary: var(--ins-deep-200);
+  --ins-text-tertiary: var(--ins-deep-300);
+  --ins-text-disabled: var(--ins-deep-400);
   --ins-text-inverse: var(--ins-neutral-950);
-  --ins-text-accent: var(--ins-orange-400);
-  --ins-text-link: #f4f5f6;
-  --ins-text-link-hover: var(--ins-orange-400);
+  --ins-text-accent: var(--ins-rose-300);
+  --ins-text-link: var(--ins-neutral-0);
+  --ins-text-link-hover: var(--ins-rose-300);
 
   /* Borders */
-  --ins-border-subtle: #262b30;
-  --ins-border-default: #343a40;
-  --ins-border-strong: #4a5158;
+  --ins-border-subtle: var(--ins-deep-700);
+  --ins-border-default: var(--ins-deep-600);
+  --ins-border-strong: var(--ins-deep-500);
   --ins-border-inverse: var(--ins-neutral-300);
 
-  /* Accent — coral holds up on ink without adjustment */
-  --ins-accent-bg: var(--ins-orange-500);
-  --ins-accent-bg-hover: var(--ins-orange-400);
-  --ins-accent-bg-active: var(--ins-orange-300);
-  --ins-accent-bg-subtle: rgba(252, 119, 59, 0.18);
-  --ins-accent-bg-subtle-hover: rgba(252, 119, 59, 0.26);
-  --ins-accent-border: rgba(252, 119, 59, 0.44);
-  --ins-accent-text: var(--ins-orange-300);
-  --ins-accent-on-accent: #21100a;
+  /* Accent — rose holds up on dark teal */
+  --ins-accent-bg: var(--ins-rose-500);
+  --ins-accent-bg-hover: var(--ins-rose-400);
+  --ins-accent-bg-active: var(--ins-rose-300);
+  --ins-accent-bg-subtle: rgba(238, 64, 101, 0.18);
+  --ins-accent-bg-subtle-hover: rgba(238, 64, 101, 0.26);
+  --ins-accent-border: rgba(238, 64, 101, 0.48);
+  --ins-accent-text: var(--ins-rose-300);
+  --ins-accent-on-accent: var(--ins-neutral-0);
 
   /* Emphasis — inverts to white on the dark ground */
-  --ins-emphasis-bg: #1c2024;
-  --ins-emphasis-border: #343a40;
+  --ins-emphasis-bg: var(--ins-deep-750);
+  --ins-emphasis-border: var(--ins-deep-600);
   --ins-emphasis-text: var(--ins-neutral-100);
   --ins-emphasis-solid: var(--ins-neutral-0);
   --ins-emphasis-solid-hover: var(--ins-neutral-200);
   --ins-emphasis-on-solid: var(--ins-neutral-950);
 
   /* Support */
-  --ins-support-bg: rgba(1, 130, 203, 0.2);
-  --ins-support-border: rgba(70, 181, 254, 0.42);
-  --ins-support-text: var(--ins-azure-300);
-  --ins-support-solid: var(--ins-azure-400);
+  --ins-support-bg: rgba(15, 162, 191, 0.2);
+  --ins-support-border: rgba(85, 216, 242, 0.42);
+  --ins-support-text: var(--ins-teal-300);
+  --ins-support-solid: var(--ins-teal-400);
 
   /* Neutral action */
-  --ins-neutral-bg: #1c2024;
-  --ins-neutral-bg-hover: #262b30;
-  --ins-neutral-bg-active: #343a40;
+  --ins-neutral-bg: var(--ins-deep-750);
+  --ins-neutral-bg-hover: var(--ins-deep-700);
+  --ins-neutral-bg-active: var(--ins-deep-600);
 
   /* Status */
-  --ins-info-bg: rgba(1, 130, 203, 0.2);
-  --ins-info-border: rgba(70, 181, 254, 0.42);
-  --ins-info-text: var(--ins-azure-300);
-  --ins-info-solid: var(--ins-azure-400);
+  --ins-info-bg: rgba(15, 162, 191, 0.2);
+  --ins-info-border: rgba(85, 216, 242, 0.42);
+  --ins-info-text: var(--ins-teal-300);
+  --ins-info-solid: var(--ins-teal-400);
 
-  --ins-success-bg: rgba(15, 163, 127, 0.2);
-  --ins-success-border: rgba(15, 163, 127, 0.46);
+  --ins-success-bg: rgba(23, 160, 106, 0.2);
+  --ins-success-border: rgba(23, 160, 106, 0.46);
   --ins-success-text: var(--ins-green-300);
   --ins-success-solid: var(--ins-green-500);
 
-  --ins-warning-bg: rgba(255, 212, 56, 0.16);
-  --ins-warning-border: rgba(255, 212, 56, 0.4);
+  --ins-warning-bg: rgba(250, 180, 0, 0.16);
+  --ins-warning-border: rgba(250, 180, 0, 0.4);
   --ins-warning-text: var(--ins-yellow-300);
   --ins-warning-solid: var(--ins-yellow-500);
 
-  --ins-danger-bg: rgba(226, 61, 79, 0.2);
-  --ins-danger-border: rgba(226, 61, 79, 0.46);
+  --ins-danger-bg: rgba(217, 58, 43, 0.22);
+  --ins-danger-border: rgba(217, 58, 43, 0.5);
   --ins-danger-text: var(--ins-red-300);
   --ins-danger-solid: var(--ins-red-500);
 
-  --ins-highlight-bg: rgba(255, 212, 56, 0.18);
-  --ins-highlight-border: rgba(255, 212, 56, 0.42);
+  --ins-highlight-bg: rgba(250, 180, 0, 0.18);
+  --ins-highlight-border: rgba(250, 180, 0, 0.42);
   --ins-highlight-text: var(--ins-yellow-300);
   --ins-highlight-solid: var(--ins-yellow-500);
 
   /* Button hierarchy — inverted for the dark ground (see the light block). */
-  --ins-button-primary-bg: var(--ins-orange-500);
-  --ins-button-primary-bg-hover: var(--ins-orange-400);
-  --ins-button-primary-fg: #21100a;
-  --ins-button-emphasis-bg: var(--ins-azure-500);
-  --ins-button-emphasis-bg-hover: var(--ins-azure-400);
-  --ins-button-emphasis-fg: var(--ins-brand-white);
+  --ins-button-primary-bg: var(--ins-rose-500);
+  --ins-button-primary-bg-hover: var(--ins-rose-400);
+  --ins-button-primary-fg: var(--ins-neutral-0);
+  --ins-button-emphasis-bg: var(--ins-neutral-0);
+  --ins-button-emphasis-bg-hover: var(--ins-neutral-200);
+  --ins-button-emphasis-fg: var(--ins-neutral-950);
 
   /* Interaction */
-  --ins-focus-ring: 0 0 0 3px rgba(252, 119, 59, 0.45);
-  --ins-focus-ring-color: var(--ins-orange-400);
-  --ins-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --ins-shadow-card-hover: 0 6px 20px rgba(0, 0, 0, 0.55);
-  --ins-shadow-popover: 0 16px 44px rgba(0, 0, 0, 0.62);
+  --ins-focus-ring: 0 0 0 3px rgba(238, 64, 101, 0.5);
+  --ins-focus-ring-color: var(--ins-rose-400);
+  --ins-shadow-card: 0 1px 3px rgba(2, 10, 12, 0.5);
+  --ins-shadow-card-hover: 0 6px 20px rgba(2, 10, 12, 0.55);
+  --ins-shadow-popover: 0 16px 44px rgba(2, 10, 12, 0.62);
 
   /* Tooltip / inverse chips */
   --ins-inverse-surface: var(--ins-neutral-0);

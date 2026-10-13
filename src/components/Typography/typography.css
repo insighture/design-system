@@ -1,14 +1,28 @@
 /* ---- Heading -------------------------------------------------------------
-   One family, bold, with tracking that tightens as the type grows. That
-   size-dependent tracking is what separates a modern screen face from a
-   default-spaced one — do not flatten it to a single value. */
+   DM Sans semibold, with tracking that tightens as the type grows. Do not
+   flatten that size-dependent tracking to a single value. */
 .ins-heading {
   margin: 0;
   font-family: var(--ins-font-sans);
-  font-weight: var(--ins-font-weight-bold);
+  font-weight: var(--ins-font-weight-semibold);
   line-height: var(--ins-line-height-tight);
   text-wrap: pretty;
-  font-feature-settings: 'cv11', 'ss01';
+}
+
+/* The brand's signature move: one or two words of a headline set in DM Serif
+   Display italic, in the accent. Write `<em>` inside a Heading to get it. */
+.ins-heading em {
+  font-family: var(--ins-font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  /* Full rose, as on insighture.com. That passes contrast only as large text
+     (3.7:1 on white), so use emphasis at size md (28px) and up. */
+  color: var(--ins-accent-bg);
+}
+
+.ins-heading--tone-inverse em {
+  color: inherit;
 }
 
 .ins-heading--balance {
@@ -81,8 +95,6 @@
   margin: 0;
   font-family: var(--ins-font-sans);
   line-height: var(--ins-line-height-normal);
-  /* Tabular-ish defaults and Inter's straight-sided glyph alternates. */
-  font-feature-settings: 'cv11';
 }
 
 .ins-text--2xs {

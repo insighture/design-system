@@ -3,11 +3,11 @@ import { cx } from '../../utils/cx';
 
 export type TagColor =
   | 'neutral'
-  | 'azure'
-  | 'coral'
-  | 'amber'
+  | 'rose'
+  | 'teal'
+  | 'orange'
   | 'yellow'
-  | 'green';
+  | 'indigo';
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /**

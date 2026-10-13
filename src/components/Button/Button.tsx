@@ -13,8 +13,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Visual weight. `primary` is ink (near-black) — the default action, one per
-   * view. `emphasis` is coral orange, louder still, for the single most
+   * Visual weight. `primary` is black on light (rose on dark) — the default
+   * action, one per view. `emphasis` is crimson rose on light (white on dark), for the single most
    * important action on a marketing or onboarding surface.
    */
   variant?: ButtonVariant;

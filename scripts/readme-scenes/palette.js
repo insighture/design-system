@@ -2,10 +2,13 @@ const { Heading, Stack, Text } = window.Insighture;
 
 const RAMPS = [
   ['Neutral', 'the backbone', 'neutral', [0,50,100,200,300,400,500,600,700,800,900,950]],
-  ['Coral', 'the accent', 'orange', [50,100,200,300,400,500,600,700,800,900]],
-  ['Azure', 'support, rationed', 'azure', [50,100,200,300,400,500,600,700,800,900]],
-  ['Yellow', 'highlight', 'yellow', [50,100,200,300,400,500,600,700,800,900]],
-  ['Green', 'success', 'green', [50,100,200,300,400,500,600,700,800,900]],
+  ['Deep teal', 'the brand ground', 'deep', [50,100,200,300,400,500,600,700,750,800,900,950]],
+  ['Crimson rose', 'the accent', 'rose', [50,100,200,300,400,500,600,700,800,900]],
+  ['Teal', 'support, info', 'teal', [50,100,200,300,400,500,600,700,800,900]],
+  ['Orange', 'alt', 'orange', [50,100,200,300,400,500,600,700,800,900]],
+  ['Yellow', 'alt, warning', 'yellow', [50,100,200,300,400,500,600,700,800,900]],
+  ['Indigo', 'alt', 'indigo', [50,100,200,300,400,500,600,700,800,900]],
+  ['Green', 'success, functional', 'green', [50,100,200,300,400,500,600,700,800,900]],
   ['Red', 'danger', 'red', [50,100,200,300,400,500,600,700,800,900]],
 ];
 
@@ -27,7 +30,7 @@ mount(
       h(Stack, { gap: '2xs' },
         h(Heading, { level: 2, size: 'md' }, 'Colour'),
         h(Text, { size: 'sm', tone: 'secondary' },
-          'Ramps generated in HLS with hue rotation on the dark steps, so shades stay chromatic instead of going muddy.')),
+          'Four main colours, four alts. Rose, teal and the alts sit at step 500; dark teal is deep-900; white and black are neutral 0 and 950.')),
       ...RAMPS.map(([name, role, family, steps]) =>
         h(Stack, { key: family, gap: '2xs' },
           h(Stack, { direction: 'row', gap: 'xs', align: 'baseline' },

@@ -46,7 +46,7 @@
 
 .ins-alert--info {
   --ins-alert-tone: var(--ins-info-solid);
-  --ins-alert-icon-fg: var(--ins-brand-white);
+  --ins-alert-icon-fg: var(--ins-neutral-950);
   --ins-alert-tint-bg: var(--ins-info-bg);
   --ins-alert-tint-border: var(--ins-info-border);
 }

@@ -26,9 +26,9 @@ const col1 = h(Stack, { gap: 'md', style: { width: 360 } },
     h(Badge, { tone: 'info', variant: 'solid' }, 'Beta'),
     h(Badge, { tone: 'success', variant: 'solid' }, 'New')),
   h(Stack, { direction: 'row', gap: 'xs', wrap: true, align: 'center' },
-    h(Tag, { color: 'coral', swatch: true }, 'Design'),
-    h(Tag, { color: 'azure', swatch: true }, 'Engineering'),
-    h(Tag, { color: 'green', swatch: true }, 'Research'),
+    h(Tag, { color: 'rose', swatch: true }, 'Design'),
+    h(Tag, { color: 'teal', swatch: true }, 'Engineering'),
+    h(Tag, { color: 'indigo', swatch: true }, 'Research'),
     h(Tag, { color: 'neutral' }, 'Archived')));
 
 const col2 = h(Stack, { gap: 'md', style: { width: 360 } },
