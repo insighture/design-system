@@ -63,10 +63,13 @@ function Section({
 function Swatches() {
   const ramps: [string, Record<string, string>][] = [
     ['Neutral — the backbone', palette.neutral],
-    ['Coral orange — the accent', palette.orange],
-    ['Azure — support, in small doses', palette.azure],
-    ['Yellow — highlight', palette.yellow],
-    ['Green — success', palette.green],
+    ['Deep teal — the brand ground', palette.deep],
+    ['Crimson rose — the accent', palette.rose],
+    ['Teal — support, info', palette.teal],
+    ['Orange — alt', palette.orange],
+    ['Yellow — alt, warning', palette.yellow],
+    ['Indigo — alt', palette.indigo],
+    ['Green — success (functional)', palette.green],
     ['Red — danger', palette.red],
   ];
 
@@ -133,21 +136,21 @@ function Showcase() {
 
       <Section
         title="Typography"
-        description="Inter throughout — one family, bold headings, tracking that tightens as type grows."
+        description="DM Sans throughout, semibold headings, and DM Serif Display italic for the accent words."
       >
         <Stack gap="sm">
           <Heading level={1} size="display">
-            Insight, engineered.
+            We own the problem, not just <em>the solution.</em>
           </Heading>
           <Heading level={2} size="lg">
             Tracking tightens as the type grows
           </Heading>
           <Heading level={3} size="sm">
-            Semibold for dense product UI
+            Semibold for labels, tables and slides
           </Heading>
           <Text relaxed>
-            Body copy is Inter at 16px with a 1.5 line height. It stays legible
-            on the white canvas and on the near-black ground, and the type scale
+            Body copy is DM Sans at 16px with a 1.5 line height. It stays legible
+            on the white page and on the dark teal ground, and the type scale
             steps in ratios that hold up at both ends.
           </Text>
           <Stack direction="row" gap="md" wrap align="center">
@@ -171,7 +174,7 @@ function Showcase() {
         </Stack>
       </Section>
 
-      <Section title="Colour" description="Brand palette with generated ramps.">
+      <Section title="Colour" description="Four main colours, four alts. Rose, teal and the alts sit at step 500; dark teal is deep-900; white and black are neutral 0 and 950.">
         <Swatches />
       </Section>
 
@@ -231,16 +234,16 @@ function Showcase() {
             </Badge>
           </Stack>
           <Stack direction="row" gap="xs" wrap>
-            <Tag color="coral" swatch>
+            <Tag color="rose" swatch>
               Design
             </Tag>
-            <Tag color="azure" swatch>
+            <Tag color="teal" swatch>
               Engineering
             </Tag>
-            <Tag color="green" swatch>
+            <Tag color="indigo" swatch>
               Research
             </Tag>
-            <Tag color="amber" onRemove={() => {}}>
+            <Tag color="orange" onRemove={() => {}}>
               Removable
             </Tag>
             <Tag color="neutral">Archived</Tag>
@@ -474,7 +477,7 @@ function Showcase() {
 
       <footer className="pv-footer">
         <Text size="xs" tone="tertiary">
-          Insighture Design System · Inter
+          Insighture Design System · DM Sans + DM Serif Display
         </Text>
       </footer>
     </div>

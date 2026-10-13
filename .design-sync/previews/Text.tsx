@@ -36,8 +36,8 @@ export const Paragraph = () => (
   <Stack gap="xs" style={{ maxWidth: 460 }}>
     <Text size="xs" caps tone="tertiary">Eyebrow label</Text>
     <Text relaxed>
-      Body copy is Inter at 16px with a 1.5 line height. It stays legible on
-      the white canvas and on the near-black ground, and the type scale steps in
+      Body copy is DM Sans at 16px with a 1.5 line height. It stays legible on
+      the white page and on the dark teal ground, and the type scale steps in
       ratios that hold up at both ends.
     </Text>
   </Stack>

@@ -5,7 +5,7 @@
   justify-content: center;
   gap: var(--ins-space-xs);
   border: var(--ins-border-width-thin) solid transparent;
-  border-radius: var(--ins-radius-md);
+  border-radius: var(--ins-radius-pill);
   font-family: var(--ins-font-sans);
   font-weight: var(--ins-font-weight-medium);
   line-height: 1;
@@ -69,7 +69,7 @@
 }
 
 /* ---- Variants ------------------------------------------------------------ */
-/* The strongest action. Ink on the light ground, coral on the dark one — the
+/* The strongest action. Black on the light ground, rose on the dark-teal one — the
    tokens flip per theme so the button always reads as the heaviest thing. */
 .ins-button--primary {
   background-color: var(--ins-button-primary-bg);
@@ -80,7 +80,7 @@
   background-color: var(--ins-button-primary-bg-hover);
 }
 
-/* The second step: coral on light, azure on dark. Reserve it for the single
+/* The second step: rose on light, white on dark teal. Reserve it for the single
    most important action on a marketing or onboarding surface. */
 .ins-button--emphasis {
   background-color: var(--ins-button-emphasis-bg);

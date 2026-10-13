@@ -3,18 +3,26 @@
 <img src="docs/assets/hero.png" alt="Insighture Design System" width="880">
 
 <p>
-  <img alt="components" src="https://img.shields.io/badge/components-28-FC773B?style=flat-square&labelColor=101315">
-  <img alt="themes" src="https://img.shields.io/badge/themes-light%20%2B%20dark-0182CB?style=flat-square&labelColor=101315">
-  <img alt="typeface" src="https://img.shields.io/badge/typeface-Inter-101315?style=flat-square&labelColor=101315">
-  <img alt="react" src="https://img.shields.io/badge/React-18%2B-101315?style=flat-square&labelColor=101315">
-  <img alt="typescript" src="https://img.shields.io/badge/TypeScript-strict-101315?style=flat-square&labelColor=101315">
+  <img alt="components" src="https://img.shields.io/badge/components-28-EE4065?style=flat-square&labelColor=15181A">
+  <img alt="themes" src="https://img.shields.io/badge/themes-light%20%2B%20dark%20teal-08242B?style=flat-square&labelColor=15181A">
+  <img alt="typeface" src="https://img.shields.io/badge/typeface-DM%20Sans-15181A?style=flat-square&labelColor=15181A">
+  <img alt="react" src="https://img.shields.io/badge/React-18%2B-15181A?style=flat-square&labelColor=15181A">
+  <img alt="typescript" src="https://img.shields.io/badge/TypeScript-strict-15181A?style=flat-square&labelColor=15181A">
 </p>
 
-**Tokens, primitives and 28 React components for Insighture product surfaces.**
+**One brand system for documents, presentations, websites and everything else.**<br>
+Colour, type and layout rules for any medium, plus tokens and 28 React components for the web.
 
 </div>
 
 ---
+
+## Start here: [GUIDELINES.md](GUIDELINES.md)
+
+The brand guidelines are the system. They cover colour, type, space and
+per-medium rules for **Word/PDF documents, slide decks, spreadsheets, websites,
+charts, email and social**. Everything below is the web implementation of
+those rules.
 
 ## The system at a glance
 
@@ -25,9 +33,10 @@ mockups — so they cannot drift from what the library actually ships.
 
 <img src="docs/assets/components-dark.png" alt="Insighture components in the dark theme" width="100%">
 
-Light and dark are both first-class. Note the button hierarchy inverting between
-them: on white the strongest action is ink, on near-black it is coral — because
-ink disappears against a dark ground. That runs through dedicated
+Light and dark are both first-class, and the dark theme is the brand dark teal.
+Note the button hierarchy inverting between them: on white the strongest action
+is black, and on dark teal it's rose, because black disappears against a dark
+ground. That runs through dedicated
 `--ins-button-*` tokens, so the swap never drags the rest of the accent system
 with it.
 
@@ -68,39 +77,50 @@ token layer keys off — components rendered outside a provider are unstyled.
 
 <img src="docs/assets/palette.png" alt="Insighture colour ramps" width="100%">
 
-Drawn from the Insighture mark, but deliberately **weighted**: the system is
-carried by white and near-black, accented with the mark's coral orange, and
-blue appears only in small doses.
+Four main colours and four alts. Rose, teal and the alts sit at step 500 of their ramps; dark teal is `deep-900`; white and black are `neutral-0` and `neutral-950`.
 
-| Role | Colour | Notes |
-| ---- | ------ | ----- |
-| Backbone | White → near-black `#101315` | Surfaces, rules, text. Most of any screen. |
-| Accent | Coral `#FC773B` | Primary actions, focus, selection, links. |
-| Emphasis | Near-black (white in dark mode) | Louder than the accent *because* it isn't a colour. |
-| Support | Azure `#0182CB` | Info status, one tag slot, one chart series. Never a surface. |
-| Highlight | Yellow `#FFD438` | Warnings and highlights only. |
-| Success / danger | Green `#0FA37F`, red `#E23D4F` | Status only. |
+| | Colour | Hex | Role |
+| --- | ------ | --- | ---- |
+| Main | White | `#FCFCFD` | Pages, slides, surfaces. Most of everything. |
+| Main | Black | `#15181A` | Text, headings, the strongest action on light. |
+| Main | Dark teal | `#08242B` | The brand ground: dark theme, covers, title slides, hero bands. |
+| Main | Crimson rose | `#EE4065` | **The** accent: one key element per view, plus focus and selection. |
+| Alt | Teal | `#0FA2BF` | Support / info, second data series. |
+| Alt | Orange | `#FF8102` | Categorical, illustration. |
+| Alt | Yellow | `#FAB400` | Warning, highlight, categorical. |
+| Alt | Indigo | `#4F46E5` | Categorical, data. |
+| Functional | Green `#17A06A`, red `#D93A2B` | | Success / danger status only. Red leans orange so it never reads as rose. |
 
-The restraint is enforced by the token layer, not by convention: azure is
-reachable only through `--ins-support-*` and `--ins-info-*`, so a component
-cannot casually become blue. Turning any brand hue into the accent is an edit to
-the `--ins-accent-*` block in `semantic.css` and nothing else.
+The restraint is enforced by the token layer: alt colours are reachable from
+components only through `--ins-support-*`, `--ins-info-*`, `--ins-warning-*`
+and the `Tag` swatches, so nothing casually turns teal or indigo. Changing the
+accent is an edit to the `--ins-accent-*` block in `semantic.css` and nothing
+else.
 
-How the ramps were built, since the source colours barely moved:
+- **The ramps hold each brand hex exactly** (500 for rose and the alts). Lighter steps are tints toward
+  white, and darker steps keep their saturation (warm hues rotate slightly
+  toward red), so shades stay chromatic instead of going muddy.
+- **A dedicated dark-teal ramp** (`--ins-deep-*`) builds the dark theme's
+  canvas, surfaces, borders and secondary text, so dark mode reads as brand
+  rather than generic charcoal.
+- **Neutrals are slightly cool** and run from brand white to brand black, so
+  greys sit beside dark teal without looking warm.
+- **Contrast:** white on rose is 3.8:1, which is fine for buttons and bold
+  large text. Small accent text uses `--ins-text-accent` (`#B11032` on light,
+  `#F58AA1` on dark).
 
-- **Generated in HLS with hue rotation on the dark steps.** Dropping lightness
-  alone turns yellow olive and coral brown. Warm hues rotate toward red as they
-  darken; azure rotates toward the wordmark navy. Every shade stays chromatic.
-- **One orange family, not two.** `#FC773B` and `#FC9B1F` were near-duplicates.
-  Coral carries the ramp; amber survives as `--ins-orange-amber` for places the
-  mark itself is reproduced.
-- **A red that is clearly not coral**, so danger and the brand accent never read
-  as the same signal.
-- **Rounder geometry.** The mark is arcs and circles, so radii open up (`sm` 6px
-  through `xl` 24px) and controls that can be pills, are.
-- **Pills carry no fill.** `Badge` defaults to a neutral chip with a coloured
-  dot; `outline` and `solid` are the opt-in louder tiers. `Tag` keeps its colour
-  in the swatch. Alerts are neutral cards with a coloured icon and no edge bar.
+## Type and shape
+
+Matched to [insighture.com](https://www.insighture.com):
+
+- **DM Sans** for everything, with **semibold** headings tracking down to
+  -0.025em at display size.
+- **DM Serif Display italic** for one or two emphasis words per headline.
+  Write `<em>` inside a `Heading`: `<Heading>Great outcomes start with the
+  <em>right thinking.</em></Heading>`.
+- **Pill buttons**, 18px cards, 48px feature panels.
+- **`--ins-gradient-rose`** (`#E63A5F → #B61639`) for hero and
+  call-to-action bands.
 
 ## Tokens
 
@@ -117,12 +137,18 @@ Never reference a primitive from a component. If a role is missing, add it to th
 semantic layer for both themes.
 
 `src/tokens.ts` mirrors the values in TypeScript for places CSS custom
-properties cannot reach — charts, canvas, email, generated docs. `chartSeries`
-gives a ready-ordered categorical sequence.
+properties can't reach: charts, canvas, email, and generated Word, PowerPoint
+and PDF files.
+
+- `brand`: the eight colours.
+- `chartSeries`: a ready-ordered categorical sequence.
+- `mediaType`: pt type scales for documents and 16:9 slides.
+- `officeTheme`: the dk1/lt1/accent1–6 + fonts mapping to apply as a Word,
+  PowerPoint or Excel theme.
 
 ## Themes
 
-`light` on white, `dark` on near-black ink. Both are
+`light` on white, `dark` on the brand dark teal. Both are
 first-class — every component is styled for each.
 
 ```tsx
@@ -148,16 +174,16 @@ Conventions across the set:
 
 - **Tone vs colour.** `Badge`/`Alert`/`Progress` take a semantic `tone`
   (`success`, `danger`, …). `Tag` takes a `color` named after the palette
-  (`coral`, `amber`, `yellow`, `azure`, `green`, `neutral`) because tags are
+  (`rose`, `teal`, `orange`, `yellow`, `indigo`, `neutral`) because tags are
   categorical, not status.
 - **Form controls own their labels.** Pass `label`, `hint` and `error` to the
   control; `htmlFor`, `aria-describedby` and `aria-invalid` are wired for you.
   Setting `error` also flips the field into the invalid state.
 - **Controlled and uncontrolled.** `Tabs`, `RadioGroup` and `InsightureProvider`
   accept `value`/`defaultValue` with an `on*Change` callback.
-- **Accent restraint.** Coral is the accent — one `Button variant="primary"`
-  per view. `variant="emphasis"` (near-black) is for the single strongest action
-  on a page. Reach for neutrals first; colour is the exception, not the default.
+- **Accent restraint.** Rose is the accent. Use one `Button variant="primary"`
+  per view, and save `variant="emphasis"` (rose on light, white on dark teal)
+  for the single strongest action on a page. Reach for neutrals first; colour is the exception, not the default.
 
 ## Styling your own layout
 
@@ -184,10 +210,11 @@ src/
   tokens.ts                TS mirror of the token values
   styles/                  font, primitives, semantic, base, stylesheet barrel
   components/<Name>/       one .tsx + one .css per component
+GUIDELINES.md              brand guidelines for every medium: start here
 docs/                      per-component docs (also drive the design-system sync)
 docs/assets/               the README images, rendered from the real bundle
 preview/                   local showcase app, not published
-scripts/fetch-fonts.mjs    refreshes the self-hosted Inter subset
+scripts/fetch-fonts.mjs    refreshes the self-hosted DM Sans + DM Serif Display subsets
 .design-sync/              inputs for the claude.ai/design sync
 ```
 

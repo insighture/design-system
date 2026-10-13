@@ -59,22 +59,22 @@
   --ins-tag-solid: var(--ins-neutral-500);
 }
 
-.ins-tag--coral {
-  --ins-tag-solid: var(--ins-orange-500);
+.ins-tag--rose {
+  --ins-tag-solid: var(--ins-rose-500);
 }
 
-.ins-tag--amber {
-  --ins-tag-solid: var(--ins-orange-amber);
+.ins-tag--teal {
+  --ins-tag-solid: var(--ins-teal-500);
+}
+
+.ins-tag--orange {
+  --ins-tag-solid: var(--ins-orange-500);
 }
 
 .ins-tag--yellow {
   --ins-tag-solid: var(--ins-yellow-500);
 }
 
-.ins-tag--azure {
-  --ins-tag-solid: var(--ins-azure-500);
-}
-
-.ins-tag--green {
-  --ins-tag-solid: var(--ins-green-500);
+.ins-tag--indigo {
+  --ins-tag-solid: var(--ins-indigo-500);
 }

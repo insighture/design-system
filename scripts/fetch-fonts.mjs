@@ -3,9 +3,11 @@
  *
  *   node scripts/fetch-fonts.mjs
  *
- * Pulls the latin subset of Inter (variable, wght 100–900) from Google Fonts.
- * Inter is the whole type system — there is no second family. fonts.css is
- * hand-maintained; if the file names below change, update it to match.
+ * Pulls the latin subsets of the two brand families from Google Fonts:
+ *   - DM Sans (variable, wght 100–1000, roman + italic) — the whole system.
+ *   - DM Serif Display (400, roman + italic) — the emphasis face, used only
+ *     for the italic accent words inside headlines.
+ * fonts.css is hand-maintained; if the file names below change, update it.
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -17,9 +19,9 @@ const outDir = path.join(here, '..', 'src', 'styles', 'fonts');
 // The wght RANGE (not a single value) is what makes Google serve the variable
 // font. Ask for one weight and you get a static 400 instance — every `medium`
 // and `bold` in the system would then silently render at 400, because base.css
-// sets `font-synthesis-weight: none`.
+// sets `font-synthesis-weight: none`. DM Serif Display ships one weight only.
 const CSS_URL =
-  'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
+  'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap';
 
 // A modern UA is required — Google serves woff2 only to browsers it recognises.
 const UA =
@@ -27,8 +29,10 @@ const UA =
 
 // Which @font-face block maps to which output file.
 const TARGETS = [
-  { family: 'Inter', style: 'normal', file: 'inter-variable.woff2' },
-  { family: 'Inter', style: 'italic', file: 'inter-variable-italic.woff2' },
+  { family: 'DM Sans', style: 'normal', file: 'dm-sans-variable.woff2' },
+  { family: 'DM Sans', style: 'italic', file: 'dm-sans-variable-italic.woff2' },
+  { family: 'DM Serif Display', style: 'normal', file: 'dm-serif-display.woff2' },
+  { family: 'DM Serif Display', style: 'italic', file: 'dm-serif-display-italic.woff2' },
 ];
 
 const css = await fetch(CSS_URL, { headers: { 'User-Agent': UA } }).then((res) => {

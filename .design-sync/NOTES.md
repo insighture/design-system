@@ -26,11 +26,13 @@ Repo-specific gotchas for future syncs. Read this before re-running.
   `.ins-choice__input:indeterminate` rule painted every empty radio group as if
   all options were half-selected. The selector is now
   `.ins-choice__input--checkbox:indeterminate`.
-- **Inter must be fetched as a weight RANGE.** `scripts/fetch-fonts.mjs` asks
-  Google for `wght@100..900`. Requesting a single weight returns a *static* 400
+- **DM Sans must be fetched as a weight RANGE.** `scripts/fetch-fonts.mjs`
+  asks Google for `wght@100..1000`. Requesting a single weight returns a *static* 400
   file; combined with `font-synthesis-weight: none` in `base.css`, every
   `medium`/`semibold`/`bold` in the system would then silently render at 400.
-  Verified by measuring string widths at 400/500/600/700 — they must all differ.
+  Verified by measuring DOM span widths at 300–800; they must all differ.
+  (Canvas `measureText` is NOT a valid check: it reported 400 = 500 and
+  600 = 700 for the same correctly loaded variable font.)
 - **Link tones must stay distinguishable.** `tone="default"` and `tone="accent"`
   both resolved to orange, so the variant axis didn't vary. Prose links are now
   ink + underline (`--ins-text-link: --ins-neutral-900`) warming to orange on
@@ -71,9 +73,16 @@ bug, because the dot is the only tone signal.
 - **Fonts are network-fetched.** `scripts/fetch-fonts.mjs` pulls from Google
   Fonts at author time; the woff2 files are committed, so a sync does not need
   network. Re-running the script requires it.
-- **The palette and type were reworked repeatedly during the first session.**
-  Endpoint: white/near-black backbone, coral orange accent, rationed blue, and
-  Inter as the single family. Several decisions look like omissions but are
+- **Palette rebrand (2026-10-13).** Endpoint: white `#FCFCFD` / black `#15181A`
+  backbone, dark teal `#08242B` ground (the dark theme and `--ins-bg-inverse`),
+  crimson rose `#EE4065` accent, and alts teal/orange/yellow/indigo.
+  Same day, the type was aligned with insighture.com: DM Sans (semibold
+  headings) plus DM Serif Display italic via `<em>` in `Heading`, pill
+  buttons, 18px cards, and `--ins-gradient-rose` hero bands. The Inter woff2
+  files in `src/styles/fonts/` are unused leftovers and can be deleted. `--ins-azure-*`, `--ins-ink-*`, `--ins-orange-amber`
+  and the coral/amber/azure/green `Tag` colours were removed. The system is
+  now medium-agnostic (see `GUIDELINES.md`), and conventions.md carries the
+  deck/document guidance. Several decisions look like omissions but are
   deliberate — do NOT "restore" them:
   - `Badge` surfaces and labels are neutral; `tone` colours the dot only.
     `outline` and `solid` are the opt-in louder tiers.
@@ -81,12 +90,13 @@ bug, because the dot is the only tone signal.
   - `Alert` has no coloured left rule and no tinted default surface.
   - `Avatar` fallbacks are neutral, not accent-tinted.
   - **The button hierarchy is theme-dependent and intentional.** Light:
-    `primary` = ink, `emphasis` = coral. Dark: `primary` = coral,
-    `emphasis` = azure. It runs through dedicated `--ins-button-primary-*` /
+    `primary` = black, `emphasis` = rose. Dark (teal): `primary` = rose,
+    `emphasis` = white. It runs through dedicated `--ins-button-primary-*` /
     `--ins-button-emphasis-*` tokens rather than `--ins-accent-*`, precisely so
-    the dark-mode swap does not turn every accent in the system blue. If you
+    the dark-mode swap does not drag the rest of the accent system with it. If you
     ever "simplify" these back onto the accent tokens you will break that.
-  - There is no serif face and no `font` prop on `Heading`; heading tracking is
-    driven by `size` alone.
+  - There is still no `font` prop on `Heading`. The serif is reachable only
+    through `<em>` inside a heading, on purpose: it's an emphasis device, not
+    a heading style. Heading tracking is driven by `size` alone.
 - **`preview/` (the local Vite showcase) is not part of the sync** and can drift
   from `.design-sync/previews/`. The synced cards come only from the latter.

@@ -4,117 +4,153 @@
    palette, type, space, radius and elevation scales the semantic layer maps on
    top of. Consume the semantic tokens (semantic.css) in components, not these.
 
-   The palette is derived from the Insighture mark, weighted deliberately:
-   white and near-black carry the system, coral orange is the accent, and the
-   mark's azure appears only in small doses (info, support, a second chart
-   series). Ramps are generated in HLS with a hue rotation on the dark steps,
-   so shades stay chromatic instead of going muddy (yellow rotates toward
-   bronze, coral toward red, azure toward navy).
+   The palette is medium-agnostic: the same values drive web pages, documents,
+   slides, charts and email. It is built from four main colours and four alt
+   colours:
+
+     Main  — White #FCFCFD · Black #15181A · Dark teal #08242B · Crimson rose #EE4065
+     Alt   — Teal #0FA2BF · Orange #FF8102 · Yellow #FAB400 · Indigo #4F46E5
+
+   White and black carry the content, dark teal is the brand ground (dark
+   theme, covers, hero bands), crimson rose is the single accent, and the alt
+   colours are supporting/categorical — never competing with rose. Brand
+   hexes are kept exact: rose, teal and the alts at step 500, dark teal at
+   deep-900, white and black at neutral-0 and neutral-950.
    ========================================================================== */
 
 :root {
-  /* ---- Brand: the mark, exactly ----------------------------------------- */
-  --ins-brand-azure: #0182cb;
-  --ins-brand-coral: #fc773b;
-  --ins-brand-amber: #fc9b1f;
-  --ins-brand-yellow: #ffd438;
-  --ins-brand-navy: #004166;
-  --ins-brand-white: #ffffff;
-  --ins-brand-black: #101315;
+  /* ---- Brand: the eight colours, exactly -------------------------------- */
+  --ins-brand-white: #fcfcfd;
+  --ins-brand-black: #15181a;
+  --ins-brand-deep-teal: #08242b;
+  --ins-brand-rose: #ee4065;
+  --ins-brand-teal: #0fa2bf;
+  --ins-brand-orange: #ff8102;
+  --ins-brand-yellow: #fab400;
+  --ins-brand-indigo: #4f46e5;
 
-  /* ---- Azure (primary: interactive, links, focus) ----------------------- */
-  --ins-azure-50: #f1f7fb;
-  --ins-azure-100: #dfeff9;
-  --ins-azure-200: #b9e0f9;
-  --ins-azure-300: #83ccfb;
-  --ins-azure-400: #46b5fe;
-  --ins-azure-500: #0182cb;
-  --ins-azure-600: #015fa2;
-  --ins-azure-700: #01437e;
-  --ins-azure-800: #01305e;
-  --ins-azure-900: #022245;
+  /* ---- Rose (THE accent: key action, focus, selection, highlight) ------- */
+  --ins-rose-50: #fcf0f3;
+  --ins-rose-100: #f8e0e5;
+  --ins-rose-200: #f9b9c6;
+  --ins-rose-300: #f58aa1;
+  --ins-rose-400: #f05677;
+  --ins-rose-500: #ee4065;
+  --ins-rose-600: #de143f;
+  --ins-rose-700: #b11032;
+  --ins-rose-800: #8b0c27;
+  --ins-rose-900: #69091e;
 
-  /* ---- Orange (secondary accent: emphasis, calls to action) ------------- */
-  --ins-orange-50: #fbf5f1;
-  --ins-orange-100: #f9e9df;
-  --ins-orange-200: #f8d1b9;
-  --ins-orange-300: #fab185;
-  --ins-orange-400: #fc8c48;
-  --ins-orange-500: #fc773b;
-  --ins-orange-600: #f54604;
-  --ins-orange-700: #be3103;
-  --ins-orange-800: #8f2304;
-  --ins-orange-900: #691904;
+  /* ---- Teal (support, info, second chart series) ----------------------- */
+  --ins-teal-50: #f0fafc;
+  --ins-teal-100: #e0f4f8;
+  --ins-teal-200: #b8eff9;
+  --ins-teal-300: #89e4f6;
+  --ins-teal-400: #55d8f2;
+  --ins-teal-500: #0fa2bf;
+  --ins-teal-600: #0c7b99;
+  --ins-teal-700: #0a5d7a;
+  --ins-teal-800: #084460;
+  --ins-teal-900: #063149;
 
-  /* The mark's second orange. It sits between orange-400 and -500 rather than
-     carrying its own ramp — two near-identical orange families is exactly the
-     kind of redundancy this refresh removes. */
-  --ins-orange-amber: #fc9b1f;
+  /* ---- Orange (alt: categorical, illustration) ------------------------- */
+  --ins-orange-50: #fdf6ef;
+  --ins-orange-100: #faecde;
+  --ins-orange-200: #ffd9b2;
+  --ins-orange-300: #ffc080;
+  --ins-orange-400: #ffa447;
+  --ins-orange-500: #ff8102;
+  --ins-orange-600: #ce5800;
+  --ins-orange-700: #a43b00;
+  --ins-orange-800: #802500;
+  --ins-orange-900: #621500;
 
-  /* ---- Yellow (highlight, warning) -------------------------------------- */
-  --ins-yellow-50: #fbf9f1;
-  --ins-yellow-100: #f9f4de;
-  --ins-yellow-200: #f9edb8;
-  --ins-yellow-300: #fce683;
-  --ins-yellow-400: #ffdd45;
-  --ins-yellow-500: #ffd438;
-  --ins-yellow-600: #f9af00;
-  --ins-yellow-700: #c17a00;
-  --ins-yellow-800: #915501;
-  --ins-yellow-900: #6a3c03;
+  /* ---- Yellow (alt: warning, highlight) -------------------------------- */
+  --ins-yellow-50: #fdf9ef;
+  --ins-yellow-100: #faf2de;
+  --ins-yellow-200: #ffeab2;
+  --ins-yellow-300: #ffdb80;
+  --ins-yellow-400: #ffcc47;
+  --ins-yellow-500: #fab400;
+  --ins-yellow-600: #c87800;
+  --ins-yellow-700: #a04d00;
+  --ins-yellow-800: #7d2d00;
+  --ins-yellow-900: #5f1700;
 
-  /* ---- Green (success) — not in the mark; tuned to sit beside azure ----- */
-  --ins-green-50: #f1f9f6;
-  --ins-green-100: #dcf1ea;
-  --ins-green-200: #b4e3d6;
-  --ins-green-300: #7fcfbb;
-  --ins-green-400: #3fb79b;
-  --ins-green-500: #0fa37f;
-  --ins-green-600: #0c826a;
-  --ins-green-700: #096555;
-  --ins-green-800: #084c41;
-  --ins-green-900: #073831;
+  /* ---- Indigo (alt: categorical, data) --------------------------------- */
+  --ins-indigo-50: #f2f1fb;
+  --ins-indigo-100: #e2e1f7;
+  --ins-indigo-200: #bfbcf6;
+  --ins-indigo-300: #958fef;
+  --ins-indigo-400: #665ee8;
+  --ins-indigo-500: #4f46e5;
+  --ins-indigo-600: #281dd2;
+  --ins-indigo-700: #2018a8;
+  --ins-indigo-800: #191283;
+  --ins-indigo-900: #130e64;
 
-  /* ---- Red (danger) — rotated well clear of coral so the two never read
-         as the same signal ------------------------------------------------ */
-  --ins-red-50: #faf2f3;
-  --ins-red-100: #f6e2e3;
-  --ins-red-200: #f1c1c4;
-  --ins-red-300: #ec9299;
-  --ins-red-400: #e75d67;
-  --ins-red-500: #e23d4f;
-  --ins-red-600: #c81e34;
-  --ins-red-700: #9b172b;
-  --ins-red-800: #741323;
-  --ins-red-900: #560f1b;
+  /* ---- Green (success) — functional only, not a brand colour ----------- */
+  --ins-green-50: #f1fbf7;
+  --ins-green-100: #e1f7ee;
+  --ins-green-200: #bcf5df;
+  --ins-green-300: #90efc9;
+  --ins-green-400: #5ee8b2;
+  --ins-green-500: #17a06a;
+  --ins-green-600: #128059;
+  --ins-green-700: #0f664a;
+  --ins-green-800: #0c503c;
+  --ins-green-900: #093d30;
 
-  /* ---- Neutral (the system's backbone: white through near-black) --------
-         This palette is carried by neutrals, not by hue. Almost every surface,
-         rule and label in a screen should come from this ramp. */
-  --ins-neutral-0: #ffffff;
-  --ins-neutral-50: #fafafb;
-  --ins-neutral-100: #f3f4f5;
-  --ins-neutral-200: #e5e7e9;
-  --ins-neutral-300: #d0d3d6;
-  --ins-neutral-400: #a4a9ae;
-  --ins-neutral-500: #787e84;
-  --ins-neutral-600: #585e64;
-  --ins-neutral-700: #414750;
-  --ins-neutral-800: #292e34;
-  --ins-neutral-900: #1a1e22;
-  --ins-neutral-950: #101315;
+  /* ---- Red (danger) — functional only. Rotated toward orange so it never
+         reads as the rose accent. ---------------------------------------- */
+  --ins-red-50: #fbf2f1;
+  --ins-red-100: #f6e4e2;
+  --ins-red-200: #f3c3be;
+  --ins-red-300: #ec9b93;
+  --ins-red-400: #e36e63;
+  --ins-red-500: #d93a2b;
+  --ins-red-600: #b02c20;
+  --ins-red-700: #8d2319;
+  --ins-red-800: #6e1c14;
+  --ins-red-900: #54150f;
 
-  /* ---- Ink (the dark-mode ground) --------------------------------------- */
-  --ins-ink-canvas: #0b0d0f;
-  --ins-ink-surface: #131619;
-  --ins-ink-raised: #1b1f23;
-  --ins-ink-sunken: #070809;
+  /* ---- Neutral (the backbone: brand white → brand black) ---------------
+         Slightly cool, so greys sit beside dark teal without looking warm.
+         Almost every surface, rule and label comes from this ramp. */
+  --ins-neutral-0: #fcfcfd;
+  --ins-neutral-50: #f6f7f8;
+  --ins-neutral-100: #eef0f1;
+  --ins-neutral-200: #e1e4e6;
+  --ins-neutral-300: #cbd0d3;
+  --ins-neutral-400: #9ea5aa;
+  --ins-neutral-500: #6b7278;
+  --ins-neutral-600: #555c62;
+  --ins-neutral-700: #3e4449;
+  --ins-neutral-800: #2a2e32;
+  --ins-neutral-900: #1d2023;
+  --ins-neutral-950: #15181a;
+
+  /* ---- Deep teal (the dark ground: dark theme, covers, hero bands) ----- */
+  --ins-deep-50: #e6eef0;
+  --ins-deep-100: #c3d4d8;
+  --ins-deep-200: #a9c0c5;
+  --ins-deep-300: #7e9aa1;
+  --ins-deep-400: #4e6b72;
+  --ins-deep-500: #346672;
+  --ins-deep-600: #23525e;
+  --ins-deep-700: #1a4450;
+  --ins-deep-750: #12383f;
+  --ins-deep-800: #0c2e36;
+  --ins-deep-900: #08242b;
+  --ins-deep-950: #051a1f;
 
   /* ---- Typography ------------------------------------------------------- */
-  /* One family for the whole system. Inter is a screen typeface: it is tuned
-     for UI at small sizes and holds up at display sizes with tighter tracking. */
-  --ins-font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
-    Roboto, Helvetica, Arial, sans-serif;
+  /* DM Sans for everything — screen, print and slides. DM Serif Display
+     italic is the emphasis face for one or two accent words in a headline.
+     In Office files where they may be missing, fall back to Arial / Georgia. */
+  --ins-font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --ins-font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
   --ins-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
     'Liberation Mono', monospace;
 
@@ -139,10 +175,10 @@
   --ins-font-weight-semibold: 600;
   --ins-font-weight-bold: 700;
 
-  /* Inter needs progressively tighter tracking as it scales up; at display
-     sizes the default spacing reads loose and dated. */
-  --ins-letter-spacing-display: -0.035em;
-  --ins-letter-spacing-tight: -0.022em;
+  /* DM Sans tightens as it scales up: about -0.025em at display sizes, as on
+     insighture.com. */
+  --ins-letter-spacing-display: -0.025em;
+  --ins-letter-spacing-tight: -0.02em;
   --ins-letter-spacing-snug: -0.012em;
   --ins-letter-spacing-normal: 0;
   --ins-letter-spacing-wide: 0.02em;
@@ -161,30 +197,29 @@
   --ins-space-3xl: 4rem; /* 64px */
   --ins-space-4xl: 6rem; /* 96px */
 
-  /* ---- Radius ------------------------------------------------------------
-     The mark is built from circles and arcs, so the system leans round:
-     pills for controls that can take them, generous radii elsewhere. */
+  /* ---- Radius ------------------------------------------------------------ */
   --ins-radius-none: 0;
   --ins-radius-sm: 6px;
   --ins-radius-md: 10px;
-  --ins-radius-lg: 16px;
+  --ins-radius-lg: 18px;
   --ins-radius-xl: 24px;
+  --ins-radius-2xl: 48px;
   --ins-radius-pill: 999px;
 
   /* ---- Borders ----------------------------------------------------------- */
   --ins-border-width-thin: 1px;
   --ins-border-width-thick: 2px;
 
-  /* ---- Elevation — neutral, matching the black/white ground -------------- */
-  --ins-shadow-xs: 0 1px 2px rgba(16, 19, 21, 0.06);
-  --ins-shadow-sm: 0 1px 3px rgba(16, 19, 21, 0.09),
-    0 1px 2px rgba(16, 19, 21, 0.04);
-  --ins-shadow-md: 0 4px 14px rgba(16, 19, 21, 0.1),
-    0 2px 4px rgba(16, 19, 21, 0.05);
-  --ins-shadow-lg: 0 14px 36px rgba(16, 19, 21, 0.15),
-    0 4px 8px rgba(16, 19, 21, 0.06);
-  /* Focus is orange — the accent, so focus reads as brand, not as system UI. */
-  --ins-shadow-focus: 0 0 0 3px rgba(252, 119, 59, 0.34);
+  /* ---- Elevation — neutral, tinted by the brand black -------------------- */
+  --ins-shadow-xs: 0 1px 2px rgba(21, 24, 26, 0.06);
+  --ins-shadow-sm: 0 1px 3px rgba(21, 24, 26, 0.09),
+    0 1px 2px rgba(21, 24, 26, 0.04);
+  --ins-shadow-md: 0 4px 14px rgba(21, 24, 26, 0.1),
+    0 2px 4px rgba(21, 24, 26, 0.05);
+  --ins-shadow-lg: 0 14px 36px rgba(21, 24, 26, 0.15),
+    0 4px 8px rgba(21, 24, 26, 0.06);
+  /* Focus is rose — the accent, so focus reads as brand, not as system UI. */
+  --ins-shadow-focus: 0 0 0 3px rgba(238, 64, 101, 0.34);
 
   /* ---- Motion ------------------------------------------------------------ */
   --ins-duration-fast: 120ms;
@@ -205,12 +240,16 @@
   --ins-z-modal: 600;
   --ins-z-toast: 700;
 
-  /* ---- Brand gradient — the four segments of the mark, in mark order ----- */
+  /* ---- Rose gradient — the brand's signature surface. Hero bands and
+         call-to-action strips; white text sits on it. ----------------- */
+  --ins-gradient-rose: linear-gradient(90deg, #e63a5f 0%, #b61639 100%);
+
+  /* ---- Brand gradient — rose through the warm alts. Covers, divider strips
+         and hero accents only; never behind text. ----------------------- */
   --ins-gradient-brand: linear-gradient(
     120deg,
-    var(--ins-brand-coral) 0%,
-    var(--ins-brand-amber) 32%,
-    var(--ins-brand-yellow) 62%,
-    var(--ins-brand-azure) 100%
+    var(--ins-brand-rose) 0%,
+    var(--ins-brand-orange) 55%,
+    var(--ins-brand-yellow) 100%
   );
 }
