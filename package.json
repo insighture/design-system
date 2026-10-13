@@ -1,7 +1,7 @@
 {
   "name": "@insighture/design-system",
   "version": "0.1.0",
-  "description": "Insighture design system \u2014 tokens, primitives and React components.",
+  "description": "Insighture design system — tokens, primitives and React components.",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
@@ -29,7 +29,8 @@
     "typecheck": "tsc --noEmit",
     "preview": "vite --config vite.preview.config.ts",
     "clean": "rm -rf dist",
-    "readme:assets": "node scripts/readme-scenes/shoot.mjs"
+    "readme:assets": "node scripts/readme-scenes/shoot.mjs",
+    "templates": "node scripts/templates/build.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -39,8 +40,11 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "docx": "^9.5.1",
     "esbuild": "^0.28.2",
+    "jszip": "^3.10.1",
     "playwright": "^1.49.0",
+    "pptxgenjs": "^4.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tsup": "^8.3.5",

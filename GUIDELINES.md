@@ -185,6 +185,9 @@ spacing should be about half a line, not a blank line.
 
 ## 5. Applying it, by medium
 
+Start from the ready-made files in [`templates/`](templates/README.md) (PowerPoint, Word,
+PDF, email and social) rather than a blank document.
+
 ### Documents (Word, Google Docs, PDF reports, letters)
 
 - Page: white `#FCFCFD` (pure white `#FFFFFF` is fine in print). Body DM Sans

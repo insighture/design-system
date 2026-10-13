@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Insighture report</title>
+<link rel="stylesheet" href="../../../src/styles/fonts.css">
+<link rel="stylesheet" href="../../../src/styles/tokens.css">
+<style>
+@page { size: A4; margin: 0 }
+* { box-sizing: border-box }
+html, body { margin: 0; padding: 0 }
+body { font-family: var(--ins-font-sans); color: var(--ins-brand-black); font-size: 10.5pt; line-height: 1.5;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; break-after: page }
+.page:last-child { page-break-after: auto; break-after: auto }
+.pad { padding: 22mm 20mm 20mm }
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1 }
+h1 em, h2 em, .display em { font-family: var(--ins-font-serif); font-style: italic; font-weight: 400; letter-spacing: 0; color: var(--ins-brand-rose) }
+p { margin: 0 0 3mm }
+.eyebrow { font-size: 8.5pt; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ins-indigo-500); margin-bottom: 2.5mm }
+.lead { font-size: 12.5pt; color: var(--ins-neutral-700); line-height: 1.5 }
+.muted { color: var(--ins-neutral-500) }
+.wordmark { font-size: 15pt; font-weight: 300; letter-spacing: -0.01em }
+/* Brand grounds, with the soft circle motif from insighture.com */
+.rose { background: var(--ins-gradient-rose); color: var(--ins-brand-white) }
+.deep { background: var(--ins-brand-deep-teal); color: var(--ins-brand-white) }
+.rose em, .deep .white-em em { color: inherit !important }
+.motif { position: absolute; border-radius: 50%; pointer-events: none }
+.glow { width: 170mm; height: 170mm; right: -60mm; top: 20mm; background: radial-gradient(circle, rgba(255,255,255,.16) 0%, transparent 62%) }
+.ring { border: 1.5px solid rgba(255,255,255,.28) }
+.deep .glow { background: radial-gradient(circle, rgba(15,162,191,.14) 0%, transparent 62%) }
+.deep .ring { border-color: rgba(15,162,191,.25) }
+.pill { display: inline-block; padding: 3mm 7mm; border-radius: 999px; font-weight: 600; font-size: 10pt }
+.pill.white { background: var(--ins-brand-white); color: var(--ins-rose-600) }
+.running { position: absolute; left: 20mm; right: 20mm; display: flex; justify-content: space-between; font-size: 8pt; color: var(--ins-neutral-500) }
+.running.top { top: 10mm; padding-bottom: 2.5mm; border-bottom: 1px solid var(--ins-neutral-200) }
+.running.top b { color: var(--ins-brand-black); font-weight: 600 }
+.running.bottom { bottom: 10mm }
+
+.cover h1 { font-size: 40pt; line-height: 1.02; letter-spacing: -0.025em; max-width: 150mm }
+.cover .eyebrow { color: rgba(255,255,255,.9) }
+.cover .sub { font-size: 14pt; max-width: 130mm; margin-top: 6mm; opacity: .92 }
+.cover .meta { position: absolute; left: 20mm; bottom: 22mm; font-size: 8.5pt; font-weight: 600; letter-spacing: .12em; text-transform: uppercase }
+h1.section { font-size: 24pt; margin-bottom: 4mm }
+h2 { font-size: 14pt; margin: 8mm 0 2.5mm }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin: 6mm 0 2mm }
+.stat { background: var(--ins-neutral-100); border-radius: 4mm; padding: 5mm }
+.stat b { display: block; font-size: 24pt; font-weight: 600; letter-spacing: -0.02em; color: var(--ins-brand-rose); line-height: 1.1 }
+.stat span { font-size: 9pt; color: var(--ins-neutral-700) }
+ul, ol { margin: 0 0 3mm; padding-left: 5mm }
+li { margin-bottom: 1.5mm }
+ul li::marker { color: var(--ins-brand-rose) }
+ol li::marker { color: var(--ins-brand-rose); font-weight: 600 }
+.chart { margin: 4mm 0 1mm; border: 1px solid var(--ins-neutral-200); border-radius: 4.5mm; padding: 5mm 6mm 3mm }
+.chart h3 { font-size: 10pt; margin-bottom: 3mm }
+.caption { font-size: 8pt; color: var(--ins-neutral-500) }
+table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 3mm 0 1mm }
+th { background: var(--ins-neutral-100); text-align: left; font-size: 7.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--ins-neutral-600); font-weight: 600; padding: 2.5mm 3mm; border-bottom: 1px solid var(--ins-neutral-300) }
+td { padding: 2.5mm 3mm; border-bottom: 1px solid var(--ins-neutral-200) }
+th:not(:first-child), td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums }
+.takeaway { border-radius: 4.5mm; padding: 6mm 7mm; margin: 6mm 0 }
+.takeaway .eyebrow { color: var(--ins-teal-400); margin-bottom: 2mm }
+.takeaway p { font-size: 12.5pt; margin: 0 }
+blockquote { margin: 6mm 0; padding: 0 8mm; font-size: 13pt; font-style: italic; line-height: 1.45 }
+blockquote cite { display: block; margin-top: 2mm; font-size: 9pt; font-style: normal; color: var(--ins-neutral-500) }
+.back h2 { font-size: 34pt; letter-spacing: -0.025em; margin: 0 0 5mm }
+.back h2 em { color: var(--ins-brand-rose) }
+.back p { color: var(--ins-deep-200); font-size: 12pt }
+
+</style></head><body>
+<section class="page cover rose pad">
+  <div class="motif glow"></div><div class="motif ring" style="width:95mm;height:95mm;right:-30mm;bottom:-45mm"></div>
+  <div class="motif ring" style="width:24mm;height:24mm;right:70mm;bottom:28mm"></div>
+  <div class="wordmark">Insighture</div>
+  <div style="margin-top:88mm">
+    <div class="eyebrow">Platform review</div>
+    <h1>Modernising for <em>speed</em> and control</h1>
+    <p class="sub">How the delivery platform performed in the year after migration, and what to do next.</p>
+  </div>
+  <div class="meta">October 2026 · Insighture</div>
+</section>
+
+<section class="page pad">
+  <div class="running top"><b>Insighture</b><span>Platform review · October 2026</span></div>
+  <div class="eyebrow">Executive summary</div>
+  <h1 class="section">Faster releases, <em>fewer</em> failures</h1>
+  <p class="lead">In the twelve months since the move to the new platform, the team ships nearly twice as often and fixes problems faster. The gains are real but uneven, and two areas need attention before the next phase.</p>
+  <div class="stats">
+    <div class="stat"><b>47%</b><span>shorter lead time for changes</span></div>
+    <div class="stat"><b>3.2×</b><span>more frequent deployments</span></div>
+    <div class="stat"><b>−38%</b><span>change failure rate</span></div>
+  </div>
+  <h2>What changed</h2>
+  <p>Deployment moved from a weekly, manually approved release train to on-demand releases through an automated pipeline. Environments are now created from code, and every change runs the same checks.</p>
+  <ul><li>Lead time for changes fell from 14.2 to 7.5 days.</li><li>Deployments rose from 4 to 13 a month.</li><li>Rollbacks now take minutes instead of hours.</li></ul>
+  <div class="chart">
+    <h3>Median lead time for changes (days)</h3>
+    <svg viewBox="0 0 160 52" width="100%" style="display:block;font-family:inherit">
+    <line x1="0" x2="160" y1="44" y2="44" stroke="#E1E4E6" stroke-width=".3"/><rect x="5.87" y="7.81" width="14.93" height="36.19" rx="1" fill="#CBD0D3"/>
+      <text x="13.33" y="6.31" font-size="3.2" text-anchor="middle" fill="#3E4449">14.2</text>
+      <text x="13.33" y="49" font-size="3" text-anchor="middle" fill="#6B7278">Q1 25</text><rect x="32.53" y="8.83" width="14.93" height="35.17" rx="1" fill="#CBD0D3"/>
+      <text x="40.00" y="7.33" font-size="3.2" text-anchor="middle" fill="#3E4449">13.8</text>
+      <text x="40.00" y="49" font-size="3" text-anchor="middle" fill="#6B7278">Q2 25</text><rect x="59.20" y="15.71" width="14.93" height="28.29" rx="1" fill="#CBD0D3"/>
+      <text x="66.67" y="14.21" font-size="3.2" text-anchor="middle" fill="#3E4449">11.1</text>
+      <text x="66.67" y="49" font-size="3" text-anchor="middle" fill="#6B7278">Q3 25</text><rect x="85.87" y="20.04" width="14.93" height="23.96" rx="1" fill="#CBD0D3"/>
+      <text x="93.33" y="18.54" font-size="3.2" text-anchor="middle" fill="#3E4449">9.4</text>
+      <text x="93.33" y="49" font-size="3" text-anchor="middle" fill="#6B7278">Q4 25</text><rect x="112.53" y="23.10" width="14.93" height="20.90" rx="1" fill="#CBD0D3"/>
+      <text x="120.00" y="21.60" font-size="3.2" text-anchor="middle" fill="#3E4449">8.2</text>
+      <text x="120.00" y="49" font-size="3" text-anchor="middle" fill="#6B7278">Q1 26</text><rect x="139.20" y="24.89" width="14.93" height="19.11" rx="1" fill="#EE4065"/>
+      <text x="146.67" y="23.39" font-size="3.2" text-anchor="middle" fill="#3E4449">7.5</text>
+      <text x="146.67" y="49" font-size="3" text-anchor="middle" fill="#6B7278">Q2 26</text></svg>
+  </div>
+  <p class="caption">Source: delivery pipeline telemetry, median per quarter.</p>
+  <div class="running bottom"><span>insighture.com</span><span>2</span></div>
+</section>
+
+<section class="page pad">
+  <div class="running top"><b>Insighture</b><span>Platform review · October 2026</span></div>
+  <h2 style="margin-top:4mm">Results by quarter</h2>
+  <table>
+    <thead><tr><th>Quarter</th><th>Lead time (days)</th><th>Deploys / month</th><th>Failure rate</th></tr></thead>
+    <tbody>
+      <tr><td>Q1 2025</td><td>14.2</td><td>4</td><td>21%</td></tr><tr><td>Q2 2025</td><td>13.8</td><td>5</td><td>19%</td></tr>
+      <tr><td>Q3 2025</td><td>11.1</td><td>8</td><td>16%</td></tr><tr><td>Q4 2025</td><td>9.4</td><td>10</td><td>14%</td></tr>
+      <tr><td>Q1 2026</td><td>8.2</td><td>12</td><td>13%</td></tr><tr><td>Q2 2026</td><td>7.5</td><td>13</td><td>13%</td></tr>
+    </tbody>
+  </table>
+  <div class="takeaway deep"><div class="eyebrow">Key takeaway</div><p>The platform has paid for itself in delivery speed. The remaining risk is in testing, not tooling.</p></div>
+  <h2>Where it fell short</h2>
+  <p>Automated test coverage grew more slowly than release frequency, so a larger share of defects now reach production before they are caught. Two legacy services were never moved and still need the old release process.</p>
+  <blockquote>“The pipeline changed how we work. We stopped batching changes because we were afraid of them.”<cite>Engineering lead, platform team</cite></blockquote>
+  <h2>Recommendations</h2>
+  <ol>
+    <li>Raise automated test coverage on the five highest-change services to 80% by Q1.</li>
+    <li>Retire or migrate the two remaining legacy services.</li>
+    <li>Pilot AI-assisted code review on one team and measure the defect escape rate.</li>
+  </ol>
+  <div class="running bottom"><span>insighture.com</span><span>3</span></div>
+</section>
+
+<section class="page deep back pad">
+  <div class="motif glow"></div><div class="motif ring" style="width:95mm;height:95mm;right:-30mm;bottom:-45mm"></div>
+  <div class="wordmark">Insighture</div>
+  <div style="margin-top:150mm">
+    <h2>Let's <em>talk</em></h2>
+    <p>Your name · name@insighture.com</p>
+    <p>insighture.com</p>
+  </div>
+</section>
+</body></html>
