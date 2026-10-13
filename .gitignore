@@ -15,3 +15,7 @@ ds-bundle/
 .design-sync/upload-list.txt
 .design-sync/chunks.json
 docs/assets/*.tmp.png
+
+# templates build scratch
+templates/.render-*
+templates/word/*.tmp.docx

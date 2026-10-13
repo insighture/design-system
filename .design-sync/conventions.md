@@ -121,6 +121,14 @@ This system is medium-agnostic. When you build a **slide deck**, **document**,
   tile, and a "Learn more ›" link. Each card in a set may take its own alt
   colour.
 
+### Logo
+
+Use the real logo files from `brand/logo/`, never a typed wordmark: black
+(rose dot) on white, white (rose dot) on dark teal, and all-white
+`insighture-logo-white-mono.svg` on rose grounds, where the rose dot would
+vanish. Place it top-left, at least 80px wide, with clear space of about half
+its height.
+
 ### Typography
 
 **DM Sans** is the one family for headings, UI and body. **DM Serif Display

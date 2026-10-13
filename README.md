@@ -48,6 +48,7 @@ npm run build          # dist/ (ESM + CJS + .d.ts + index.css)
 npm run preview        # local showcase on http://127.0.0.1:5273
 npm run typecheck
 npm run readme:assets  # re-render the images in this README
+npm run templates      # rebuild the Office / PDF / email / social templates
 ```
 
 `readme:assets` bundles `src/` and screenshots the scenes in
@@ -75,6 +76,35 @@ export function App() {
 `InsightureProvider` is required. It sets `data-ins-theme`, which is what the
 token layer keys off — components rendered outside a provider are unstyled.
 The `<em>` inside `Heading` renders in DM Serif Display italic, in rose.
+
+## Logo
+
+<img src="docs/assets/logo.png" alt="The Insighture logo in its four versions" width="100%">
+
+Four versions in [`brand/logo/`](brand/logo): primary (black), reversed
+(white) for dark teal, white mono for rose grounds and photos, and black mono
+for single-colour print. The package ships them too:
+
+```tsx
+import logoUrl from '@insighture/design-system/logo/insighture-logo-black.svg';
+```
+
+Usage rules (clear space, minimum size, what not to do) are in
+[GUIDELINES.md](GUIDELINES.md#6-logo).
+
+## Templates
+
+Ready-made, on-brand files live in [`templates/`](templates/README.md), all
+generated from the tokens with `npm run templates`:
+
+- **PowerPoint** template (`.potx`) and sample deck
+- **Word** report template (`.dotx`), filled sample report, and letterhead
+- **PDF** report and one-pager, plus their editable HTML sources
+- **Email** newsletter (HTML)
+- **Social** cards for LinkedIn, square and portrait formats
+
+Install DM Sans (the static files) and DM Serif Display before using the
+Office templates; [templates/README.md](templates/README.md) has the details.
 
 ## Beyond the web
 
@@ -277,6 +307,9 @@ GUIDELINES.md              brand guidelines for every medium: start here
 docs/                      per-component docs (also drive the design-system sync)
 docs/assets/               the README images, rendered from the real bundle
 preview/                   local showcase app, not published
+brand/logo/                the logo, as SVG, in four versions
+templates/                 generated PowerPoint, Word, PDF, email and social templates
+scripts/templates/         the generators behind `npm run templates`
 scripts/fetch-fonts.mjs    refreshes the self-hosted DM Sans + DM Serif Display subsets
 .design-sync/              inputs for the claude.ai/design sync
 ```
