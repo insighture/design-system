@@ -185,6 +185,9 @@ spacing should be about half a line, not a blank line.
 
 ## 5. Applying it, by medium
 
+Start from the ready-made files in [`templates/`](templates/README.md) (PowerPoint, Word,
+PDF, email and social) rather than a blank document.
+
 ### Documents (Word, Google Docs, PDF reports, letters)
 
 - Page: white `#FCFCFD` (pure white `#FFFFFF` is fine in print). Body DM Sans
@@ -293,14 +296,41 @@ h1 em, h2 em { font-family: var(--ins-font-serif); font-style: italic; font-weig
 
 ## 6. Logo
 
-There is no official logo file in this system yet. **Don't draw or invent
-one.** The real logo is a light-weight geometric "Insighture" wordmark (see
-insighture.com), shown in white on rose and dark teal. Get the official file
-from the brand owner. Until then, when a brand mark is needed, use the text
-"Insighture" in DM Sans Light (300): black on light, white on rose or dark
-teal.
+<img src="docs/assets/logo.png" alt="The Insighture logo in its four versions" width="100%">
 
----
+The logo is the lowercase **Insighture** wordmark with a crimson-rose dot on
+the *i*. Use the supplied files; never retype the wordmark in a font.
+
+| Version | File | Use it on |
+| --- | --- | --- |
+| **Primary** (black, rose dot) | `brand/logo/insighture-logo-black.svg` | White and light neutral grounds. The default. |
+| **Reversed** (white, rose dot) | `brand/logo/insighture-logo-white.svg` | Dark teal and black grounds. |
+| **White mono** (all white) | `brand/logo/insighture-logo-white-mono.svg` | Rose and rose-gradient grounds, where the rose dot would disappear, and photographs. |
+| **Black mono** (all black) | `brand/logo/insighture-logo-black-mono.svg` | Single-colour print, engraving, fax, and where rose can't be reproduced. |
+
+PNG exports for Office and email (transparent, 1420 × 336 px) are in
+`templates/assets/logo-*.png`.
+
+**Clear space:** keep a margin of at least the height of the lowercase
+letters (about half the logo's height) on every side, free of text and other
+graphics.
+
+**Minimum size:** 80 px wide on screen and 20 mm wide in print. Below that
+the dot and the thin strokes fill in.
+
+**Placement:** top-left is the default on covers, slides, letterheads and
+pages. On running headers and slide footers, use it small (about 6 mm or
+0.24 in tall) at the left margin.
+
+**Don't:**
+- recolour the wordmark or the dot, other than switching between the four
+  versions above;
+- put the rose-dot versions on rose (use white mono);
+- stretch, condense, rotate, outline or add effects such as shadows or
+  glows;
+- place it on busy imagery without enough contrast (use white mono on a
+  dark area of the photo, or don't use it there);
+- lock it up with other text or logos without a clear-space gap.
 
 ## 7. Checklist before you ship anything
 
@@ -316,4 +346,6 @@ teal.
 - [ ] Small text meets contrast: no rose `#EE4065`, teal or yellow body text
       on white.
 - [ ] Spacing is on the 4px grid, with consistent radii and no heavy shadows.
-- [ ] There's no invented logo and no hex values outside this palette.
+- [ ] The logo is the supplied file, in the right version for its ground, at or
+      above minimum size with clear space.
+- [ ] There are no hex values outside this palette.

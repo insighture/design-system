@@ -58,7 +58,7 @@ const shell = (scene) => `<!doctype html><html><head><meta charset="utf-8">
 <style>html,body{margin:0}#root{display:inline-block}.scene{padding:48px;box-sizing:border-box}</style>
 </head><body><div id="root"></div><script src="/${scene}.js"></script></body></html>`;
 
-const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css' };
+const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml' };
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://x');
   const name = url.pathname.replace(/^\/+/, '');
@@ -66,7 +66,7 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'content-type': 'text/html' });
     return res.end(shell(name.replace('.html', '')));
   }
-  for (const dir of [tmp, here]) {
+  for (const dir of [tmp, here, path.join(root, 'brand', 'logo')]) {
     try {
       const body = await fs.readFile(path.join(dir, name));
       res.writeHead(200, { 'content-type': MIME[path.extname(name)] ?? 'application/octet-stream' });

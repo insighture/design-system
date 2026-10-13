@@ -6,12 +6,14 @@
   <img alt="components" src="https://img.shields.io/badge/components-28-EE4065?style=flat-square&labelColor=15181A">
   <img alt="themes" src="https://img.shields.io/badge/themes-light%20%2B%20dark%20teal-08242B?style=flat-square&labelColor=15181A">
   <img alt="typeface" src="https://img.shields.io/badge/type-DM%20Sans%20%2B%20DM%20Serif-15181A?style=flat-square&labelColor=15181A">
+  <img alt="templates" src="https://img.shields.io/badge/templates-PowerPoint%20·%20Word%20·%20PDF%20·%20email%20·%20social-0FA2BF?style=flat-square&labelColor=15181A">
   <img alt="react" src="https://img.shields.io/badge/React-18%2B-15181A?style=flat-square&labelColor=15181A">
   <img alt="typescript" src="https://img.shields.io/badge/TypeScript-strict-15181A?style=flat-square&labelColor=15181A">
 </p>
 
 **One brand system for documents, presentations, websites and everything else.**<br>
-Colour, type and layout rules for any medium, plus tokens and 28 React components for the web.
+Brand guidelines, the logo, ready-made PowerPoint / Word / PDF / email / social templates,<br>
+and tokens plus 28 React components for the web.
 
 </div>
 
@@ -19,10 +21,17 @@ Colour, type and layout rules for any medium, plus tokens and 28 React component
 
 ## Start here: [GUIDELINES.md](GUIDELINES.md)
 
-The brand guidelines are the system. They cover colour, type, space and
-per-medium rules for **Word/PDF documents, slide decks, spreadsheets, websites,
-charts, email and social**. Everything below is the web implementation of
-those rules.
+The brand guidelines are the system. They cover the logo, colour, type, space
+and per-medium rules for **Word/PDF documents, slide decks, spreadsheets,
+websites, charts, email and social**.
+
+| I want to… | Go to |
+| --- | --- |
+| Make a deck, report, letter, one-pager or social post | [`templates/`](templates/README.md) |
+| Use the logo | [`brand/logo/`](brand/logo) · [rules](GUIDELINES.md#6-logo) |
+| Build a web page or app | [Install and use](#install-and-use) |
+| Check a colour, size or rule | [GUIDELINES.md](GUIDELINES.md) |
+| See everything locally | `npm run preview` → http://localhost:5273 |
 
 ## The system at a glance
 
@@ -45,9 +54,11 @@ with it.
 ```bash
 npm install
 npm run build          # dist/ (ESM + CJS + .d.ts + index.css)
-npm run preview        # local showcase on http://127.0.0.1:5273
+npm run preview        # local showcase on http://localhost:5273: components, logo, templates
 npm run typecheck
 npm run readme:assets  # re-render the images in this README
+npm run templates      # rebuild the Office / PDF / email / social templates
+npm run templates:preview  # re-render the template gallery images (needs LibreOffice + Poppler)
 ```
 
 `readme:assets` bundles `src/` and screenshots the scenes in
@@ -75,6 +86,43 @@ export function App() {
 `InsightureProvider` is required. It sets `data-ins-theme`, which is what the
 token layer keys off — components rendered outside a provider are unstyled.
 The `<em>` inside `Heading` renders in DM Serif Display italic, in rose.
+
+## Logo
+
+<img src="docs/assets/logo.png" alt="The Insighture logo in its four versions" width="100%">
+
+Four versions in [`brand/logo/`](brand/logo): primary (black), reversed
+(white) for dark teal, white mono for rose grounds and photos, and black mono
+for single-colour print. The package ships them too:
+
+```tsx
+import logoUrl from '@insighture/design-system/logo/insighture-logo-black.svg';
+```
+
+Usage rules (clear space, minimum size, what not to do) are in
+[GUIDELINES.md](GUIDELINES.md#6-logo).
+
+## Templates
+
+<img src="docs/assets/templates-slides.png" alt="Slides from the Insighture PowerPoint template" width="100%">
+
+<img src="docs/assets/templates-documents.png" alt="Insighture Word, PDF, social and email templates" width="100%">
+
+Ready-made, on-brand files in [`templates/`](templates/README.md), all
+generated from the tokens with `npm run templates`. The images above are
+rendered from those real files by `npm run templates:preview`, not mocked up.
+
+| Format | Files | |
+| --- | --- | --- |
+| **PowerPoint** | [`Insighture.potx`](templates/powerpoint/Insighture.potx) · [sample deck](templates/powerpoint/Insighture-sample.pptx) | Eight layouts, brand theme colours and fonts, nine example slides |
+| **Word** | [report `.dotx`](templates/word/Insighture-report.dotx) · [sample report](templates/word/Insighture-report-sample.docx) · [letterhead `.dotx`](templates/word/Insighture-letterhead.dotx) | A4, rose cover, brand styles incl. Serif Emphasis |
+| **PDF** | [report](templates/pdf/Insighture-report.pdf) · [one-pager](templates/pdf/Insighture-one-pager.pdf) | A4, fonts embedded, editable HTML sources |
+| **Email** | [`newsletter.html`](templates/email/newsletter.html) | Table layout, inline styles, font fallbacks |
+| **Social** | [LinkedIn](templates/social/linkedin-1200x627.png) · [quote](templates/social/quote-1080x1080.png) · [stat](templates/social/stat-1080x1350.png) | 1200×627, 1080×1080, 1080×1350 |
+
+Install DM Sans (the **static** files) and DM Serif Display before using the
+Office templates; [templates/README.md](templates/README.md) has the details,
+including how to apply the serif emphasis in PowerPoint and Word.
 
 ## Beyond the web
 
@@ -277,6 +325,9 @@ GUIDELINES.md              brand guidelines for every medium: start here
 docs/                      per-component docs (also drive the design-system sync)
 docs/assets/               the README images, rendered from the real bundle
 preview/                   local showcase app, not published
+brand/logo/                the logo, as SVG, in four versions
+templates/                 generated PowerPoint, Word, PDF, email and social templates
+scripts/templates/         the generators behind `npm run templates`
 scripts/fetch-fonts.mjs    refreshes the self-hosted DM Sans + DM Serif Display subsets
 .design-sync/              inputs for the claude.ai/design sync
 ```
