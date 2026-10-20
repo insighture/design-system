@@ -16,9 +16,21 @@ tone, these rules win.
 
 ## Bundled files
 
-Paths are relative to this file's folder. Some installs copy only this file —
-check before relying on them, and fall back to the inline values and the
-inline logo in the appendix.
+Paths are relative to this file's folder. How you reach them depends on how
+this skill reached you:
+
+- **As a folder** (Claude Code, Codex, Windsurf, Devin, a zip uploaded to
+  claude.ai, or synced by Tracelet into `~/.claude/skills/insighture-design-system/`
+  and the like): read them from disk next to this file.
+- **Through the Tracelet MCP Gateway** (claude.ai, ChatGPT and other browser
+  clients with the Tracelet connector): call `read_skill_file` with slug
+  `insighture-design-system` and the path from the table, e.g.
+  `assets/logo/insighture-logo-black.svg`.
+- **As this text only** (Cursor rules, Copilot instructions, a Custom GPT or Gem
+  prompt): there are no files. Use the inline values and the inline logo in
+  the appendix.
+
+Check which applies before relying on a file.
 
 | File | Use |
 | --- | --- |

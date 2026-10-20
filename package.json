@@ -34,7 +34,8 @@
     "readme:assets": "node scripts/readme-scenes/shoot.mjs",
     "templates": "node scripts/templates/build.mjs",
     "templates:preview": "node scripts/templates/preview.mjs",
-    "skill": "node scripts/skill/build.mjs"
+    "skill": "node scripts/skill/build.mjs",
+    "skill:check": "node scripts/skill/tracelet-check.mjs"
   },
   "peerDependencies": {
     "react": ">=18",

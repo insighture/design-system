@@ -10,12 +10,16 @@
  * Cursor, Copilot, Gemini and friends) is SKILL.md minus its Claude-only
  * parts. Rebuild after changing SKILL.md, the logo, templates or tokens (run
  * `npm run templates` first if the templates changed).
+ *
+ * The zip is checked against Tracelet's upload rules (tracelet-check.mjs)
+ * and the build fails rather than write one Tracelet would refuse.
  */
 import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkSkillDir, checkZip, report } from './tracelet-check.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const name = 'insighture-design-system';
@@ -82,10 +86,16 @@ await fs.writeFile(
 ${agents}`,
 );
 
+report(`skills/${name}`, await checkSkillDir(skillDir, name));
+if (process.exitCode) process.exit();
+
 const zip = path.join(root, 'dist', `${name}.zip`);
 await fs.mkdir(path.dirname(zip), { recursive: true });
 await fs.rm(zip, { force: true });
 execFileSync('zip', ['-rqX', zip, name, '-x', '*.DS_Store', '*__pycache__*'], { cwd: path.join(root, 'skills') });
+
+report(`dist/${name}.zip`, await checkZip(zip));
+if (process.exitCode) process.exit();
 
 console.log(path.relative(root, skillDir));
 console.log(path.relative(root, zip));

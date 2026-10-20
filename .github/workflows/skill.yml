@@ -1,0 +1,28 @@
+name: AI skill
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  skill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Rebuilds skills/insighture-design-system and the zip, and fails if
+      # Tracelet would refuse the zip (scripts/skill/tracelet-check.mjs).
+      - run: npm run skill
+      - name: Committed skill matches the sources
+        run: |
+          if ! git diff --exit-code -- skills/; then
+            echo "::error::skills/insighture-design-system is stale. Run npm run skill and commit the result."
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: insighture-design-system
+          path: dist/insighture-design-system.zip
