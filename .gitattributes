@@ -1,0 +1,27 @@
+# This repo is an AI skill (SKILL.md at the root). Everything NOT marked
+# export-ignore below ships in it: the zip `npm run skill` builds for
+# Tracelet and claude.ai, `git archive`, and GitHub's "Download ZIP".
+# Tracelet refuses a whole zip over 100 files or with one disallowed type,
+# so anything for building the library stays out. `npm run skill:check`
+# verifies the result.
+
+# Tooling and the React library's source
+/.github/** export-ignore
+/.design-sync/** export-ignore
+/.gitignore export-ignore
+/.gitattributes export-ignore
+/package.json export-ignore
+/package-lock.json export-ignore
+/tsconfig.json export-ignore
+/tsup.config.ts export-ignore
+/vite.preview.config.ts export-ignore
+/src/** export-ignore
+/preview/** export-ignore
+/scripts/** export-ignore
+/scripts/check_brand.py -export-ignore
+
+# README is for GitHub; its screenshots stay with it. The logo sheet is
+# used by references/logo.md, so it ships.
+/README.md export-ignore
+/docs/assets/** export-ignore
+/docs/assets/logo.png -export-ignore

@@ -1,15 +1,19 @@
 /**
- * Check the skill folder and its zip against Tracelet's upload rules, so the
- * zip in dist/ is always one Tracelet's Engineering Standards → Skills
- * "Upload zip" accepts. Mirrors api/internal/skillbundle in the Tracelet repo
- * (limits, allowed file types, frontmatter); update both together.
+ * Check the skill bundle against Tracelet's upload rules, so the zip in dist/
+ * (and GitHub's "Download ZIP", which honours the same .gitattributes) is
+ * always one Tracelet's Engineering Standards → Skills "Upload zip" accepts.
+ * Tracelet refuses the whole zip on one bad file, it doesn't skip it. Mirrors
+ * api/internal/skillbundle in the Tracelet repo (limits, allowed file types,
+ * frontmatter); update both together.
  *
- *   npm run skill:check            # check skills/insighture-design-system + dist zip
+ *   npm run skill:check            # check the bundle + dist zip
  *
- * build.mjs runs this before and after zipping, so `npm run skill` fails
- * instead of writing a zip Tracelet would refuse.
+ * The bundle is every tracked or new file not marked export-ignore in
+ * .gitattributes. build.mjs runs this before and after zipping, so
+ * `npm run skill` fails instead of writing a zip Tracelet would refuse.
  */
 import { execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -47,17 +51,15 @@ const EXTENSIONLESS_TEXT = new Set(['LICENSE', 'LICENCE', 'NOTICE', 'README', 'M
 // Dropped silently by Tracelet, so harmless — but never part of the skill.
 const NOISE = new Set(['.DS_Store', 'Thumbs.db', 'desktop.ini', '.gitignore', '.gitattributes', '.gitkeep']);
 
-async function walk(dir, rel = '') {
-  const out = [];
-  for (const e of await fs.readdir(path.join(dir, rel), { withFileTypes: true })) {
-    const p = rel ? `${rel}/${e.name}` : e.name;
-    if (e.isSymbolicLink()) out.push({ path: p, symlink: true });
-    else if (e.isDirectory()) {
-      if (e.name === '__pycache__') continue;
-      out.push(...(await walk(dir, p)));
-    } else out.push({ path: p });
-  }
-  return out;
+/** Files that ship in the skill: tracked or new, not ignored, not export-ignore. */
+export function bundleFiles(root) {
+  const git = (args, input) => execFileSync('git', args, { cwd: root, encoding: 'utf8', input, maxBuffer: 16 << 20 });
+  const all = git(['ls-files', '--cached', '--others', '--exclude-standard', '-z']).split('\0').filter(Boolean);
+  const present = all.filter((f) => existsSync(path.join(root, f))); // skip files deleted in the working tree
+  const attrs = git(['check-attr', '-z', '--stdin', 'export-ignore'], present.join('\0') + '\0').split('\0');
+  const ignored = new Set();
+  for (let i = 0; i + 2 < attrs.length; i += 3) if (attrs[i + 2] === 'set') ignored.add(attrs[i]);
+  return [...new Set(present.filter((f) => !ignored.has(f) && !f.includes('__pycache__/')))].sort();
 }
 
 function frontmatter(text) {
@@ -72,10 +74,14 @@ function frontmatter(text) {
 
 const slugify = (s) => s.toLowerCase().trim().replace(/[^a-z0-9_-]+/g, '-').replace(/^[-_]+|[-_]+$/g, '').slice(0, 64);
 
-/** Returns a list of problems (empty = Tracelet will accept the folder). */
-export async function checkSkillDir(skillDir, expectedSlug) {
+/** Returns a list of problems with `paths` under `root` (empty = Tracelet accepts them). */
+export async function checkFiles(root, paths, expectedSlug) {
   const errors = [];
-  const files = (await walk(skillDir)).filter((f) => !NOISE.has(path.posix.basename(f.path)));
+  const files = [];
+  for (const p of paths) {
+    if (NOISE.has(path.posix.basename(p))) continue;
+    files.push({ path: p, symlink: (await fs.lstat(path.join(root, p))).isSymbolicLink() });
+  }
   if (files.length > LIMITS.maxFiles) errors.push(`${files.length} files; Tracelet's limit is ${LIMITS.maxFiles}`);
 
   const seen = new Map();
@@ -93,7 +99,7 @@ export async function checkSkillDir(skillDir, expectedSlug) {
     if (seen.has(lower)) errors.push(`${p}: differs only in case from ${seen.get(lower)}`);
     seen.set(lower, p);
 
-    const data = await fs.readFile(path.join(skillDir, p));
+    const data = await fs.readFile(path.join(root, p));
     total += data.length;
     if (data.length > LIMITS.maxFileBytes) errors.push(`${p}: ${data.length} bytes; per-file limit is ${LIMITS.maxFileBytes}`);
 
@@ -103,7 +109,7 @@ export async function checkSkillDir(skillDir, expectedSlug) {
     } else if (OFFICE_EXTS.has(ext)) {
       let entries;
       try {
-        entries = execFileSync('unzip', ['-Z1', path.join(skillDir, p)], { encoding: 'utf8' }).split('\n').map((e) => e.toLowerCase());
+        entries = execFileSync('unzip', ['-Z1', path.join(root, p)], { encoding: 'utf8' }).split('\n').map((e) => e.toLowerCase());
       } catch {
         errors.push(`${p}: not an Office document`);
         continue;
@@ -118,13 +124,11 @@ export async function checkSkillDir(skillDir, expectedSlug) {
   }
   if (total > LIMITS.maxTotalBytes) errors.push(`files total ${total} bytes; limit is ${LIMITS.maxTotalBytes}`);
 
-  let skill;
-  try {
-    skill = await fs.readFile(path.join(skillDir, 'SKILL.md'), 'utf8');
-  } catch {
+  if (!paths.includes('SKILL.md')) {
     errors.push('SKILL.md missing at the skill root');
     return errors;
   }
+  const skill = await fs.readFile(path.join(root, 'SKILL.md'), 'utf8');
   const fm = frontmatter(skill);
   if (!fm) errors.push('SKILL.md needs YAML frontmatter (--- name/description ---)');
   else {
@@ -153,7 +157,8 @@ export function report(label, errors) {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
   const name = 'insighture-design-system';
-  report(`skills/${name}`, await checkSkillDir(path.join(root, 'skills', name), name));
+  const files = bundleFiles(root);
+  report('the skill bundle', await checkFiles(root, files, name));
   const zip = path.join(root, 'dist', `${name}.zip`);
   try {
     report(`dist/${name}.zip`, await checkZip(zip));
@@ -161,5 +166,5 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     console.error(`dist/${name}.zip not found; run npm run skill`);
     process.exitCode = 1;
   }
-  if (!process.exitCode) console.log(`skills/${name}: Tracelet-compatible`);
+  if (!process.exitCode) console.log(`${files.length} files: Tracelet-compatible`);
 }

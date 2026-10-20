@@ -13,15 +13,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      # Rebuilds skills/insighture-design-system and the zip, and fails if
-      # Tracelet would refuse the zip (scripts/skill/tracelet-check.mjs).
+      # Regenerates GUIDELINES.md, AGENTS.md, brand/ and the component index,
+      # builds the zip, and fails if Tracelet would refuse it
+      # (scripts/skill/tracelet-check.mjs).
       - run: npm run skill
-      - name: Committed skill matches the sources
+      - name: Generated files are committed
         run: |
-          if ! git diff --exit-code -- skills/; then
-            echo "::error::skills/insighture-design-system is stale. Run npm run skill and commit the result."
+          if ! git diff --exit-code -- GUIDELINES.md AGENTS.md brand/ references/components.md; then
+            echo "::error::Generated skill files are stale. Run npm run skill and commit the result."
             exit 1
           fi
+      - name: GitHub's Download ZIP ships the same files
+        run: |
+          diff <(git archive HEAD | tar -t | grep -v '/$' | sort) \
+               <(unzip -Z1 dist/insighture-design-system.zip | grep -v '/$' | sed 's|^insighture-design-system/||' | sort)
       - uses: actions/upload-artifact@v4
         with:
           name: insighture-design-system

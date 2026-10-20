@@ -31,29 +31,45 @@ websites, charts, email and social**.
 | Use the logo | [`brand/logo/`](brand/logo) · [rules](GUIDELINES.md#6-logo) |
 | Build a web page or app | [Install and use](#install-and-use) |
 | Check a colour, size or rule | [GUIDELINES.md](GUIDELINES.md) |
-| Make an AI assistant follow the brand, or check a file | [`skills/insighture-design-system/`](skills/insighture-design-system) · [details](#ai-assistants) |
+| Make an AI assistant follow the brand | [This repo is an AI skill](#this-repo-is-an-ai-skill) |
+| Check a file against the brand | `python3 scripts/check_brand.py deck.pptx page.html` (`--json` for machines) |
 | See everything locally | `npm run preview` → http://localhost:5273 |
 
-## AI assistants
+## This repo is an AI skill
 
-`skills/insighture-design-system/` is the brand packaged for AI tools. Rebuild
-it with `npm run skill` after changing the guidelines, logo, templates or
-tokens. It also writes `dist/insighture-design-system.zip` for uploading.
+The repo root is an [Agent Skill](https://agentskills.io): `SKILL.md` at the
+top, deeper files it loads only when a task needs them. One upload to
+Tracelet puts the brand in front of every AI tool in the company.
 
-| File | For |
-| --- | --- |
-| `SKILL.md` | Claude (Claude Code, claude.ai) and other agents that read Agent Skills. Hand-written. |
-| `AGENTS.md` | Codex, Cursor, Copilot, Gemini CLI and other tools that read `AGENTS.md`; also the instructions or knowledge file for a Custom GPT or Gem. Generated from `SKILL.md`. |
-| `scripts/check_brand.py` | Brand checker for .pptx, .docx, .xlsx, .html, .css, .svg and .pdf: off-palette colours, non-brand fonts, missing logo, too much rose. Python 3, no dependencies. |
-| `assets/`, `references/` | Logo, Office and email templates, tokens, palette. Copied from this repo. |
+```
+SKILL.md                level 1: what always applies + "read next, by task"
+references/*.md         level 2: one file per topic and medium (slides, documents, web, charts…)
+references/components.md  index of the React components
+docs/<Component>.md     level 3: each component's API and guidance
+brand/                  logo SVGs, tokens.css, palette.json
+templates/              PowerPoint, Word, PDF, email and social starting points
+scripts/check_brand.py  brand checker for .pptx .docx .xlsx .html .css .svg .pdf
+```
+
+**Edit `SKILL.md` and `references/`, never the generated files.**
+`npm run skill` regenerates them and builds the zip:
+
+| Generated | From | For |
+| --- | --- | --- |
+| `GUIDELINES.md` | `references/` | People reading the brand rules |
+| `AGENTS.md` | `SKILL.md` + every reference inline | Tools that read one file: Codex, Cursor, Copilot, Gemini CLI, Custom GPTs, Gems |
+| `references/components.md` | `docs/*.md` | The component index |
+| `brand/tokens.css`, `brand/palette.json` | `src/styles/` | Web pages without the package; the brand checker |
+| `dist/insighture-design-system.zip` | every file not `export-ignore`d in `.gitattributes` | Tracelet, claude.ai |
+
+`.gitattributes` decides what ships: the React source, the preview app and
+the build tooling stay out, so GitHub's **Download ZIP** of this repo is the
+same skill (CI checks the two match). Tracelet refuses a whole zip over 100
+files or with one disallowed file type, so `npm run skill` checks the bundle
+against Tracelet's upload rules first and fails rather than write a zip it
+would refuse. `npm run skill:check` runs the check alone.
 
 ### Publish to Tracelet
-
-Tracelet is how the skill reaches every AI tool at once, so the zip is built
-to Tracelet's upload rules: `npm run skill` checks file types, sizes, the
-`SKILL.md` frontmatter and that Office templates are macro-free, and fails
-instead of writing a zip Tracelet would refuse. `npm run skill:check`
-re-runs the check on its own.
 
 1. `npm run skill` → `dist/insighture-design-system.zip` (CI also attaches it to every run).
 2. In Tracelet, **Engineering → Standards → Skills**:
@@ -65,16 +81,12 @@ re-runs the check on its own.
 
 | Where | What arrives |
 | --- | --- |
-| Claude Code, Codex, Windsurf, Devin | The whole folder in each tool's skills directory |
-| Cursor, other single-file targets | `SKILL.md` text only (it carries inline fallbacks) |
-| claude.ai, ChatGPT and other browser clients with the Tracelet MCP connector | `list_skills` / `read_skill`, and files on demand through `read_skill_file` |
+| Claude Code, Codex, Windsurf, Devin | The whole skill folder in each tool's skills directory |
+| Cursor, other single-file targets | `SKILL.md` text only; it stands on its own, with the logo inline |
+| claude.ai, ChatGPT and other browser clients with the Tracelet MCP connector | `list_skills` / `read_skill`, then `references/`, templates and logos on demand through `read_skill_file` |
 
 For tools Tracelet doesn't reach, upload the same zip directly (claude.ai
-organisation skills) or paste `AGENTS.md` into a Custom GPT or Gem.
-
-```bash
-python3 skills/insighture-design-system/scripts/check_brand.py deck.pptx page.html   # --json for machines
-```
+organisation skills) or give `AGENTS.md` to a Custom GPT or Gem.
 
 ## The system at a glance
 

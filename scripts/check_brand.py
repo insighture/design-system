@@ -10,7 +10,7 @@ heuristics (one rose element per slide, serif emphasis kept short, fonts
 actually loaded on web pages).
 
 Exit code: 0 = no errors (warnings allowed), 1 = errors found, 2 = bad input.
-Standard library only, Python 3.8+. Reads ../references/palette.json, which
+Standard library only, Python 3.8+. Reads ../brand/palette.json, which
 `npm run skill` generates from the design tokens.
 """
 import hashlib
@@ -30,7 +30,7 @@ GENERIC_FONTS = ('inherit', 'initial', 'unset', 'revert', 'var(')
 
 
 def load_palette():
-    data = json.loads((KIT / 'references' / 'palette.json').read_text())
+    data = json.loads((KIT / 'brand' / 'palette.json').read_text())
     return {h.upper(): n for h, n in data['colours'].items()}, set(data['logoHashes'])
 
 
