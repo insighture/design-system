@@ -47,6 +47,31 @@ tokens. It also writes `dist/insighture-design-system.zip` for uploading.
 | `scripts/check_brand.py` | Brand checker for .pptx, .docx, .xlsx, .html, .css, .svg and .pdf: off-palette colours, non-brand fonts, missing logo, too much rose. Python 3, no dependencies. |
 | `assets/`, `references/` | Logo, Office and email templates, tokens, palette. Copied from this repo. |
 
+### Publish to Tracelet
+
+Tracelet is how the skill reaches every AI tool at once, so the zip is built
+to Tracelet's upload rules: `npm run skill` checks file types, sizes, the
+`SKILL.md` frontmatter and that Office templates are macro-free, and fails
+instead of writing a zip Tracelet would refuse. `npm run skill:check`
+re-runs the check on its own.
+
+1. `npm run skill` → `dist/insighture-design-system.zip` (CI also attaches it to every run).
+2. In Tracelet, **Engineering → Standards → Skills**:
+   - first time: add menu → **Upload zip**, category **Brand**;
+   - after that: open *Insighture design system* → **Upload zip** (replace). The
+     slug comes from `name:` in `SKILL.md`, so keep it `insighture-design-system`
+     or Tracelet creates a second standard instead of a new version.
+3. Tracelet scans the files and distributes them on the next agent sync:
+
+| Where | What arrives |
+| --- | --- |
+| Claude Code, Codex, Windsurf, Devin | The whole folder in each tool's skills directory |
+| Cursor, other single-file targets | `SKILL.md` text only (it carries inline fallbacks) |
+| claude.ai, ChatGPT and other browser clients with the Tracelet MCP connector | `list_skills` / `read_skill`, and files on demand through `read_skill_file` |
+
+For tools Tracelet doesn't reach, upload the same zip directly (claude.ai
+organisation skills) or paste `AGENTS.md` into a Custom GPT or Gem.
+
 ```bash
 python3 skills/insighture-design-system/scripts/check_brand.py deck.pptx page.html   # --json for machines
 ```
