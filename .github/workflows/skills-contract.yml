@@ -1,0 +1,23 @@
+# Validates skills/insighture-design-system against the insighture/skills contract
+# (frontmatter and governance metadata, Rules section, CHANGELOG format and bump,
+# Tracelet bundle rules) with the shared tooling, so every Insighture skill is
+# checked by one implementation.
+#
+# This job stays red until the insighture/skills tooling PR that adds the reusable
+# workflow `.github/workflows/skill-check.yml` is merged. If insighture/skills is
+# private and reusable-workflow access is not enabled for this repository, set the
+# SKILLS_READ_TOKEN secret (read-only access to insighture/skills).
+name: Skills contract
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  contract:
+    uses: insighture/skills/.github/workflows/skill-check.yml@main
+    with:
+      skill-path: skills/insighture-design-system
+    secrets:
+      skills-read-token: ${{ secrets.SKILLS_READ_TOKEN }}
