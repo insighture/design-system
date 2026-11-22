@@ -193,7 +193,7 @@ rendered from those real files by `npm run templates:preview`, not mocked up.
 | Format | Files | |
 | --- | --- | --- |
 | **PowerPoint** | [`Insighture.potx`](templates/powerpoint/Insighture.potx) · [sample deck](templates/powerpoint/Insighture-sample.pptx) | Eight layouts, brand theme colours and fonts, nine example slides |
-| **Word** | [report `.dotx`](templates/word/Insighture-report.dotx) · [sample report](templates/word/Insighture-report-sample.docx) · [letterhead `.dotx`](templates/word/Insighture-letterhead.dotx) | A4, rose cover, brand styles incl. Serif Emphasis |
+| **Word** | [letterhead `.dotx`](templates/word/Insighture-letterhead.dotx) · documents: [the internal document format](GUIDELINES.md#the-internal-document-format-proposals-statements-of-work-handovers-reports) | A4, brand styles incl. Serif Emphasis. Proposals, SOWs and reports use Insighture's internal template, which isn't published here |
 | **PDF** | [report](templates/pdf/Insighture-report.pdf) · [one-pager](templates/pdf/Insighture-one-pager.pdf) | A4, fonts embedded, editable HTML sources |
 | **Email** | [`newsletter.html`](templates/email/newsletter.html) | Table layout, inline styles, font fallbacks |
 | **Social** | [LinkedIn](templates/social/linkedin-1200x627.png) · [quote](templates/social/quote-1080x1080.png) · [stat](templates/social/stat-1080x1350.png) | 1200×627, 1080×1080, 1080×1350 |

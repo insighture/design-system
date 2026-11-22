@@ -21,9 +21,7 @@ your installed fonts, set `INS_FONT_DIR` to a folder of the `.ttf` files.
 | --- | --- |
 | `powerpoint/Insighture.potx` | **PowerPoint template.** Open it (or set it as a theme) to start a deck with the brand layouts: Title (rose), Section (dark teal), Title and Content, Two Content, Title Only, Big Number, Quote (dark teal) and Closing (rose). It includes nine example slides; delete the ones you don't need. Works in Keynote and Google Slides via import. |
 | `powerpoint/Insighture-sample.pptx` | The same deck as a normal presentation, to copy slides from. |
-| `word/Insighture-report.dotx` | **Word report template**: rose cover page, running header and footer, and every brand style (Title, Heading 1–3, Lead, Eyebrow, Quote, Caption, Table Header/Text, and the **Serif Emphasis** character style). |
-| `word/Insighture-report-sample.docx` | A filled-in report showing the styles, stat row, data table and key-takeaway box in use. |
-| `word/Insighture-letterhead.dotx` | **Letterhead** with the logo header and company-details footer. |
+| `word/Insighture-letterhead.dotx` | **Letterhead** with the logo header and company-details footer. Documents (proposals, SOWs, reports) use Insighture's internal document template instead, which isn't published here: see [the internal document format](../GUIDELINES.md#the-internal-document-format-proposals-statements-of-work-handovers-reports). |
 | `pdf/Insighture-report.pdf` | A4 report PDF: cover, summary, chart, table, takeaway and back cover. |
 | `pdf/Insighture-one-pager.pdf` | A4 one-pager: rose hero, service cards, stats and CTA band. |
 | `pdf/src/*.html` | The editable sources for the PDFs. They use the real token CSS. Edit the copy, then run `npm run templates -- pdf`. |

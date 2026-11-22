@@ -4,7 +4,7 @@ description: "Insighture brand and design system (DM Sans + DM Serif Display ita
 license: UNLICENSED
 compatibility: Any agent that reads Agent Skills. scripts/check_brand.py needs Python 3.8+ (stdlib only).
 metadata:
-  version: "2.0.0"
+  version: "3.0.0"
   tier: org
   owner: "@insighture/design-leads"
   risk: low
@@ -49,7 +49,7 @@ Check which applies before relying on a file.
 | `assets/logo/insighture-logo-{black,white,white-mono,black-mono}.svg` | The logo. Never redraw or retype it. |
 | `assets/logo/logo-{black,white,white-mono}.png` | Transparent 1420×336 PNGs for Office, PDF and email. |
 | `assets/templates/Insighture.potx` | **Start every PowerPoint deck from this.** Layouts: Title (rose), Section (dark teal), Title and Content, Two Content, Title Only, Big Number, Quote, Closing. |
-| `assets/templates/Insighture-report.dotx` | **Start every Word report from this.** Rose cover, header/footer, all brand styles incl. the *Serif Emphasis* character style. |
+| `assets/templates/Insighture-document.docx` | **Start every Word document from this** (proposals, statements of work, handovers, reports): Insighture's internal document template. Only the Insighture organisation's copy of this skill has it; without it, follow the internal document format in section 5. |
 | `assets/templates/Insighture-letterhead.dotx` | Letters and memos. |
 | `assets/templates/newsletter.html` | Email (table layout, inline styles, fallbacks). |
 | `references/tokens.css` | The full token set (primitives + light/dark semantic roles) for HTML. |
@@ -184,7 +184,13 @@ h1 em, h2 em { font-family: var(--ins-font-serif); font-style: italic; font-weig
 - One rose element per slide, ≤ 6 bullets, one idea per slide, ≥ 40% empty. No clip-art, bevels, 3D, heavy shadows, stock "AI" imagery.
 
 ### Word (.docx), Google Docs, PDF documents, letters
-- Start from `assets/templates/Insighture-report.dotx` (reports) or `Insighture-letterhead.dotx` (letters) when available.
+- **Documents follow Insighture's internal document format.** Start from `assets/templates/Insighture-document.docx` when your copy of the skill has it (the organisation's copy does; the public one doesn't). Otherwise build its structure on a blank A4 document:
+  1. a dark teal cover with the reversed logo, the document type as an eyebrow, the title, "Prepared for", "Prepared by" and the date;
+  2. a contents page, then a version history table;
+  3. a header with the logo and the classification (for example "Classification: Confidential") in `#B11032`, and a footer with the page number, tagline and website;
+  4. client-facing sections numbered 1.0, 2.0 (Heading 1, each on a new page) with subsections 1.1, 1.2; internal reviewer pages after them, headed "Internal: …", removed before sending;
+  5. standard closing pages (confidentiality and data security, terms and conditions, acceptance with a sign-off table), then a back cover.
+- Letters and memos: `Insighture-letterhead.dotx`.
 - Page white; body DM Sans 10.5pt `#15181A`, line spacing 1.3, 6pt after.
 - Headings DM Sans semibold (Bold in Office), black: H1 20pt, H2 15pt, H3 12pt. Optional 11pt rose/indigo uppercase eyebrow above H1. Title may set one or two words in DM Serif Display italic, rose.
 - Cover: full-bleed dark teal or rose gradient (or a top band ≥ ⅓ page), white 28–36pt title, secondary `#A9C0C5` on teal / white 85% on rose, logo top-left in the right version.
