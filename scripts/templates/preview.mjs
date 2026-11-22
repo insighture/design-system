@@ -49,11 +49,12 @@ function pagePng(pdf, n, name, dpi = 110) {
 
 const T = (p) => path.join(outDir, p);
 const deck = toPdf(T('powerpoint/Insighture-sample.pptx'));
-const word = toPdf(T('word/Insighture-report-sample.docx'));
 const slides = [1, 4, 5, 6, 3, 8].map((n) => pagePng(deck, n, `slide-${n}`, 90));
+// Word documents use the internal document template, which isn't published (GUIDELINES.md), so the
+// documents row shows the PDFs.
 const docs = [
-  pagePng(word, 1, 'word-1'), pagePng(word, 2, 'word-2'),
-  pagePng(T('pdf/Insighture-report.pdf'), 2, 'pdf-report-2'), pagePng(T('pdf/Insighture-one-pager.pdf'), 1, 'pdf-one'),
+  pagePng(T('pdf/Insighture-report.pdf'), 1, 'pdf-report-1'), pagePng(T('pdf/Insighture-report.pdf'), 2, 'pdf-report-2'),
+  pagePng(T('pdf/Insighture-one-pager.pdf'), 1, 'pdf-one'),
 ];
 
 const browser = await chromium.launch();
@@ -81,8 +82,8 @@ const shots = [
   },
   {
     file: 'templates-documents.png', w: 1400, h: 1010,
-    html: page(`<div class="g" style="grid-template-columns:repeat(4,1fr)">
-      ${fig(docs[0], 'Word report · cover')}${fig(docs[1], 'Word report · page')}${fig(docs[2], 'PDF report')}${fig(docs[3], 'PDF one-pager')}
+    html: page(`<div class="g" style="grid-template-columns:repeat(3,1fr)">
+      ${fig(docs[0], 'PDF report · cover')}${fig(docs[1], 'PDF report · page')}${fig(docs[2], 'PDF one-pager')}
     </div>
     <div class="g" style="grid-template-columns:1.9fr 1fr 0.8fr 1.05fr;padding-top:0;align-items:start">
       ${fig(T('social/linkedin-1200x627.png'), 'LinkedIn card')}${fig(T('social/quote-1080x1080.png'), 'Quote card')}

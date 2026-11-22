@@ -207,6 +207,30 @@ PDF, email and social) rather than a blank document.
   most one per page.
 - Footer: 8pt muted grey, with page numbers on the right.
 
+#### The internal document format (proposals, statements of work, handovers, reports)
+
+Insighture's documents are built on one internal Word template, which replaced the published report
+template in version 3.0.0 of the skill. The file isn't published in this repository. Insighture staff
+get it with the organisation's copy of the skill (`assets/templates/Insighture-document.docx` in the
+`insighture-design-system` plugin that the private `insighture/skills` repository builds). Without
+it, build the same structure on a blank A4 document:
+
+1. **Cover**, a full page on dark teal `#08242B`: the reversed logo, the document type as an eyebrow
+   (Proposal, Statement of work, Handover, Report), the title, then "Prepared for", "Prepared by" and
+   the date.
+2. **Table of contents** on its own page, followed by a **version history** table.
+3. **Header** on every later page: the logo on the left and the document's classification (for
+   example "Classification: Confidential") in small accent text `#B11032`.
+4. **Footer**: the page number, the tagline and the website, 8pt in muted grey `#6B7278`.
+5. **Numbered sections.** Client-facing sections are numbered 1.0, 2.0 (Heading 1, each starting a
+   new page), with subsections 1.1, 1.2 (Heading 2). Pages meant only for internal reviewers come
+   after the client-facing ones, headed "Internal: …", and are removed before the document is sent.
+6. **Standard closing pages**: confidentiality and data security, terms and conditions, and
+   acceptance, with a sign-off table for the client's approval and Insighture's authority.
+7. **Back cover.**
+
+Type, colour, tables and callouts inside the document follow the rules above.
+
 ### Presentations (PowerPoint, Keynote, Google Slides)
 
 - 16:9. Apply the theme: **dk1** `#15181A`, **lt1** `#FCFCFD`,

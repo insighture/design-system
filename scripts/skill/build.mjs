@@ -37,7 +37,6 @@ const copies = {
   'assets/logo/logo-white.png': 'templates/assets/logo-white.png',
   'assets/logo/logo-white-mono.png': 'templates/assets/logo-white-mono.png',
   'assets/templates/Insighture.potx': 'templates/powerpoint/Insighture.potx',
-  'assets/templates/Insighture-report.dotx': 'templates/word/Insighture-report.dotx',
   'assets/templates/Insighture-letterhead.dotx': 'templates/word/Insighture-letterhead.dotx',
   'assets/templates/newsletter.html': 'templates/email/newsletter.html',
 };

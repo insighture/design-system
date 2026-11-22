@@ -7,6 +7,34 @@ Versions 1.0.0 and 1.1.0 were cut in `insighture/skills` while it vendored this 
 are carried over unchanged. Format follows Keep a Changelog with mandatory **Behavioural impact** and
 **Migration** sections.
 
+## [3.0.0] - 2026-11-22
+
+### Changed
+- Word documents (proposals, statements of work, handovers, reports) follow Insighture's internal
+  document format: dark teal cover, contents and version history, header with the classification,
+  footer with page number, tagline and website, sections numbered 1.0 / 1.1, internal reviewer pages
+  headed "Internal: …", standard closing pages and a back cover. Section 5 of `SKILL.md` and
+  `GUIDELINES.md` ("The internal document format") describe it.
+- The Word template is `assets/templates/Insighture-document.docx`, Insighture's internal template. It
+  isn't published here: the Insighture organisation's copy of the skill (the plugin built by
+  `insighture/skills`) carries it, and without it the skill says to build the structure on a blank
+  document.
+
+### Removed
+- `assets/templates/Insighture-report.dotx`, and `templates/word/Insighture-report.dotx` and
+  `Insighture-report-sample.docx`, which it replaces. `npm run templates` no longer generates them;
+  the letterhead and the PDF report are unchanged.
+
+### Behavioural impact
+major — an asset is removed and the Word output contract changes: agents start Word documents from
+the internal template, or its described structure, instead of the rose-cover report template.
+Palette, type, logo, the other templates and `scripts/check_brand.py` are unchanged.
+
+### Migration
+Move pins to `insighture-design-system@3.0.0`. Anything that opened `Insighture-report.dotx` uses
+`Insighture-document.docx` from the organisation's copy, or follows the format in section 5. Documents
+already made from the report template stay on-brand; new ones use the internal format.
+
 ## [2.0.0] - 2026-11-22
 
 ### Added
