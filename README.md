@@ -38,14 +38,45 @@ websites, charts, email and social**.
 
 `skills/insighture-design-system/` is the brand packaged for AI tools. Rebuild
 it with `npm run skill` after changing the guidelines, logo, templates or
-tokens. It also writes `dist/insighture-design-system.zip` for uploading.
+tokens. It also writes `dist/insighture-design-system.zip` for uploading and
+`dist/AGENTS.md` for tools that read `AGENTS.md`.
 
 | File | For |
 | --- | --- |
 | `SKILL.md` | Claude (Claude Code, claude.ai) and other agents that read Agent Skills. Hand-written. |
-| `AGENTS.md` | Codex, Cursor, Copilot, Gemini CLI and other tools that read `AGENTS.md`; also the instructions or knowledge file for a Custom GPT or Gem. Generated from `SKILL.md`. |
+| `CHANGELOG.md` | Every version, with its behavioural impact and migration. Hand-written. |
 | `scripts/check_brand.py` | Brand checker for .pptx, .docx, .xlsx, .html, .css, .svg and .pdf: off-palette colours, non-brand fonts, missing logo, too much rose. Python 3, no dependencies. |
 | `assets/`, `references/` | Logo, Office and email templates, tokens, palette. Copied from this repo. |
+| `dist/AGENTS.md` (built, not committed) | Codex, Cursor, Copilot, Gemini CLI and other tools that read `AGENTS.md`; also the instructions or knowledge file for a Custom GPT or Gem. Generated from `SKILL.md`. |
+
+### AI skill governance
+
+`insighture-design-system` is an org-tier skill. It started in
+`insighture/skills` and now lives here, governed by the same contract
+(`CONTRIBUTING.md` in `insighture/skills`): frontmatter metadata, a
+`## Rules` section that is the versioned contract, and a `CHANGELOG.md` entry
+with **Behavioural impact** and **Migration** for every version. The
+`Skills contract` CI job checks it with the shared `insighture/skills`
+tooling. Changes to `skills/` need the design leads and AI governance
+(`.github/CODEOWNERS`).
+
+To release:
+
+1. Change the skill, bump `metadata.version` in `SKILL.md` (MAJOR for a
+   changed trigger, rule or output; MINOR for additive guidance; PATCH for
+   wording) and add the matching `CHANGELOG.md` entry.
+2. Merge the PR.
+3. Tag the merge commit `insighture-design-system@<version>` and push the tag.
+   Tags are never moved or deleted.
+
+The tag is registered in `insighture/skills` `externals.json`, which keeps
+the inventory of every Insighture skill. From there the skill reaches people
+two ways:
+
+- **Tracelet:** a git-synced pack from this repository, folder `skills/`,
+  pinned to the release tag and applied to Everyone.
+- **Claude organisation library:** a plugin built by `insighture/skills` from
+  the pinned tag.
 
 ### Publish to Tracelet
 
@@ -54,6 +85,10 @@ to Tracelet's upload rules: `npm run skill` checks file types, sizes, the
 `SKILL.md` frontmatter and that Office templates are macro-free, and fails
 instead of writing a zip Tracelet would refuse. `npm run skill:check`
 re-runs the check on its own.
+
+Tracelet normally takes the skill from the git-synced pack pinned to the
+release tag (see [AI skill governance](#ai-skill-governance)). Upload a zip by
+hand only when the pack can't be used:
 
 1. `npm run skill` → `dist/insighture-design-system.zip` (CI also attaches it to every run).
 2. In Tracelet, **Engineering → Standards → Skills**:
@@ -70,7 +105,7 @@ re-runs the check on its own.
 | claude.ai, ChatGPT and other browser clients with the Tracelet MCP connector | `list_skills` / `read_skill`, and files on demand through `read_skill_file` |
 
 For tools Tracelet doesn't reach, upload the same zip directly (claude.ai
-organisation skills) or paste `AGENTS.md` into a Custom GPT or Gem.
+organisation skills) or paste `dist/AGENTS.md` into a Custom GPT or Gem.
 
 ```bash
 python3 skills/insighture-design-system/scripts/check_brand.py deck.pptx page.html   # --json for machines
