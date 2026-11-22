@@ -18,11 +18,14 @@ jobs:
       - run: npm run skill
       - name: Committed skill matches the sources
         run: |
-          if ! git diff --exit-code -- skills/; then
+          if ! git diff --exit-code -- skills/ || [ -n "$(git status --porcelain --untracked-files=all -- skills/)" ]; then
+            git status --porcelain --untracked-files=all -- skills/
             echo "::error::skills/insighture-design-system is stale. Run npm run skill and commit the result."
             exit 1
           fi
       - uses: actions/upload-artifact@v4
         with:
           name: insighture-design-system
-          path: dist/insighture-design-system.zip
+          path: |
+            dist/insighture-design-system.zip
+            dist/AGENTS.md

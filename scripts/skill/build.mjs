@@ -4,12 +4,15 @@
  *
  *   npm run skill
  *
- * SKILL.md and scripts/check_brand.py are hand-written. Everything else is
- * generated: assets/ and references/ are copied from the repo, palette.json
- * comes from the tokens, and AGENTS.md (the provider-neutral copy for Codex,
- * Cursor, Copilot, Gemini and friends) is SKILL.md minus its Claude-only
- * parts. Rebuild after changing SKILL.md, the logo, templates or tokens (run
- * `npm run templates` first if the templates changed).
+ * SKILL.md, CHANGELOG.md and scripts/check_brand.py are hand-written and never
+ * touched here. Everything else in the skill folder is generated: assets/ and
+ * references/ are copied from the repo and palette.json comes from the tokens.
+ * AGENTS.md (the provider-neutral copy for Codex, Cursor, Copilot, Gemini and
+ * friends) is SKILL.md minus its frontmatter and Claude-only parts; it is
+ * written to dist/AGENTS.md, not into the skill folder, so the folder holds
+ * only what the insighture/skills contract ships. Rebuild after changing
+ * SKILL.md, the logo, templates or tokens (run `npm run templates` first if
+ * the templates changed).
  *
  * The zip is checked against Tracelet's upload rules (tracelet-check.mjs)
  * and the build fails rather than write one Tracelet would refuse.
@@ -38,6 +41,17 @@ const copies = {
   'assets/templates/Insighture-letterhead.dotx': 'templates/word/Insighture-letterhead.dotx',
   'assets/templates/newsletter.html': 'templates/email/newsletter.html',
 };
+
+// The hand-written files must exist; this script only ever regenerates
+// assets/ and references/ inside the skill folder.
+for (const f of ['SKILL.md', 'CHANGELOG.md']) {
+  await fs.access(path.join(skillDir, f)).catch(() => {
+    console.error(`skills/${name}/${f} is missing; it is hand-written, not generated`);
+    process.exit(1);
+  });
+}
+// Older builds wrote AGENTS.md into the skill folder; it now lives in dist/.
+await fs.rm(path.join(skillDir, 'AGENTS.md'), { force: true });
 
 for (const sub of ['assets', 'references']) {
   await fs.rm(path.join(skillDir, sub), { recursive: true, force: true });
@@ -78,8 +92,9 @@ const skill = await fs.readFile(path.join(skillDir, 'SKILL.md'), 'utf8');
 const agents = skill
   .replace(/^---\n[\s\S]*?\n---\n+/, '')
   .replace(/<!-- claude-only -->[\s\S]*?<!-- \/claude-only -->\n/g, '');
+await fs.mkdir(path.join(root, 'dist'), { recursive: true });
 await fs.writeFile(
-  path.join(skillDir, 'AGENTS.md'),
+  path.join(root, 'dist', 'AGENTS.md'),
   `<!-- Generated from SKILL.md by \`npm run skill\` in github.com/insighture/design-system. Do not edit. -->
 <!-- Instructions for AI assistants and coding agents: apply these rules to anything visual you make for Insighture. -->
 
@@ -99,3 +114,4 @@ if (process.exitCode) process.exit();
 
 console.log(path.relative(root, skillDir));
 console.log(path.relative(root, zip));
+console.log(path.relative(root, path.join(root, 'dist', 'AGENTS.md')));
