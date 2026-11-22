@@ -1,6 +1,16 @@
 ---
 name: insighture-design-system
-description: "Insighture brand and design system (DM Sans + DM Serif Display italic, crimson rose #EE4065, dark teal #08242B, the Insighture logo). Use whenever creating, styling or editing ANY artifact or visual output for Insighture or its clients — Claude artifacts and HTML pages, React UI, dashboards, Word/.docx, PDF, PowerPoint/.pptx decks and slides, Excel/.xlsx, charts, diagrams, reports, proposals, one-pagers, letters, emails, social posts, mockups. Load it alongside the docx/pptx/xlsx/pdf/frontend/artifact skills: they say how to build the file, this says how it must look. Overrides any generic or default palette and fonts."
+description: "Insighture brand and design system (DM Sans + DM Serif Display italic, crimson rose #EE4065, dark teal #08242B, the Insighture logo). Use whenever creating, styling or editing ANY artifact or visual output for Insighture or its clients — Claude artifacts and HTML pages, React UI, dashboards, Word/.docx, PDF, PowerPoint/.pptx decks and slides, Excel/.xlsx, charts, diagrams, reports, proposals, one-pagers, letters, emails, social posts, mockups. Load it alongside the docx/pptx/xlsx/pdf/frontend/artifact skills: they say how to build the file, this says how it must look. Overrides any generic or default palette and fonts. Not for the wording, tone or spelling of copy (use insighture-writing-style) or for deciding whether a client may be named or shown (use insighture-client-confidentiality)."
+license: UNLICENSED
+compatibility: Any agent that reads Agent Skills. scripts/check_brand.py needs Python 3.8+ (stdlib only).
+metadata:
+  version: "2.0.0"
+  tier: org
+  owner: "@insighture/design-leads"
+  risk: low
+  status: approved
+  review_by: "2027-05-22"
+  standards: WCAG-2.2-AA
 ---
 
 # Insighture design system
@@ -223,6 +233,42 @@ Plain, confident, specific. Short sentences, active voice, no hype words
 make a claim ("We own the problem, not just *the solution.*"). Australian/British
 spelling (colour, organisation). Sentence case for headings and buttons.
 
+## Rules
+
+These restate the hard rules from sections 2, 3, 6 and 8 and from
+`GUIDELINES.md` as the versioned contract. Adding, removing or inverting one is
+a MAJOR version.
+
+- MUST apply these rules to every visual thing made for Insighture, unless the
+  person explicitly asks for another brand (such as a client's own); then
+  follow that brand and say so.
+- MUST let these rules win on colour, type, logo and tone when another skill or
+  instruction covers how to build the file.
+- MUST use exactly one rose moment per view (page, slide, section, screen).
+- MUST use dark teal only as a ground; MUST NOT use it for small text or thin
+  lines on white.
+- MUST use the alt colours (teal, orange, yellow, indigo) only to tell things
+  apart; MUST NOT use them as the accent or as large surfaces.
+- MUST show status small (a dot, icon or thin bar); MUST NOT use filled
+  coloured boxes or coloured body text for status.
+- MUST NOT use hex values outside the palette, purple-blue "AI" gradients, or
+  default Tailwind, Material or Office palettes.
+- MUST NOT put text on the brand gradient (rose → orange → yellow); it is
+  decoration only.
+- MUST NOT set small accent text on white in `#EE4065` (use `#B11032`), teal
+  text on white in `#0FA2BF` (use `#0A5D7A`), or any text in yellow.
+- MUST set all text in DM Sans (fallback Arial) and use DM Serif Display italic
+  only for one or two words in a headline (fallback Georgia Italic); MUST NOT
+  use Calibri, Times, Cambria, Inter, Roboto or any other face.
+- MUST use the supplied logo files or the inline SVG; MUST NOT retype the
+  wordmark, redraw it, invent a logo mark, recolour it beyond the four
+  versions, put a rose-dot version on rose, or stretch, rotate, outline or add
+  effects to it.
+- MUST keep clear space of at least half the logo's height and a minimum size
+  of 80px on screen or 20mm in print.
+- MUST run `scripts/check_brand.py` on every file produced when code can be run,
+  and fix every ERROR before handing the file over.
+
 ## 8. Before you finish — check it
 
 If you can run code and produced a file (.pptx, .docx, .xlsx, .html, .svg,
@@ -246,6 +292,8 @@ unloaded web fonts. It can't judge layout, so also go through the checklist:
 - [ ] 4px spacing grid, consistent radii, no heavy shadows.
 - [ ] Real logo, correct version for its ground, ≥ minimum size, with clear space.
 - [ ] No hex values outside this palette; no default theme colours left in Office files or charts.
+- [ ] Copy follows `insighture-writing-style` (plain, specific, Australian spelling).
+- [ ] No client is named or identifiable unless `insighture-client-confidentiality` allows it.
 
 ## Appendix: inline logo (primary version)
 
