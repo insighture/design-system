@@ -19,3 +19,6 @@ docs/assets/*.tmp.png
 # templates build scratch
 templates/.render-*
 templates/word/*.tmp.docx
+
+# AI skill: AGENTS.md is generated into dist/, never into the skill folder
+skills/*/AGENTS.md
