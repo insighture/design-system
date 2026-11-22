@@ -2,13 +2,15 @@
  * Render the template gallery images shown in the README, from the REAL
  * generated files (not mock-ups).
  *
- *   npm run templates:preview
+ *   npm run templates:preview                 # both images
+ *   npm run templates:preview -- documents    # one: slides or documents
  *
- * Needs LibreOffice (to render .pptx/.docx) and Poppler's `pdftoppm`, plus the
- * brand fonts installed (static DM Sans + DM Serif Display) so LibreOffice
- * doesn't substitute them. If LibreOffice can't see your installed fonts, point
- * INS_FONT_DIR at a folder of the .ttf files and they're loaded into a private
- * LibreOffice profile for the render.
+ * Needs Poppler's `pdftoppm`. The slides image also needs LibreOffice (to render
+ * the .pptx), with the brand fonts installed (static DM Sans + DM Serif Display)
+ * so LibreOffice doesn't substitute them. If LibreOffice can't see your installed
+ * fonts, point INS_FONT_DIR at a folder of the .ttf files and they're loaded into
+ * a private LibreOffice profile for the render. The documents image doesn't use
+ * LibreOffice.
  *
  * Run `npm run templates` first; this only reads templates/.
  */
@@ -26,15 +28,6 @@ const soffice = [process.env.SOFFICE, '/Applications/LibreOffice.app/Contents/Ma
 const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'pipe' });
 try { run('pdftoppm', ['-v']); } catch (e) { if (e.code === 'ENOENT') throw new Error('pdftoppm not found — install Poppler (brew install poppler).'); }
 
-const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'ins-preview-'));
-const profile = path.join(tmp, 'lo-profile');
-if (process.env.INS_FONT_DIR) {
-  await fs.mkdir(path.join(profile, 'user', 'fonts'), { recursive: true });
-  for (const f of await fs.readdir(process.env.INS_FONT_DIR)) {
-    if (/\.(ttf|otf)$/i.test(f)) await fs.copyFile(path.join(process.env.INS_FONT_DIR, f), path.join(profile, 'user', 'fonts', f));
-  }
-}
-
 /** Office file → PDF in tmp (LibreOffice), returns the PDF path. */
 function toPdf(file) {
   run(soffice, [`-env:UserInstallation=${pathToFileURL(profile).href}`, '--headless', '--convert-to', 'pdf', '--outdir', tmp, file]);
@@ -48,24 +41,26 @@ function pagePng(pdf, n, name, dpi = 110) {
 }
 
 const T = (p) => path.join(outDir, p);
-const deck = toPdf(T('powerpoint/Insighture-sample.pptx'));
-const slides = [1, 4, 5, 6, 3, 8].map((n) => pagePng(deck, n, `slide-${n}`, 90));
+const slidePngs = () => {
+  const deck = toPdf(T('powerpoint/Insighture-sample.pptx'));
+  return [1, 4, 5, 6, 3, 8].map((n) => pagePng(deck, n, `slide-${n}`, 90));
+};
 // Word documents use the internal document template, which isn't published (GUIDELINES.md), so the
 // documents row shows the PDFs.
-const docs = [
+const docPngs = () => [
   pagePng(T('pdf/Insighture-report.pdf'), 1, 'pdf-report-1'), pagePng(T('pdf/Insighture-report.pdf'), 2, 'pdf-report-2'),
   pagePng(T('pdf/Insighture-one-pager.pdf'), 1, 'pdf-one'),
 ];
 
-const browser = await chromium.launch();
-// The email, screenshotted at desktop width.
-const emailShot = path.join(tmp, 'email.png');
-{
+/** The email, screenshotted at desktop width; returns the PNG path. */
+async function emailPng() {
+  const shot = path.join(tmp, 'email.png');
   const p = await browser.newPage({ viewport: { width: 680, height: 900 } });
   await p.goto(pathToFileURL(T('email/newsletter.html')).href);
   await p.evaluate(() => document.fonts.ready);
-  await p.screenshot({ path: emailShot, fullPage: true });
+  await p.screenshot({ path: shot, fullPage: true });
   await p.close();
+  return shot;
 }
 
 const url = (f) => pathToFileURL(f).href;
@@ -76,28 +71,47 @@ const fig = (src, cap, style = '') => `<figure style="margin:0;${style}"><img sr
 
 const shots = [
   {
-    file: 'templates-slides.png', w: 1400, h: 640,
-    html: page(`<div class="g" style="grid-template-columns:repeat(3,1fr)">${slides.map((s, i) =>
+    name: 'slides', file: 'templates-slides.png', w: 1400, h: 640,
+    html: async () => page(`<div class="g" style="grid-template-columns:repeat(3,1fr)">${slidePngs().map((s, i) =>
       fig(s, ['Title', 'Card grid', 'Big number', 'Native chart', 'Section', 'Quote'][i])).join('')}</div>`, css),
   },
   {
-    file: 'templates-documents.png', w: 1400, h: 1010,
-    html: page(`<div class="g" style="grid-template-columns:repeat(3,1fr)">
+    name: 'documents', file: 'templates-documents.png', w: 1400, h: 1010,
+    html: async () => {
+      const docs = docPngs();
+      const email = await emailPng();
+      return page(`<div class="g" style="grid-template-columns:repeat(3,1fr)">
       ${fig(docs[0], 'PDF report · cover')}${fig(docs[1], 'PDF report · page')}${fig(docs[2], 'PDF one-pager')}
     </div>
     <div class="g" style="grid-template-columns:1.9fr 1fr 0.8fr 1.05fr;padding-top:0;align-items:start">
       ${fig(T('social/linkedin-1200x627.png'), 'LinkedIn card')}${fig(T('social/quote-1080x1080.png'), 'Quote card')}
       ${fig(T('social/stat-1080x1350.png'), 'Stat card')}
-      <figure style="margin:0"><div style="height:262px;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(21,24,26,.12),0 8px 24px rgba(21,24,26,.08)"><img src="${url(emailShot)}" alt="" style="box-shadow:none;border-radius:0"></div><p class="cap">Email newsletter</p></figure>
-    </div>`, css),
+      <figure style="margin:0"><div style="height:262px;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(21,24,26,.12),0 8px 24px rgba(21,24,26,.08)"><img src="${url(email)}" alt="" style="box-shadow:none;border-radius:0"></div><p class="cap">Email newsletter</p></figure>
+    </div>`, css);
+    },
   },
 ];
 
-for (const { file, w, h, html } of shots) {
+const wanted = process.argv.slice(2);
+const unknown = wanted.filter((n) => !shots.some((s) => s.name === n));
+if (unknown.length) throw new Error(`Unknown image ${unknown.join(', ')}; choose from ${shots.map((s) => s.name).join(', ')}.`);
+
+const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'ins-preview-'));
+const profile = path.join(tmp, 'lo-profile');
+if (process.env.INS_FONT_DIR) {
+  await fs.mkdir(path.join(profile, 'user', 'fonts'), { recursive: true });
+  for (const f of await fs.readdir(process.env.INS_FONT_DIR)) {
+    if (/\.(ttf|otf)$/i.test(f)) await fs.copyFile(path.join(process.env.INS_FONT_DIR, f), path.join(profile, 'user', 'fonts', f));
+  }
+}
+
+const browser = await chromium.launch();
+for (const { file, w, h, html } of shots.filter((s) => !wanted.length || wanted.includes(s.name))) {
+  const markup = await html();
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
   const p = await ctx.newPage();
   const src = path.join(tmp, `${file}.html`);
-  await fs.writeFile(src, html);
+  await fs.writeFile(src, markup);
   await p.goto(pathToFileURL(src).href);
   await p.evaluate(() => document.fonts.ready);
   const height = await p.evaluate(() => document.body.scrollHeight);

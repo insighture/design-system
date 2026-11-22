@@ -8,12 +8,14 @@ tokens) and rebuild, so every template stays in step with the system.
 npm run templates                 # rebuild everything
 npm run templates -- pptx docx    # or just some: pptx docx pdf email social
 npm run templates:preview         # re-render the README gallery images
+npm run templates:preview -- documents   # or one of them: slides, documents
 npm run preview                   # browse and download them at http://localhost:5273
 ```
 
-`templates:preview` renders the real files through LibreOffice and Poppler, so
-both must be installed, along with the brand fonts. If LibreOffice can't see
-your installed fonts, set `INS_FONT_DIR` to a folder of the `.ttf` files.
+`templates:preview` renders the real files with Poppler and Playwright's
+Chromium. The slides image also goes through LibreOffice, so that needs
+LibreOffice and the brand fonts installed. If LibreOffice can't see your
+installed fonts, set `INS_FONT_DIR` to a folder of the `.ttf` files.
 
 ## What's here
 
