@@ -136,7 +136,7 @@ npm run preview        # local showcase on http://localhost:5273: components, lo
 npm run typecheck
 npm run readme:assets  # re-render the images in this README
 npm run templates      # rebuild the Office / PDF / email / social templates
-npm run templates:preview  # re-render the template gallery images (needs LibreOffice + Poppler)
+npm run templates:preview  # re-render the template gallery images (needs Poppler; the slides need LibreOffice)
 ```
 
 `readme:assets` bundles `src/` and screenshots the scenes in
@@ -184,7 +184,7 @@ Usage rules (clear space, minimum size, what not to do) are in
 
 <img src="docs/assets/templates-slides.png" alt="Slides from the Insighture PowerPoint template" width="100%">
 
-<img src="docs/assets/templates-documents.png" alt="Insighture Word, PDF, social and email templates" width="100%">
+<img src="docs/assets/templates-documents.png" alt="Insighture PDF, social and email templates" width="100%">
 
 Ready-made, on-brand files in [`templates/`](templates/README.md), all
 generated from the tokens with `npm run templates`. The images above are
